@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "348287911762",
+    "firebase_url": "https://concord-music-hall.firebaseio.com",
+    "project_id": "concord-music-hall",
+    "storage_bucket": "concord-music-hall.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348287911762:android:cd06cfd9f7efcc51",
+        "android_client_info": {
+          "package_name": "com.concord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348287911762-f22c3krjl8665oot0ii8bjtuhmi2lbv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAj39mYzHxN2AfU56MvzPN-6DjDsMshvk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
