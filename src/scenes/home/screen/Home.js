@@ -9,13 +9,16 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { Transition } from 'react-navigation-fluid-transitions';
 import { actions as Network } from '../../../network';
 import { EventCard, DateSeparator } from '../components';
 import { styles } from './styles';
 
-const { getCurrentEvents } = Network;
-
+const { getCurrentEvents, getAllEvents } = Network;
+const AllEventsAction = NavigationActions.navigate({
+  routeName: 'Profile'
+});
 class Home extends Component {
   static navigationOptions = {
     header: null
@@ -24,6 +27,13 @@ class Home extends Component {
     console.log('componentMounted');
     this.props.getCurrentEvents();
   }
+  _GetAllEvents = () => {
+    this.props.getAllEvents(res => {
+      if (res) {
+        this.props.navigation.dispatch(AllEventsAction);
+      }
+    });
+  };
   _renderItem = ({ item, index }) => {
     return (
       <View>
@@ -53,7 +63,7 @@ class Home extends Component {
   _renderEnd = () => {
     const { ButtonContainer, ButtonText } = styles;
     return (
-      <TouchableOpacity onPress={() => console.log('ended')}>
+      <TouchableOpacity onPress={this._GetAllEvents}>
         <View style={ButtonContainer}>
           <Text style={ButtonText}>See All Events</Text>
         </View>
@@ -94,5 +104,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getCurrentEvents }
+  { getCurrentEvents, getAllEvents }
 )(Home);

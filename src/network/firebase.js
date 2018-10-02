@@ -2,13 +2,6 @@ import firebase from 'react-native-firebase';
 import moment from 'moment';
 
 export function getCurrentEvents(callback) {
-  const now = moment().format('MMM DD YYYY');
-  const later = moment()
-    .add(7, 'd')
-    .format('MMM DD YYYY');
-  console.log(later, 'LATER');
-  console.log(now, 'NOW');
-
   firebase
     .database()
     .ref('CurrentEvents')
@@ -22,5 +15,22 @@ export function getCurrentEvents(callback) {
       });
 
       callback(topEvents);
+    });
+}
+
+export function getAllEvents(callback) {
+  console.log('RUNING FB');
+  firebase
+    .database()
+    .ref(`CurrentEvents`)
+    .orderByChild('StartDate')
+    .on('value', snapshot => {
+      const allEvents = [];
+      snapshot.forEach(data => {
+        const eventData = data.val();
+        allEvents.push(eventData);
+        console.log('done?');
+      });
+      callback(allEvents);
     });
 }
