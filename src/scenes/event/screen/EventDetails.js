@@ -7,7 +7,8 @@ import {
   ImageBackground,
   StatusBar,
   FlatList,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import moment from 'moment';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -50,7 +51,13 @@ class EventDetails extends Component {
     );
   }
   render() {
-    const { ImageStyle } = styles;
+    const {
+      ImageStyle,
+      AgeContainer,
+      badgeText,
+      ButtonContainer,
+      ButtonText
+    } = styles;
     const { Image, AgeLimit } = this.props.navigation.state.params.item;
     const { index } = this.props.navigation.state.params;
     if (this.props.loaded) {
@@ -67,24 +74,19 @@ class EventDetails extends Component {
               >
                 <View
                   style={{
-                    backgroundColor: '#000000',
-                    borderRadius: 15,
-                    marginRight: 15,
-                    marginTop: 15
+                    padding: 15,
+                    justifyContent: 'space-between',
+                    flex: 1
                   }}
                 >
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      color: '#ffffff',
-                      paddingLeft: 10,
-                      paddingRight: 10,
-                      paddingTop: 5,
-                      paddingBottom: 5
-                    }}
-                  >
-                    {AgeLimit}
-                  </Text>
+                  <View style={AgeContainer}>
+                    <Text style={badgeText}>{AgeLimit}</Text>
+                  </View>
+                  <TouchableOpacity onPress={() => console.log('logng')}>
+                    <View style={ButtonContainer}>
+                      <Text style={ButtonText}>Buy Tickets</Text>
+                    </View>
+                  </TouchableOpacity>
                 </View>
               </ImageBackground>
             </Transition>

@@ -33,25 +33,25 @@ const Headliner = props => {
       <Text style={HeadlinerText}>{HeadlinerName}</Text>
       <View style={IconRow}>
         <View style={IconContainer}>
-          <Icon name="calendar" size={25} style={{ color: '#000000' }} />
+          <Icon name="calendar" size={25} style={{ color: '#646872' }} />
         </View>
         <Text style={IconRowText}>{moment(Day).format('MMM Do YYYY')}</Text>
       </View>
       <View style={IconRow}>
         <View style={IconContainer}>
-          <Icon name="clock" size={25} style={{ color: '#000000' }} />
+          <Icon name="clock" size={25} style={{ color: '#646872' }} />
         </View>
         <Text style={IconRowText}>{moment(Time).format('hA')}</Text>
       </View>
       <View style={IconRow}>
         <View style={IconContainer}>
-          <Icon name="currency-usd" size={25} style={{ color: '#000000' }} />
+          <Icon name="currency-usd" size={25} style={{ color: '#646872' }} />
         </View>
         <Text style={IconRowText}>{Price}</Text>
       </View>
       <View style={IconRow}>
         <View style={IconContainer}>
-          <Icon name="map-marker" size={25} style={{ color: '#000000' }} />
+          <Icon name="map-marker" size={25} style={{ color: '#646872' }} />
         </View>
         <View style={AddressContainer}>
           <Text style={IconRowText}>{VenueName}</Text>

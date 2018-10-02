@@ -6,12 +6,12 @@ export const styles = StyleSheet.create({
   HeaderText: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: '#00cc99',
+    color: '#646872',
     marginBottom: 5
   },
   HeadlinerText: {
     fontSize: 36,
-    color: '#000000',
+    color: '#496DDB',
     fontWeight: 'bold'
   },
   IconContainer: {
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   IconRowText: {
     fontSize: 21,
-    color: '#000000',
+    color: '#646872',
     alignSelf: 'flex-start',
     justifyContent: 'center'
   },
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
   descText: {
     marginTop: 15,
     fontSize: 15,
-    color: '#000000',
+    color: '#646872',
     marginBottom: 45
   },
   SupportContainer: {
