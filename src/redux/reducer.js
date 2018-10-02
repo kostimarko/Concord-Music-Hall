@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { reducer as reducers } from '../network';
 
-const { mainReducer } = reducers;
+const { eventsReducer } = reducers;
 
 const rootReducer = combineReducers({
-  mainReducer
+  eventsReducer
 });
 
 export default rootReducer;

@@ -7,10 +7,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "moment": "^2.22.2",
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-firebase": "^5.0.0",
-    "react-navigation": "^1.3.0",
+    "react-native-vector-icons": "^5.0.0",
+    "react-navigation": "^2.17.0",
+    "react-navigation-fluid-transitions": "^0.2.71",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"

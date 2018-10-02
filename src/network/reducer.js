@@ -1,14 +1,17 @@
-import { APP_LOADED } from './actionTypes';
+import { APP_LOADED, GOT_EVENTS } from './actionTypes';
 
-const initState = {
-  loaded: false
+const initEventState = {
+  loaded: false,
+  Events: {}
 };
 
-export const mainReducer = (state = initState, action) => {
+export const eventsReducer = (state = initEventState, action) => {
   switch (action.type) {
     case APP_LOADED:
-      return { ...state };
-
+      console.log(action.data);
+      return { ...state, loaded: action.data };
+    case GOT_EVENTS:
+      return { ...state, Events: action.data };
     default:
       return { ...state };
   }
