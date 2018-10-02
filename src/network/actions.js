@@ -12,10 +12,9 @@ export function getCurrentEvents() {
   };
 }
 
-export function getAllEvents(callback) {
-  console.log('running action');
+export function getAllEvents(StartDate, callback) {
   return dispatch => {
-    api.getAllEvents(data => {
+    api.getAllEvents(StartDate, data => {
       dispatch({ type: GOT_ALL_EVENTS, data: data });
     });
     callback(true);

@@ -7,7 +7,8 @@ export function getCurrentEvents(callback) {
     .ref('CurrentEvents')
     .orderByChild('StartDate')
     .limitToFirst(10)
-    .on('value', snapshot => {
+    .once('value')
+    .then(snapshot => {
       const topEvents = [];
       snapshot.forEach(data => {
         const eventData = data.val();
@@ -15,22 +16,24 @@ export function getCurrentEvents(callback) {
       });
 
       callback(topEvents);
-    });
+    })
+    .catch(e => console.log(e));
 }
 
-export function getAllEvents(callback) {
-  console.log('RUNING FB');
+export function getAllEvents(StartDate, callback) {
   firebase
     .database()
     .ref(`CurrentEvents`)
     .orderByChild('StartDate')
-    .on('value', snapshot => {
+    .startAt(`${StartDate}`)
+    .once('value')
+    .then(snapshot => {
       const allEvents = [];
       snapshot.forEach(data => {
         const eventData = data.val();
         allEvents.push(eventData);
-        console.log('done?');
       });
       callback(allEvents);
-    });
+    })
+    .catch(e => console.log(e));
 }

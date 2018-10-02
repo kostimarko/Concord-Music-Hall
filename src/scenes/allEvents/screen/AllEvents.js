@@ -11,32 +11,16 @@ import {
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { Transition } from 'react-navigation-fluid-transitions';
-import { actions as Network } from '../../../network';
 import { EventCard, DateSeparator } from '../components';
 import { styles } from './styles';
 
-const { getCurrentEvents, getAllEvents } = Network;
-const AllEventsAction = NavigationActions.navigate({
-  routeName: 'AllEvents'
-});
-class Home extends Component {
+class AllEvents extends Component {
   static navigationOptions = {
     header: null
   };
   componentDidMount() {
     console.log('componentMounted');
-    this.props.getCurrentEvents();
   }
-  _GetAllEvents = () => {
-    console.log(this.props.Events);
-    const { Events } = this.props;
-    const { StartDate } = Events[Events.length - 1];
-    this.props.getAllEvents(StartDate, res => {
-      if (res) {
-        this.props.navigation.dispatch(AllEventsAction);
-      }
-    });
-  };
   _renderItem = ({ item, index }) => {
     return (
       <View>
@@ -63,16 +47,7 @@ class Home extends Component {
       </View>
     );
   };
-  _renderEnd = () => {
-    const { ButtonContainer, ButtonText } = styles;
-    return (
-      <TouchableOpacity onPress={this._GetAllEvents}>
-        <View style={ButtonContainer}>
-          <Text style={ButtonText}>See All Events</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
+
   render() {
     const { welcome } = styles;
     if (this.props.loaded) {
@@ -81,11 +56,10 @@ class Home extends Component {
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <View style={{ padding: 10, backgroundColor: '#ffffff' }}>
             <FlatList
-              data={this.props.Events}
+              data={this.props.AllEvents}
               renderItem={this._renderItem}
               ListHeaderComponent={this._renderHeader}
               showsVerticalScrollIndicator={false}
-              ListFooterComponent={this._renderEnd}
               keyExtractor={(item, index) => item.EventId.toString()}
             />
           </View>
@@ -102,11 +76,8 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => {
-  const { loaded, Events } = state.eventsReducer;
-  return { loaded, Events };
+  const { loaded, AllEvents } = state.eventsReducer;
+  return { loaded, AllEvents };
 };
 
-export default connect(
-  mapStateToProps,
-  { getCurrentEvents, getAllEvents }
-)(Home);
+export default connect(mapStateToProps)(AllEvents);
