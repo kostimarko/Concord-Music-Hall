@@ -56,7 +56,10 @@ class EventDetails extends Component {
       AgeContainer,
       badgeText,
       ButtonContainer,
-      ButtonText
+      ButtonText,
+      ImageDetailsContainer,
+      IconContainer,
+      HeaderRow
     } = styles;
     const { Image, AgeLimit } = this.props.navigation.state.params.item;
     const { index } = this.props.navigation.state.params;
@@ -72,21 +75,36 @@ class EventDetails extends Component {
                 }}
                 style={ImageStyle}
               >
-                <View
-                  style={{
-                    padding: 15,
-                    justifyContent: 'space-between',
-                    flex: 1
-                  }}
-                >
-                  <View style={AgeContainer}>
-                    <Text style={badgeText}>{AgeLimit}</Text>
-                  </View>
-                  <TouchableOpacity onPress={() => console.log('logng')}>
-                    <View style={ButtonContainer}>
-                      <Text style={ButtonText}>Buy Tickets</Text>
+                <View style={ImageDetailsContainer}>
+                  <View style={HeaderRow}>
+                    <TouchableOpacity
+                      onPress={() => this.props.navigation.goBack()}
+                    >
+                      <View style={IconContainer}>
+                        <MaterialCommunityIcons
+                          name="arrow-left"
+                          size={25}
+                          color="#646872"
+                        />
+                      </View>
+                    </TouchableOpacity>
+                    <View style={AgeContainer}>
+                      <Text style={badgeText}>{AgeLimit}</Text>
                     </View>
-                  </TouchableOpacity>
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      alignItems: 'flex-end',
+                      justifyContent: 'flex-end'
+                    }}
+                  >
+                    <TouchableOpacity onPress={() => console.log('logng')}>
+                      <View style={ButtonContainer}>
+                        <Text style={ButtonText}>Buy Tickets</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </ImageBackground>
             </Transition>
