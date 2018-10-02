@@ -13,16 +13,21 @@ const EventStack = createStackNavigator({
   EventDetails: {
     screen: EventDetails,
     navigationOptions: ({ navigation }) => ({
-      //don't forget parentheses around the object notation
       title: 'Back',
       headerLeft: (
-        <TouchableWithoutFeedback
-          style={{ marginLeft: 30 }}
-          onPress={() => navigation.goBack(null)}
-        >
-          <MaterialCommunityIcons name="arrow-left" size={25} color="#000000" />
-        </TouchableWithoutFeedback>
-      )
+        <View style={{ marginLeft: 10 }}>
+          <TouchableWithoutFeedback onPress={() => navigation.goBack(null)}>
+            <MaterialCommunityIcons
+              name="arrow-left"
+              size={25}
+              color="#000000"
+            />
+          </TouchableWithoutFeedback>
+        </View>
+      ),
+      headerStyle: {
+        elevation: 0
+      }
     })
   }
 });
