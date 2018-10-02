@@ -13,7 +13,6 @@ export function getCurrentEvents(callback) {
     .database()
     .ref('CurrentEvents')
     .orderByChild('StartDate')
-
     .limitToFirst(10)
     .on('value', snapshot => {
       const topEvents = [];

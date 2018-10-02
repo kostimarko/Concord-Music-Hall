@@ -6,11 +6,13 @@ import {
   View,
   ImageBackground,
   StatusBar,
-  FlatList
+  FlatList,
+  TouchableOpacity
 } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
 import { actions as Network } from '../../../network';
 import { EventCard, DateSeparator } from '../components';
+import { styles } from './styles';
 
 const { getCurrentEvents } = Network;
 
@@ -48,7 +50,18 @@ class Home extends Component {
       </View>
     );
   };
+  _renderEnd = () => {
+    const { ButtonContainer, ButtonText } = styles;
+    return (
+      <TouchableOpacity onPress={() => console.log('ended')}>
+        <View style={ButtonContainer}>
+          <Text style={ButtonText}>See All Events</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
   render() {
+    const { welcome } = styles;
     if (this.props.loaded) {
       return (
         <View>
@@ -59,6 +72,7 @@ class Home extends Component {
               renderItem={this._renderItem}
               ListHeaderComponent={this._renderHeader}
               showsVerticalScrollIndicator={false}
+              ListFooterComponent={this._renderEnd}
             />
           </View>
         </View>
@@ -72,25 +86,6 @@ class Home extends Component {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
-  }
-});
 
 const mapStateToProps = state => {
   const { loaded, Events } = state.eventsReducer;
