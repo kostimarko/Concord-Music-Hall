@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   HeaderStyle: {
     marginTop: 5,
-    marginBottom: 25,
+    marginBottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
