@@ -23,5 +23,21 @@ export const styles = StyleSheet.create({
     paddingRight: 10,
     paddingTop: 5,
     paddingBottom: 5
+  },
+  HeaderStyle: {
+    marginTop: 5,
+    marginBottom: 25,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  IconContainer: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#ffffff',
+    elevation: 0,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

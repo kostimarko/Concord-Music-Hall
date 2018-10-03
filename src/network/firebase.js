@@ -2,11 +2,17 @@ import firebase from 'react-native-firebase';
 import moment from 'moment';
 
 export function getCurrentEvents(callback) {
+  const now = moment().format('YYYY-MM-DD');
+  const later = moment()
+    .add(7, 'days')
+    .format('YYYY-MM-DD');
+  console.log(later);
   firebase
     .database()
     .ref('CurrentEvents')
     .orderByChild('StartDate')
-    .limitToFirst(10)
+    .startAt(`${now}`)
+    .endAt(`${later}`)
     .once('value')
     .then(snapshot => {
       const topEvents = [];

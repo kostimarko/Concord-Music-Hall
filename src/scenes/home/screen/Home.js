@@ -10,6 +10,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Transition } from 'react-navigation-fluid-transitions';
 import { actions as Network } from '../../../network';
 import { EventCard, DateSeparator } from '../components';
@@ -56,21 +57,20 @@ class Home extends Component {
   };
   _renderHeader = ({ item }) => {
     return (
-      <View style={{ marginTop: 5, marginBottom: 25 }}>
+      <View style={styles.HeaderStyle}>
         <Text style={{ fontSize: 30, fontWeight: '300' }}>
           Concord Music Hall
         </Text>
+        <TouchableOpacity onPress={() => console.log('hello world')}>
+          <View style={styles.IconContainer}>
+            <MaterialCommunityIcons
+              name="filter-variant"
+              size={25}
+              color="#646872"
+            />
+          </View>
+        </TouchableOpacity>
       </View>
-    );
-  };
-  _renderEnd = () => {
-    const { ButtonContainer, ButtonText } = styles;
-    return (
-      <TouchableOpacity onPress={this._GetAllEvents}>
-        <View style={ButtonContainer}>
-          <Text style={ButtonText}>See All Events</Text>
-        </View>
-      </TouchableOpacity>
     );
   };
   render() {
@@ -85,7 +85,6 @@ class Home extends Component {
               renderItem={this._renderItem}
               ListHeaderComponent={this._renderHeader}
               showsVerticalScrollIndicator={false}
-              ListFooterComponent={this._renderEnd}
               keyExtractor={(item, index) => item.EventId.toString()}
             />
           </View>
