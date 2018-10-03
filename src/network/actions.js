@@ -3,6 +3,7 @@ import * as api from './firebase';
 import { APP_LOADED, GOT_WEEK_EVENTS, GOT_ALL_EVENTS } from './actionTypes';
 
 export function getCurrentEvents(start, end) {
+  console.log(start, end);
   return dispatch => {
     api.getCurrentEvents(start, end, data => {
       const loaded = true;

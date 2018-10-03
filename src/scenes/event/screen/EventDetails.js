@@ -61,6 +61,7 @@ class EventDetails extends Component {
       IconContainer,
       HeaderRow
     } = styles;
+
     const { Image, AgeLimit } = this.props.navigation.state.params.item;
     const { index } = this.props.navigation.state.params;
     if (this.props.loaded) {
@@ -68,7 +69,7 @@ class EventDetails extends Component {
         <ScrollView showsVerticalScrollIndicator={false}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <View style={{ backgroundColor: '#ffffff', flex: 1 }}>
-            <Transition shared={`${index}`}>
+            <Transition shared={`image${index}`}>
               <ImageBackground
                 source={{
                   uri: Image.Large

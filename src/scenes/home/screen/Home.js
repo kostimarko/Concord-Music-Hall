@@ -56,9 +56,12 @@ class Home extends Component {
   };
   confirmDate({ startDate, endDate, startMoment, endMoment }) {
     this.setState({
-      startDate,
-      endDate
+      startDate: startMoment,
+      endDate: endMoment
     });
+    const start = moment(startMoment).format('YYYY-MM-DD');
+    const end = moment(endMoment).format('YYYY-MM-DD');
+    this.props.getCurrentEvents(start, end);
   }
   openCalendar() {
     console.log('opening calendar');
@@ -68,7 +71,7 @@ class Home extends Component {
     return (
       <View>
         <DateSeparator StartDate={item.StartDate} EventId={item.EventId} />
-        <Transition shared={`${index}`}>
+        <Transition shared={`image${index}`}>
           <EventCard
             ImageSource={item.Image.Medium}
             AgeLimit={item.AgeLimit}
@@ -120,22 +123,21 @@ class Home extends Component {
               showsVerticalScrollIndicator={false}
               keyExtractor={(item, index) => item.EventId.toString()}
             />
-
-            <Calendar
-              i18n="en"
-              ref={calendar => {
-                this.calendar = calendar;
-              }}
-              customI18n={customI18n}
-              color={color}
-              format="YYYYMMDD"
-              minDate={Today}
-              maxDate={YearLater}
-              startDate={this.state.startDate}
-              endDate={this.state.endDate}
-              onConfirm={this.confirmDate}
-            />
           </View>
+          <Calendar
+            i18n="en"
+            ref={calendar => {
+              this.calendar = calendar;
+            }}
+            customI18n={customI18n}
+            color={color}
+            format="YYYYMMDD"
+            minDate={Today}
+            maxDate={YearLater}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            onConfirm={this.confirmDate}
+          />
         </View>
       );
     } else {

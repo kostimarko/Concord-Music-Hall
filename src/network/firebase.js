@@ -2,6 +2,7 @@ import firebase from 'react-native-firebase';
 import moment from 'moment';
 
 export function getCurrentEvents(start, end, callback) {
+  console.log(start, end);
   firebase
     .database()
     .ref('CurrentEvents')

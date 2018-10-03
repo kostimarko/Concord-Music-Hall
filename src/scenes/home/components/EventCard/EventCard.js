@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ImageBackground,
-  TouchableWithoutFeedback
-} from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
 import { styles } from './styles';
 
@@ -12,7 +7,7 @@ const EventCard = props => {
   const { ImageSource, AgeLimit, HeadLiner, NextSceeen } = props;
   const { Image } = styles;
   return (
-    <TouchableWithoutFeedback onPress={NextSceeen}>
+    <TouchableOpacity onPress={NextSceeen}>
       <View style={{ marginBottom: 25 }}>
         <View>
           <ImageBackground
@@ -51,7 +46,7 @@ const EventCard = props => {
           </ImageBackground>
         </View>
       </View>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 };
 
