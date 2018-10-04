@@ -15,20 +15,6 @@ const EventCard = props => {
             style={Image}
             imageStyle={{ borderRadius: 15 }}
           >
-            <View style={{ backgroundColor: '#000000', borderRadius: 15 }}>
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: '#ffffff',
-                  paddingLeft: 15,
-                  paddingRight: 15,
-                  paddingTop: 5,
-                  paddingBottom: 5
-                }}
-              >
-                {Price}
-              </Text>
-            </View>
             <View style={{ backgroundColor: '#496DDB', borderRadius: 15 }}>
               <Text
                 style={{
@@ -41,6 +27,20 @@ const EventCard = props => {
                 }}
               >
                 {HeadLiner}
+              </Text>
+            </View>
+            <View style={{ backgroundColor: '#000000', borderRadius: 15 }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: '#ffffff',
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                  paddingTop: 5,
+                  paddingBottom: 5
+                }}
+              >
+                {Price}
               </Text>
             </View>
           </ImageBackground>

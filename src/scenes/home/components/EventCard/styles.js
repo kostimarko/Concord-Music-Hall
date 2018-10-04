@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     height: 250,
     borderRadius: 15,
     padding: 15,
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
     justifyContent: 'space-between'
   }
 });
