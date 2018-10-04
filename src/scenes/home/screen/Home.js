@@ -155,6 +155,7 @@ class Home extends Component {
     } else {
       return (
         <View style={styles.container}>
+          <StatusBar backgroundColor="white" barStyle="dark-content" />
           <EventCardLoader>
             <Rect x="0" y="13" rx="4" ry="4" width="100" height="13" />
             <Rect x="0" y="37" rx="4" ry="4" width="50" height="8" />
