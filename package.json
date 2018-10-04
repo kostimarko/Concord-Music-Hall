@@ -7,11 +7,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "d3-interpolate": "^1.3.2",
     "moment": "^2.22.2",
+    "prop-types": "^15.6.2",
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-calendar-select": "^0.1.2",
     "react-native-firebase": "^5.0.0",
+    "react-native-svg": "^7.0.3",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^2.17.0",
     "react-navigation-fluid-transitions": "^0.2.71",

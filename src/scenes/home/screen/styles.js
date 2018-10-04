@@ -8,6 +8,11 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10
   },
+  container: {
+    backgroundColor: '#ffffff',
+    flex: 1,
+    alignItems: 'center'
+  },
   ButtonContainer: {
     backgroundColor: '#E43F6F',
     borderRadius: 15,

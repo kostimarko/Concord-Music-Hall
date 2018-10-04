@@ -12,10 +12,11 @@ import {
 import { NavigationActions } from 'react-navigation';
 import moment from 'moment';
 import Calendar from 'react-native-calendar-select';
+import Svg, { Circle, Rect } from 'react-native-svg';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Transition } from 'react-navigation-fluid-transitions';
 import { actions as Network } from '../../../network';
-import { EventCard, DateSeparator } from '../components';
+import { EventCard, DateSeparator, EventCardLoader } from '../components';
 import { styles } from './styles';
 
 const { getCurrentEvents, getAllEvents } = Network;
@@ -151,7 +152,16 @@ class Home extends Component {
     } else {
       return (
         <View style={styles.container}>
-          <Text style={styles.welcome}>Welcome to React Native!</Text>
+          <EventCardLoader>
+            <Rect x="0" y="13" rx="4" ry="4" width="100" height="13" />
+            <Rect x="0" y="37" rx="4" ry="4" width="50" height="8" />
+            <Rect x="0" y="70" rx="5" ry="5" width="400" height="200" />
+          </EventCardLoader>
+          <EventCardLoader>
+            <Rect x="0" y="13" rx="4" ry="4" width="100" height="13" />
+            <Rect x="0" y="37" rx="4" ry="4" width="50" height="8" />
+            <Rect x="0" y="70" rx="5" ry="5" width="400" height="200" />
+          </EventCardLoader>
         </View>
       );
     }
