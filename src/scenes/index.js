@@ -1,6 +1,6 @@
 import Home from './home/screen/Home';
 import Profile from './profile/screen/Profile';
 import EventDetails from './event/screen/EventDetails';
-import AllEvents from './allEvents/screen/AllEvents';
+import BuyTickets from './buyTickets/screen/BuyTickets';
 
-export { Home, Profile, EventDetails, AllEvents };
+export { Home, Profile, EventDetails, BuyTickets };

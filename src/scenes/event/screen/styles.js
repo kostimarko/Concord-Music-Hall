@@ -26,13 +26,14 @@ export const styles = StyleSheet.create({
   ButtonContainer: {
     backgroundColor: '#496DDB',
     borderRadius: 25,
-    width: 150,
+    width: 250,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center'
   },
   ButtonText: {
     fontSize: 21,
+    fontWeight: '700',
     color: '#ffffff',
     paddingLeft: 10,
     paddingRight: 10,
@@ -45,9 +46,9 @@ export const styles = StyleSheet.create({
     flex: 1
   },
   IconContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     backgroundColor: '#ffffff',
     elevation: 1,
     alignItems: 'center',

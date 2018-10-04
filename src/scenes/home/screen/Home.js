@@ -23,8 +23,31 @@ const AllEventsAction = NavigationActions.navigate({
   routeName: 'AllEvents'
 });
 class Home extends Component {
-  static navigationOptions = {
-    header: null
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: 'Concord Music Hall',
+      headerTitleStyle: {
+        color: '#646872',
+        fontSize: 24,
+        fontWeight: '300',
+        marginLeft: 10
+      },
+      headerStyle: {
+        elevation: 0
+      },
+      headerLeft: null,
+      headerRight: (
+        <TouchableOpacity onPress={navigation.getParam('handleFilter')}>
+          <View style={styles.IconContainer}>
+            <MaterialCommunityIcons
+              name="filter-variant"
+              size={25}
+              color="#646872"
+            />
+          </View>
+        </TouchableOpacity>
+      )
+    };
   };
   constructor(props) {
     super(props);
@@ -43,9 +66,9 @@ class Home extends Component {
       .add(7, 'days')
       .format('YYYY-MM-DD');
     this.props.getCurrentEvents(start, end);
+    this.props.navigation.setParams({ handleFilter: this.openCalendar });
   }
   _GetAllEvents = () => {
-    console.log(this.props.Events);
     const { Events } = this.props;
     const { StartDate } = Events[Events.length - 1];
     this.props.getAllEvents(StartDate, res => {
@@ -64,17 +87,16 @@ class Home extends Component {
     this.props.getCurrentEvents(start, end);
   }
   openCalendar() {
-    console.log('opening calendar');
     this.calendar && this.calendar.open();
   }
   _renderItem = ({ item, index }) => {
     return (
       <View>
         <DateSeparator StartDate={item.StartDate} EventId={item.EventId} />
-        <Transition shared={`image${index}`}>
+        <Transition shared={`${index}`}>
           <EventCard
             ImageSource={item.Image.Medium}
-            AgeLimit={item.AgeLimit}
+            Price={item.TicketPrice}
             HeadLiner={item.HeadlinerInfo.name}
             NextSceeen={() =>
               this.props.navigation.navigate('Details', { item, index })
@@ -103,20 +125,6 @@ class Home extends Component {
         <View>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <View style={{ padding: 10, backgroundColor: '#ffffff' }}>
-            <View style={styles.HeaderStyle}>
-              <Text style={{ fontSize: 30, fontWeight: '300' }}>
-                Concord Music Hall
-              </Text>
-              <TouchableOpacity onPress={this.openCalendar}>
-                <View style={styles.IconContainer}>
-                  <MaterialCommunityIcons
-                    name="filter-variant"
-                    size={25}
-                    color="#646872"
-                  />
-                </View>
-              </TouchableOpacity>
-            </View>
             <FlatList
               data={this.props.Events}
               renderItem={this._renderItem}

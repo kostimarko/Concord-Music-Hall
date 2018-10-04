@@ -4,7 +4,7 @@ import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
 
 const EventCard = props => {
-  const { ImageSource, AgeLimit, HeadLiner, NextSceeen } = props;
+  const { ImageSource, Price, HeadLiner, NextSceeen } = props;
   const { Image } = styles;
   return (
     <TouchableOpacity onPress={NextSceeen}>
@@ -20,13 +20,13 @@ const EventCard = props => {
                 style={{
                   fontSize: 18,
                   color: '#ffffff',
-                  paddingLeft: 10,
-                  paddingRight: 10,
+                  paddingLeft: 15,
+                  paddingRight: 15,
                   paddingTop: 5,
                   paddingBottom: 5
                 }}
               >
-                {AgeLimit}
+                {Price}
               </Text>
             </View>
             <View style={{ backgroundColor: '#496DDB', borderRadius: 15 }}>

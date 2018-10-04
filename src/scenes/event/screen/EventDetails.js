@@ -62,14 +62,18 @@ class EventDetails extends Component {
       HeaderRow
     } = styles;
 
-    const { Image, AgeLimit } = this.props.navigation.state.params.item;
+    const {
+      Image,
+      AgeLimit,
+      TicketLink
+    } = this.props.navigation.state.params.item;
     const { index } = this.props.navigation.state.params;
     if (this.props.loaded) {
       return (
         <ScrollView showsVerticalScrollIndicator={false}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <View style={{ backgroundColor: '#ffffff', flex: 1 }}>
-            <Transition shared={`image${index}`}>
+            <Transition shared={`${index}`}>
               <ImageBackground
                 source={{
                   uri: Image.Large
@@ -84,7 +88,7 @@ class EventDetails extends Component {
                       <View style={IconContainer}>
                         <MaterialCommunityIcons
                           name="arrow-left"
-                          size={25}
+                          size={20}
                           color="#646872"
                         />
                       </View>
@@ -100,7 +104,11 @@ class EventDetails extends Component {
                       justifyContent: 'flex-end'
                     }}
                   >
-                    <TouchableOpacity onPress={() => console.log('logng')}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        this.props.navigation.navigate('Buy', { TicketLink })
+                      }
+                    >
                       <View style={ButtonContainer}>
                         <Text style={ButtonText}>Buy Tickets</Text>
                       </View>
