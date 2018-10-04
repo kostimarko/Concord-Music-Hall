@@ -7,7 +7,8 @@ import {
   ImageBackground,
   StatusBar,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Animated
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import moment from 'moment';
@@ -56,7 +57,8 @@ class Home extends Component {
       startDate: moment().format('YYYYMMDD'),
       endDate: moment()
         .add(7, 'days')
-        .format('YYYYMMDD')
+        .format('YYYYMMDD'),
+      bgColor: new Animated.Value(0)
     };
     this.confirmDate = this.confirmDate.bind(this);
     this.openCalendar = this.openCalendar.bind(this);
@@ -108,7 +110,7 @@ class Home extends Component {
     );
   };
   render() {
-    const { welcome } = styles;
+    const { welcome, FlatListContainer } = styles;
     // It's an optional property, I use this to show the structure of customI18n object.
     let customI18n = {
       date: 'MM / DD' // date format
@@ -121,18 +123,19 @@ class Home extends Component {
     const YearLater = moment()
       .add(1, 'years')
       .format('YYYYMMDD');
+
     if (this.props.loaded) {
       return (
         <View>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
-          <View style={{ padding: 10, backgroundColor: '#ffffff' }}>
+          <Animated.View style={[FlatListContainer]}>
             <FlatList
               data={this.props.Events}
               renderItem={this._renderItem}
               showsVerticalScrollIndicator={false}
               keyExtractor={(item, index) => item.EventId.toString()}
             />
-          </View>
+          </Animated.View>
           <Calendar
             i18n="en"
             ref={calendar => {

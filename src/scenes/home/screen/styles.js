@@ -44,5 +44,9 @@ export const styles = StyleSheet.create({
     elevation: 0,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  FlatListContainer: {
+    padding: 10,
+    backgroundColor: '#ffffff'
   }
 });
