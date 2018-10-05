@@ -33,6 +33,7 @@ class EventDetails extends Component {
       VenueCity,
       HeadlinerDesc
     } = this.props.navigation.state.params.item;
+    const { AgeContainer, badgeText } = styles;
     return (
       <View style={{ padding: 15 }}>
         <Headliner
@@ -46,6 +47,7 @@ class EventDetails extends Component {
           VenueCity={VenueCity}
           HeadlinerDesc={HeadlinerDesc}
           Price={TicketPrice}
+          AgeLimit={AgeLimit}
         />
       </View>
     );
@@ -53,8 +55,6 @@ class EventDetails extends Component {
   render() {
     const {
       ImageStyle,
-      AgeContainer,
-      badgeText,
       ButtonContainer,
       ButtonText,
       ImageDetailsContainer,
@@ -93,9 +93,6 @@ class EventDetails extends Component {
                         />
                       </View>
                     </TouchableOpacity>
-                    <View style={AgeContainer}>
-                      <Text style={badgeText}>{AgeLimit}</Text>
-                    </View>
                   </View>
                   <View
                     style={{

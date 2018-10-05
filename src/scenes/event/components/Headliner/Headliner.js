@@ -25,7 +25,8 @@ const Headliner = props => {
     VenueState,
     VenueCity,
     HeadlinerDesc,
-    Price
+    Price,
+    AgeLimit
   } = props;
   return (
     <View>
@@ -48,6 +49,12 @@ const Headliner = props => {
           <Icon name="currency-usd" size={25} style={{ color: '#646872' }} />
         </View>
         <Text style={IconRowText}>{Price}</Text>
+      </View>
+      <View style={IconRow}>
+        <View style={IconContainer}>
+          <Icon name="face" size={25} style={{ color: '#646872' }} />
+        </View>
+        <Text style={IconRowText}>{AgeLimit}</Text>
       </View>
       <View style={IconRow}>
         <View style={IconContainer}>
