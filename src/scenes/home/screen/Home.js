@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
   StyleSheet,
@@ -24,7 +24,7 @@ const { getCurrentEvents, getAllEvents } = Network;
 const AllEventsAction = NavigationActions.navigate({
   routeName: 'AllEvents'
 });
-class Home extends Component {
+class Home extends PureComponent {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: 'Concord Music Hall',
