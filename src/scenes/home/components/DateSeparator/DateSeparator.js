@@ -7,7 +7,7 @@ import { styles } from './styles';
 const DateSeparator = props => {
   const { StartDate, EventId } = props;
   return (
-    <View style={{ marginTop: 5, marginBottom: 15 }}>
+    <View style={{ marginTop: 5, marginBottom: 10 }}>
       <Text style={{ fontSize: 18, fontWeight: '700' }}>
         {moment(StartDate).format('MMM Do YYYY')}
       </Text>

@@ -8,17 +8,14 @@ const EventCard = props => {
   const { Image } = styles;
   return (
     <TouchableOpacity onPress={NextSceeen}>
-      <View style={{ marginBottom: 25 }}>
+      <View style={{ marginBottom: 45 }}>
         <View>
-          <ImageBackground
-            source={{ uri: ImageSource }}
-            style={Image}
-            imageStyle={{ borderRadius: 15 }}
-          >
-            <View style={{ backgroundColor: '#496DDB', borderRadius: 15 }}>
+          <ImageBackground source={{ uri: ImageSource }} style={Image}>
+            <View style={{ backgroundColor: '#496DDB', borderRadius: 30 }}>
               <Text
                 style={{
                   fontSize: 24,
+                  fontWeight: '700',
                   color: '#ffffff',
                   paddingLeft: 20,
                   paddingRight: 20,
@@ -29,7 +26,7 @@ const EventCard = props => {
                 {HeadLiner}
               </Text>
             </View>
-            <View style={{ backgroundColor: '#000000', borderRadius: 15 }}>
+            <View style={{ backgroundColor: '#000000', borderRadius: 30 }}>
               <Text
                 style={{
                   fontSize: 18,
