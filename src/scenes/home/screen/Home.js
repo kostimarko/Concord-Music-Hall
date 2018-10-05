@@ -70,7 +70,6 @@ class Home extends PureComponent {
       .format('YYYY-MM-DD');
     this.props.getCurrentEvents(start, end);
     this.props.navigation.setParams({ handleFilter: this.openCalendar });
-    console.log('UHH');
   }
   _GetAllEvents = () => {
     const { Events } = this.props;
