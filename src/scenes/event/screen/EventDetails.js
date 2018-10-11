@@ -12,11 +12,27 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Transition } from 'react-navigation-fluid-transitions';
 import { styles } from './styles';
 import { Headliner } from '../components';
 
 class EventDetails extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { HeadlinerInfo } = navigation.state.params.item;
+    return {
+      headerTitle: `${HeadlinerInfo.name}`,
+      headerTitleStyle: {
+        color: '#191919',
+        fontSize: 24,
+        fontWeight: '300',
+        marginLeft: 10
+      },
+      headerStyle: {
+        elevation: 0
+      },
+
+      headerRight: null
+    };
+  };
   componentDidMount() {
     console.log('componentMounted');
     console.log(this.props.navigation.state.params);
@@ -73,47 +89,33 @@ class EventDetails extends Component {
         <ScrollView showsVerticalScrollIndicator={false}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <View style={{ backgroundColor: '#ffffff', flex: 1 }}>
-            <Transition shared={`${index}`}>
-              <ImageBackground
-                source={{
-                  uri: Image.Large
-                }}
-                style={ImageStyle}
-              >
-                <View style={ImageDetailsContainer}>
-                  <View style={HeaderRow}>
-                    <TouchableOpacity
-                      onPress={() => this.props.navigation.goBack()}
-                    >
-                      <View style={IconContainer}>
-                        <MaterialCommunityIcons
-                          name="arrow-left"
-                          size={20}
-                          color="#646872"
-                        />
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                  <View
-                    style={{
-                      flex: 1,
-                      alignItems: 'flex-end',
-                      justifyContent: 'flex-end'
-                    }}
+            <ImageBackground
+              source={{
+                uri: Image.Large
+              }}
+              style={ImageStyle}
+            >
+              <View style={ImageDetailsContainer}>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: 'flex-end',
+                    justifyContent: 'flex-end'
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate('Buy', { TicketLink })
+                    }
                   >
-                    <TouchableOpacity
-                      onPress={() =>
-                        this.props.navigation.navigate('Buy', { TicketLink })
-                      }
-                    >
-                      <View style={ButtonContainer}>
-                        <Text style={ButtonText}>Buy Tickets</Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
+                    <View style={ButtonContainer}>
+                      <Text style={ButtonText}>Buy Tickets</Text>
+                    </View>
+                  </TouchableOpacity>
                 </View>
-              </ImageBackground>
-            </Transition>
+              </View>
+            </ImageBackground>
+
             {this._renderDetails()}
           </View>
         </ScrollView>

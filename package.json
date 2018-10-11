@@ -17,7 +17,6 @@
     "react-native-svg": "^7.0.3",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^2.17.0",
-    "react-navigation-fluid-transitions": "^0.2.71",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"

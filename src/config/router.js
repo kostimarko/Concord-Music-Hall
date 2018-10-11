@@ -6,18 +6,13 @@ import {
 } from 'react-navigation';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { FluidNavigator } from 'react-navigation-fluid-transitions';
 import { Home, Profile, EventDetails, BuyTickets } from '../scenes';
 
-const EventListStack = createStackNavigator({
-  EventList: { screen: Home }
-});
-
-const HomeStack = FluidNavigator(
+const HomeStack = createStackNavigator(
   {
-    Home: EventListStack,
+    Home: { screen: Home },
     Details: { screen: EventDetails },
-    Buy: BuyTickets
+    Buy: { screen: BuyTickets }
   },
   {
     navigationOptions: {

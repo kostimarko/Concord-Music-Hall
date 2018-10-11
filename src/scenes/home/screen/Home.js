@@ -15,7 +15,6 @@ import moment from 'moment';
 import Calendar from 'react-native-calendar-select';
 import Svg, { Circle, Rect } from 'react-native-svg';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Transition } from 'react-navigation-fluid-transitions';
 import { actions as Network } from '../../../network';
 import { EventCard, DateSeparator, EventCardLoader } from '../components';
 import { styles } from './styles';
@@ -29,7 +28,7 @@ class Home extends PureComponent {
     return {
       headerTitle: 'Concord Music Hall',
       headerTitleStyle: {
-        color: '#646872',
+        color: '#191919',
         fontSize: 24,
         fontWeight: '300',
         marginLeft: 10
@@ -44,7 +43,7 @@ class Home extends PureComponent {
             <MaterialCommunityIcons
               name="filter-variant"
               size={25}
-              color="#646872"
+              color="#191919"
             />
           </View>
         </TouchableOpacity>
@@ -96,16 +95,12 @@ class Home extends PureComponent {
     return (
       <View>
         <DateSeparator StartDate={item.StartDate} EventId={item.EventId} />
-        <Transition shared={`${index}`}>
-          <EventCard
-            ImageSource={item.Image.Medium}
-            Price={item.TicketPrice}
-            HeadLiner={item.HeadlinerInfo.name}
-            NextSceeen={() =>
-              this.props.navigation.navigate('Details', { item, index })
-            }
-          />
-        </Transition>
+        <EventCard
+          ImageSource={item.Image.Medium}
+          Price={item.TicketPrice}
+          HeadLiner={item.HeadlinerInfo.name}
+          NextSceeen={() => this.props.navigation.navigate('Details', { item })}
+        />
       </View>
     );
   };

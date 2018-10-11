@@ -6,14 +6,13 @@ import { styles } from './styles';
 
 const DateSeparator = props => {
   const { StartDate, EventId } = props;
+  const { Container, DateTextStyle, TimeTextStyle } = styles;
   return (
-    <View style={{ marginTop: 5, marginBottom: 10 }}>
-      <Text style={{ fontSize: 18, fontWeight: '700' }}>
+    <View style={Container}>
+      <Text style={DateTextStyle}>
         {moment(StartDate).format('MMM Do YYYY')}
       </Text>
-      <Text style={{ fontSize: 18, fontWeight: '300' }}>
-        {moment(StartDate).format('h:mm A')}
-      </Text>
+      <Text style={TimeTextStyle}>{moment(StartDate).format('h:mm A')}</Text>
     </View>
   );
 };
