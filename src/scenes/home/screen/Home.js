@@ -59,8 +59,6 @@ class Home extends PureComponent {
         .format('YYYYMMDD'),
       bgColor: new Animated.Value(0)
     };
-    this.confirmDate = this.confirmDate.bind(this);
-    this.openCalendar = this.openCalendar.bind(this);
   }
   componentDidMount() {
     const start = moment().format('YYYY-MM-DD');
@@ -79,7 +77,7 @@ class Home extends PureComponent {
       }
     });
   };
-  confirmDate({ startDate, endDate, startMoment, endMoment }) {
+  confirmDate = ({ startDate, endDate, startMoment, endMoment }) => {
     this.setState({
       startDate: startMoment,
       endDate: endMoment
@@ -87,10 +85,10 @@ class Home extends PureComponent {
     const start = moment(startMoment).format('YYYY-MM-DD');
     const end = moment(endMoment).format('YYYY-MM-DD');
     this.props.getCurrentEvents(start, end);
-  }
-  openCalendar() {
+  };
+  openCalendar = () => {
     this.calendar && this.calendar.open();
-  }
+  };
   _renderItem = ({ item, index }) => {
     return (
       <View>
