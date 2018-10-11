@@ -14,7 +14,7 @@ const EventCard = props => {
             <View style={{ backgroundColor: '#496DDB', borderRadius: 30 }}>
               <Text
                 style={{
-                  fontSize: 24,
+                  fontSize: 18,
                   fontWeight: '700',
                   color: '#ffffff',
                   paddingLeft: 20,
