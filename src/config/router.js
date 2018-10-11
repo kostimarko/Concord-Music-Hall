@@ -8,6 +8,8 @@ import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Home, Profile, EventDetails, BuyTickets } from '../scenes';
 
+import { fromLeft } from './transitions';
+
 const HomeStack = createStackNavigator(
   {
     Home: { screen: Home },
@@ -17,7 +19,8 @@ const HomeStack = createStackNavigator(
   {
     navigationOptions: {
       gesturesEnabled: true
-    }
+    },
+    transitionConfig: () => fromLeft()
   }
 );
 
