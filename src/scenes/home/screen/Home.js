@@ -8,7 +8,9 @@ import {
   StatusBar,
   FlatList,
   TouchableOpacity,
-  Animated
+  Animated,
+  Easing,
+  Dimensions
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import moment from 'moment';
@@ -23,6 +25,7 @@ const { getCurrentEvents, getAllEvents } = Network;
 const AllEventsAction = NavigationActions.navigate({
   routeName: 'AllEvents'
 });
+const { width } = Dimensions.get('window');
 class Home extends PureComponent {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -56,16 +59,22 @@ class Home extends PureComponent {
       startDate: moment().format('YYYYMMDD'),
       endDate: moment()
         .add(7, 'days')
-        .format('YYYYMMDD'),
-      bgColor: new Animated.Value(0)
+        .format('YYYYMMDD')
     };
+    this._animated = new Animated.Value(0);
   }
   componentDidMount() {
     const start = moment().format('YYYY-MM-DD');
     const end = moment()
       .add(7, 'days')
       .format('YYYY-MM-DD');
-    this.props.getCurrentEvents(start, end);
+    this.props.getCurrentEvents(start, end, res => {
+      Animated.timing(this._animated, {
+        toValue: 1,
+        duration: 800,
+        easing: Easing.in(Easing.cubic)
+      }).start();
+    });
     this.props.navigation.setParams({ handleFilter: this.openCalendar });
   }
   _GetAllEvents = () => {
@@ -84,22 +93,47 @@ class Home extends PureComponent {
     });
     const start = moment(startMoment).format('YYYY-MM-DD');
     const end = moment(endMoment).format('YYYY-MM-DD');
-    this.props.getCurrentEvents(start, end);
+    this.props.getCurrentEvents(start, end, res => {
+      Animated.timing(this._animated, {
+        toValue: 1,
+        duration: 800,
+        easing: Easing.in(Easing.cubic)
+      }).start();
+    });
   };
   openCalendar = () => {
     this.calendar && this.calendar.open();
   };
   _renderItem = ({ item, index }) => {
+    const rowStyles = [
+      {
+        opacity: this._animated.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, 1]
+        })
+      },
+      {
+        transform: [
+          {
+            translateX: this._animated.interpolate({
+              inputRange: [0, 1],
+              outputRange: [width, 0]
+            })
+          }
+        ]
+      }
+    ];
     return (
-      <View>
+      <Animated.View style={rowStyles} index={index}>
         <DateSeparator StartDate={item.StartDate} EventId={item.EventId} />
+
         <EventCard
           ImageSource={item.Image.Medium}
           Price={item.TicketPrice}
           HeadLiner={item.HeadlinerInfo.name}
           NextSceeen={() => this.props.navigation.navigate('Details', { item })}
         />
-      </View>
+      </Animated.View>
     );
   };
   render() {
