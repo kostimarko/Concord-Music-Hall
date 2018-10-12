@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
   StyleSheet,
@@ -9,14 +9,15 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
-  WebView
+  WebView,
+  ActivityIndicator
 } from 'react-native';
 import moment from 'moment';
+import Svg, { Rect } from 'react-native-svg';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { styles } from './styles';
-//import { Headliner } from '../components';
 
-class BuyTickets extends Component {
+class BuyTickets extends PureComponent {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: 'Buy Tickets',
@@ -33,16 +34,25 @@ class BuyTickets extends Component {
       headerRight: null
     };
   };
-  componentDidMount() {
-    console.log('componentMounted');
-    console.log(this.props.navigation.state.params.TicketLink);
-  }
+
+  _renderLoading = () => {
+    return (
+      <View>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  };
+
   render() {
     const { HeaderRow, IconContainer } = styles;
     const { TicketLink } = this.props.navigation.state.params;
     return (
       <View style={{ flex: 1 }}>
-        <WebView source={{ uri: TicketLink }} />
+        <WebView
+          source={{ uri: TicketLink }}
+          startInLoadingState
+          renderLoading={this._renderLoading}
+        />
       </View>
     );
   }
