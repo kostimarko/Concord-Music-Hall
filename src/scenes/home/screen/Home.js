@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 import {
   StyleSheet,
   Text,
@@ -11,29 +11,30 @@ import {
   Animated,
   Easing,
   Dimensions
-} from 'react-native';
-import { NavigationActions } from 'react-navigation';
-import moment from 'moment';
-import Calendar from 'react-native-calendar-select';
-import Svg, { Circle, Rect } from 'react-native-svg';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { actions as Network } from '../../../network';
-import { EventCard, DateSeparator, EventCardLoader } from '../components';
-import { styles } from './styles';
+} from "react-native";
+import { NavigationActions } from "react-navigation";
+import moment from "moment";
+import Calendar from "react-native-calendar-select";
+import Svg, { Circle, Rect } from "react-native-svg";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import ContentLoader from "rn-content-loader";
+import { actions as Network } from "../../../network";
+import { EventCard, DateSeparator } from "../components";
+import { styles } from "./styles";
 
 const { getCurrentEvents, getAllEvents } = Network;
 const AllEventsAction = NavigationActions.navigate({
-  routeName: 'AllEvents'
+  routeName: "AllEvents"
 });
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 class Home extends PureComponent {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: 'Concord Music Hall',
+      headerTitle: "Concord Music Hall",
       headerTitleStyle: {
-        color: '#191919',
+        color: "#191919",
         fontSize: 24,
-        fontWeight: '300',
+        fontWeight: "300",
         marginLeft: 10
       },
       headerStyle: {
@@ -41,7 +42,7 @@ class Home extends PureComponent {
       },
       headerLeft: null,
       headerRight: (
-        <TouchableOpacity onPress={navigation.getParam('handleFilter')}>
+        <TouchableOpacity onPress={navigation.getParam("handleFilter")}>
           <View style={styles.IconContainer}>
             <MaterialCommunityIcons
               name="filter-variant"
@@ -56,18 +57,25 @@ class Home extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: moment().format('YYYYMMDD'),
+      startDate: moment().format("YYYYMMDD"),
       endDate: moment()
-        .add(7, 'days')
-        .format('YYYYMMDD')
+        .add(7, "days")
+        .format("YYYYMMDD"),
+      CustomColor: [
+        "rgb(255, 181, 5)",
+        "rgb(124, 234, 230)",
+        "rgb(224, 89, 89)",
+        "rgb(164, 61, 237)",
+        "rgb(95, 244, 155)"
+      ]
     };
     this._animated = new Animated.Value(0);
   }
   componentDidMount() {
-    const start = moment().format('YYYY-MM-DD');
+    const start = moment().format("YYYY-MM-DD");
     const end = moment()
-      .add(7, 'days')
-      .format('YYYY-MM-DD');
+      .add(7, "days")
+      .format("YYYY-MM-DD");
     this.props.getCurrentEvents(start, end, res => {
       Animated.timing(this._animated, {
         toValue: 1,
@@ -77,6 +85,12 @@ class Home extends PureComponent {
     });
     this.props.navigation.setParams({ handleFilter: this.openCalendar });
   }
+  _getColor = () => {
+    let color = this.state.CustomColor[
+      Math.floor(Math.random() * this.state.CustomColor.length)
+    ];
+    return color;
+  };
   _GetAllEvents = () => {
     const { Events } = this.props;
     const { StartDate } = Events[Events.length - 1];
@@ -91,8 +105,8 @@ class Home extends PureComponent {
       startDate: startMoment,
       endDate: endMoment
     });
-    const start = moment(startMoment).format('YYYY-MM-DD');
-    const end = moment(endMoment).format('YYYY-MM-DD');
+    const start = moment(startMoment).format("YYYY-MM-DD");
+    const end = moment(endMoment).format("YYYY-MM-DD");
     this.props.getCurrentEvents(start, end, res => {
       Animated.timing(this._animated, {
         toValue: 1,
@@ -105,6 +119,7 @@ class Home extends PureComponent {
     this.calendar && this.calendar.open();
   };
   _renderItem = ({ item, index }) => {
+    let borderColor = this._getColor();
     const rowStyles = [
       {
         opacity: this._animated.interpolate({
@@ -125,13 +140,12 @@ class Home extends PureComponent {
     ];
     return (
       <Animated.View style={rowStyles} index={index}>
-        <DateSeparator StartDate={item.StartDate} EventId={item.EventId} />
-
         <EventCard
+          BorderColor={borderColor}
           ImageSource={item.Image.Medium}
           Price={item.TicketPrice}
           HeadLiner={item.HeadlinerInfo.name}
-          NextSceeen={() => this.props.navigation.navigate('Details', { item })}
+          NextSceen={() => this.props.navigation.navigate("Details", { item })}
         />
       </Animated.View>
     );
@@ -140,16 +154,16 @@ class Home extends PureComponent {
     const { welcome, FlatListContainer } = styles;
     // It's an optional property, I use this to show the structure of customI18n object.
     let customI18n = {
-      date: 'MM / DD' // date format
+      date: "MM / DD" // date format
     };
     let color = {
-      mainColor: '#E43F6F',
-      subColor: '#ffffff'
+      mainColor: "#E43F6F",
+      subColor: "#ffffff"
     };
-    const Today = moment().format('YYYYMMDD');
+    const Today = moment().format("YYYYMMDD");
     const YearLater = moment()
-      .add(1, 'years')
-      .format('YYYYMMDD');
+      .add(1, "years")
+      .format("YYYYMMDD");
 
     if (this.props.loaded) {
       return (
@@ -183,16 +197,16 @@ class Home extends PureComponent {
       return (
         <View style={styles.container}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
-          <EventCardLoader>
+          <ContentLoader>
             <Rect x="0" y="13" rx="4" ry="4" width="100" height="13" />
             <Rect x="0" y="37" rx="4" ry="4" width="50" height="8" />
             <Rect x="0" y="70" rx="5" ry="5" width="400" height="200" />
-          </EventCardLoader>
-          <EventCardLoader>
+          </ContentLoader>
+          <ContentLoader>
             <Rect x="0" y="13" rx="4" ry="4" width="100" height="13" />
             <Rect x="0" y="37" rx="4" ry="4" width="50" height="8" />
             <Rect x="0" y="70" rx="5" ry="5" width="400" height="200" />
-          </EventCardLoader>
+          </ContentLoader>
         </View>
       );
     }

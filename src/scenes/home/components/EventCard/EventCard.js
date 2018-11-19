@@ -1,27 +1,29 @@
-import React from 'react';
-import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import React from "react";
+import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 
-import { styles } from './styles';
+import { styles } from "./styles";
 
 const EventCard = props => {
-  const { ImageSource, Price, HeadLiner, NextSceeen } = props;
-  const { Image, HeadlinerTextStyle, PriceTextStyle } = styles;
+  const { ImageSource, Price, HeadLiner, NextSceen, BorderColor } = props;
+  const { Image, HeadlinerTextStyle, PriceTextStyle, EventContainer } = styles;
+
   return (
-    <TouchableOpacity onPress={NextSceeen}>
-      <View style={{ marginBottom: 45 }}>
+    <TouchableOpacity onPress={NextSceen}>
+      <View style={{ marginBottom: 45, flexDirection: "row" }}>
         <View>
           <ImageBackground
             source={{ uri: ImageSource }}
             style={Image}
             imageStyle={Image}
-          >
-            <View style={{ backgroundColor: '#496DDB', borderRadius: 30 }}>
-              <Text style={HeadlinerTextStyle}>{HeadLiner}</Text>
-            </View>
-            <View style={{ backgroundColor: '#000000', borderRadius: 30 }}>
-              <Text style={PriceTextStyle}>{Price}</Text>
-            </View>
-          </ImageBackground>
+          />
+        </View>
+        <View style={[EventContainer, { borderColor: BorderColor }]}>
+          <View>
+            <Text style={HeadlinerTextStyle}>{HeadLiner}</Text>
+          </View>
+          <View>
+            <Text style={PriceTextStyle}>{Price}</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
