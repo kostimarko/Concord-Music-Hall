@@ -7,28 +7,42 @@ export const styles = StyleSheet.create({
     width: width / 2 - 10,
     height: width / 2 - 10
   },
-  HeadlinerTextStyle: {
-    fontSize: 18,
+  DateTextStyle: {
+    fontSize: 15,
     fontWeight: "700",
+    color: "#000000"
+  },
+  TimeTextStyle: {
     color: "#000000",
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 5,
-    paddingBottom: 5
+    fontSize: 15,
+    marginTop: 15,
+    fontWeight: "700"
+  },
+  HeadlinerTextStyle: {
+    fontSize: 24,
+    fontWeight: "300",
+    color: "#000000"
   },
   PriceTextStyle: {
-    fontSize: 18,
     color: "#000000",
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 5,
-    paddingBottom: 5
+    fontSize: 15,
+    fontWeight: "300"
+  },
+  AgeLimitTextStyle: {
+    color: "#000000",
+    fontSize: 15,
+    marginTop: 15,
+    fontWeight: "700"
   },
   EventContainer: {
     width: width / 2 - 10,
     height: width / 2 - 10,
     borderWidth: 10,
     backgroundColor: "white",
-    marginTop: 30
+    marginTop: 30,
+    paddingLeft: 10,
+    paddingTop: 15,
+    paddingRight: 10,
+    paddingBottom: 15
   }
 });

@@ -142,9 +142,11 @@ class Home extends PureComponent {
       <Animated.View style={rowStyles} index={index}>
         <EventCard
           BorderColor={borderColor}
+          StartDate={item.StartDate}
           ImageSource={item.Image.Medium}
           Price={item.TicketPrice}
           HeadLiner={item.HeadlinerInfo.name}
+          AgeLimit={item.AgeLimit}
           NextSceen={() => this.props.navigation.navigate("Details", { item })}
         />
       </Animated.View>
