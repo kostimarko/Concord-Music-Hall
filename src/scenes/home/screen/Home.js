@@ -147,7 +147,9 @@ class Home extends PureComponent {
           Price={item.TicketPrice}
           HeadLiner={item.HeadlinerInfo.name}
           AgeLimit={item.AgeLimit}
-          NextSceen={() => this.props.navigation.navigate("Details", { item })}
+          NextSceen={() =>
+            this.props.navigation.navigate("Details", { item, borderColor })
+          }
         />
       </Animated.View>
     );

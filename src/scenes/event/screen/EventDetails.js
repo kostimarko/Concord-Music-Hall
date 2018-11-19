@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   StyleSheet,
   Text,
@@ -9,11 +9,11 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity
-} from 'react-native';
-import moment from 'moment';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { styles } from './styles';
-import { Headliner } from '../components';
+} from "react-native";
+import moment from "moment";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { styles } from "./styles";
+import { Headliner } from "../components";
 
 class EventDetails extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -21,9 +21,9 @@ class EventDetails extends Component {
     return {
       headerTitle: `${HeadlinerInfo.name}`,
       headerTitleStyle: {
-        color: '#191919',
+        color: "#191919",
         fontSize: 24,
-        fontWeight: '300',
+        fontWeight: "300",
         marginLeft: 10
       },
       headerStyle: {
@@ -34,7 +34,7 @@ class EventDetails extends Component {
     };
   };
   componentDidMount() {
-    console.log('componentMounted');
+    console.log("componentMounted");
     console.log(this.props.navigation.state.params);
   }
   _renderDetails() {
@@ -49,6 +49,7 @@ class EventDetails extends Component {
       VenueCity,
       HeadlinerDesc
     } = this.props.navigation.state.params.item;
+    const { borderColor } = this.props.navigation.state.params;
     const { AgeContainer, badgeText } = styles;
     return (
       <View style={{ padding: 15 }}>
@@ -64,6 +65,7 @@ class EventDetails extends Component {
           HeadlinerDesc={HeadlinerDesc}
           Price={TicketPrice}
           AgeLimit={AgeLimit}
+          Color={borderColor}
         />
       </View>
     );
@@ -83,12 +85,13 @@ class EventDetails extends Component {
       AgeLimit,
       TicketLink
     } = this.props.navigation.state.params.item;
+    const { borderColor } = this.props.navigation.state.params;
     const { index } = this.props.navigation.state.params;
     if (this.props.loaded) {
       return (
         <ScrollView showsVerticalScrollIndicator={false}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
-          <View style={{ backgroundColor: '#ffffff', flex: 1 }}>
+          <View style={{ backgroundColor: "#ffffff", flex: 1 }}>
             <ImageBackground
               source={{
                 uri: Image.Large
@@ -99,16 +102,21 @@ class EventDetails extends Component {
                 <View
                   style={{
                     flex: 1,
-                    alignItems: 'flex-end',
-                    justifyContent: 'flex-end'
+                    alignItems: "flex-end",
+                    justifyContent: "flex-end"
                   }}
                 >
                   <TouchableOpacity
                     onPress={() =>
-                      this.props.navigation.navigate('Buy', { TicketLink })
+                      this.props.navigation.navigate("Buy", { TicketLink })
                     }
                   >
-                    <View style={ButtonContainer}>
+                    <View
+                      style={[
+                        ButtonContainer,
+                        { backgroundColor: borderColor }
+                      ]}
+                    >
                       <Text style={ButtonText}>Buy Tickets</Text>
                     </View>
                   </TouchableOpacity>
