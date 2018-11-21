@@ -7,29 +7,31 @@ export const styles = StyleSheet.create({
     width: width / 2 - 10,
     height: width / 2 - 10
   },
+  SoldOutImageContainer: {
+    width: width / 2 - 10,
+    height: width / 2 - 10,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
+  },
   DateTextStyle: {
     fontSize: 15,
-    fontWeight: "700",
-    color: "#000000"
+    fontWeight: "700"
   },
   TimeTextStyle: {
-    color: "#000000",
     fontSize: 15,
     marginTop: 15,
     fontWeight: "700"
   },
   HeadlinerTextStyle: {
     fontSize: 24,
-    fontWeight: "300",
-    color: "#000000"
+    fontWeight: "300"
   },
   PriceTextStyle: {
-    color: "#000000",
     fontSize: 15,
     fontWeight: "300"
   },
   AgeLimitTextStyle: {
-    color: "#000000",
     fontSize: 15,
     marginTop: 15,
     fontWeight: "700"
@@ -38,7 +40,6 @@ export const styles = StyleSheet.create({
     width: width / 2 - 10,
     height: width / 2 - 10,
     borderWidth: 10,
-    backgroundColor: "white",
     marginTop: 30,
     paddingLeft: 10,
     paddingTop: 15,

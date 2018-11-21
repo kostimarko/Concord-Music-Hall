@@ -150,6 +150,8 @@ class Home extends PureComponent {
           NextSceen={() =>
             this.props.navigation.navigate("Details", { item, borderColor })
           }
+          EventStatus={item.EventStatus}
+          EventId={item.EventId}
         />
       </Animated.View>
     );

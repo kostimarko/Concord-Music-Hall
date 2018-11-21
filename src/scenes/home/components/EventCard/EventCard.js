@@ -12,7 +12,9 @@ const EventCard = props => {
     NextSceen,
     BorderColor,
     StartDate,
-    AgeLimit
+    AgeLimit,
+    EventStatus,
+    EventId
   } = props;
   const {
     Image,
@@ -21,43 +23,102 @@ const EventCard = props => {
     DateTextStyle,
     TimeTextStyle,
     PriceTextStyle,
-    AgeLimitTextStyle
+    AgeLimitTextStyle,
+    SoldOutImageContainer
   } = styles;
-
-  return (
-    <TouchableOpacity onPress={NextSceen}>
-      <View style={{ marginBottom: 45, flexDirection: "row" }}>
-        <View>
-          <ImageBackground
-            source={{ uri: ImageSource }}
-            style={Image}
-            imageStyle={Image}
-          />
-        </View>
-        <View style={[EventContainer, { borderColor: BorderColor }]}>
-          <View>
-            <Text style={DateTextStyle}>
-              {moment(StartDate).format("dddd MMM do")}
+  if (EventStatus === "Sold Out") {
+    return (
+      <TouchableOpacity onPress={NextSceen}>
+        <View style={{ marginBottom: 45, flexDirection: "row" }}>
+          <View
+            style={[SoldOutImageContainer, { backgroundColor: BorderColor }]}
+          >
+            <Text style={{ color: "white", fontSize: 24, fontWeight: "700" }}>
+              {EventStatus}
             </Text>
           </View>
-          <View>
-            <Text style={HeadlinerTextStyle}>{HeadLiner}</Text>
-          </View>
-          <View>
-            <Text style={TimeTextStyle}>
-              {moment(StartDate).format("h:mm a")}
-            </Text>
-          </View>
-          <View>
-            <Text style={PriceTextStyle}>{Price}</Text>
-          </View>
-          <View>
-            <Text style={AgeLimitTextStyle}>{AgeLimit}</Text>
+          <View
+            style={[
+              EventContainer,
+              { borderColor: BorderColor, backgroundColor: BorderColor }
+            ]}
+          >
+            <View>
+              <Text style={[DateTextStyle, { color: "#ffffff" }]}>
+                {moment(StartDate).format("dddd MMM Do")}
+              </Text>
+            </View>
+            <View>
+              <Text style={[HeadlinerTextStyle, { color: "#ffffff" }]}>
+                {HeadLiner}
+              </Text>
+            </View>
+            <View>
+              <Text style={[TimeTextStyle, { color: "#ffffff" }]}>
+                {moment(StartDate).format("h:mm a")}
+              </Text>
+            </View>
+            <View>
+              <Text style={[PriceTextStyle, { color: "#ffffff" }]}>
+                {Price}
+              </Text>
+            </View>
+            <View>
+              <Text style={[AgeLimitTextStyle, { color: "#ffffff" }]}>
+                {AgeLimit}
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
-  );
+      </TouchableOpacity>
+    );
+  } else {
+    return (
+      <TouchableOpacity onPress={NextSceen}>
+        <View style={{ marginBottom: 45, flexDirection: "row" }}>
+          <View>
+            <ImageBackground
+              source={{ uri: ImageSource }}
+              style={Image}
+              imageStyle={Image}
+            />
+          </View>
+          <View
+            style={[
+              EventContainer,
+              { borderColor: BorderColor, backgroundColor: "white" }
+            ]}
+          >
+            <View>
+              <Text style={[DateTextStyle, { color: "#000000" }]}>
+                {moment(StartDate).format("dddd MMM Do")}
+              </Text>
+            </View>
+            <View>
+              <Text style={[HeadlinerTextStyle, { color: "#000000" }]}>
+                {HeadLiner}
+              </Text>
+            </View>
+            <View>
+              <Text style={[TimeTextStyle, { color: "#000000" }]}>
+                {moment(StartDate).format("h:mm a")}
+              </Text>
+            </View>
+            <View>
+              <Text style={[PriceTextStyle, { color: "#000000" }]}>
+                {Price}
+              </Text>
+            </View>
+            <View>
+              <Text style={[AgeLimitTextStyle, { color: "#000000" }]}>
+                {AgeLimit}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
 };
 
 export default EventCard;
