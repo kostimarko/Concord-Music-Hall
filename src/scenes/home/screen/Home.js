@@ -15,7 +15,7 @@ import {
 import { NavigationActions } from "react-navigation";
 import moment from "moment";
 import Calendar from "react-native-calendar-select";
-import Svg, { Circle, Rect } from "react-native-svg";
+import Svg, { Circle, Rect, Line } from "react-native-svg";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ContentLoader from "rn-content-loader";
 import { actions as Network } from "../../../network";
@@ -59,7 +59,7 @@ class Home extends PureComponent {
     this.state = {
       startDate: moment().format("YYYYMMDD"),
       endDate: moment()
-        .add(7, "days")
+        .add(14, "days")
         .format("YYYYMMDD"),
       CustomColor: [
         "rgb(255, 181, 5)",
@@ -156,6 +156,16 @@ class Home extends PureComponent {
       </Animated.View>
     );
   };
+  _renderHeader = () => {
+    return (
+      <View style={{ marginBottom: 15 }}>
+        <Text style={styles.DateTextStyle}>
+          {moment(this.state.startDate).format("MMM Do")} &#8211;{" "}
+          {moment(this.state.endDate).format("MMM Do")}
+        </Text>
+      </View>
+    );
+  };
   render() {
     const { welcome, FlatListContainer } = styles;
     // It's an optional property, I use this to show the structure of customI18n object.
@@ -181,6 +191,7 @@ class Home extends PureComponent {
               renderItem={this._renderItem}
               showsVerticalScrollIndicator={false}
               keyExtractor={(item, index) => item.EventId.toString()}
+              ListHeaderComponent={this._renderHeader}
             />
           </Animated.View>
           <Calendar

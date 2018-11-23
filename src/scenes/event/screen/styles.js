@@ -8,6 +8,11 @@ export const styles = StyleSheet.create({
     height: 400,
     flexDirection: "column"
   },
+  SoldOutImageContainer: {
+    width: width,
+    height: 400,
+    flexDirection: "column"
+  },
   AgeContainer: {
     backgroundColor: "#000000",
     borderRadius: 15,

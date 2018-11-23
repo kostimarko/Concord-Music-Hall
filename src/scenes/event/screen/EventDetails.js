@@ -47,7 +47,8 @@ class EventDetails extends Component {
       VenueAddress,
       VenueState,
       VenueCity,
-      HeadlinerDesc
+      HeadlinerDesc,
+      EventStatus
     } = this.props.navigation.state.params.item;
     const { borderColor } = this.props.navigation.state.params;
     const { AgeContainer, badgeText } = styles;
@@ -70,6 +71,75 @@ class EventDetails extends Component {
       </View>
     );
   }
+  _renderImageBackground(Image, EventStatus) {
+    const { borderColor } = this.props.navigation.state.params;
+    const {
+      ImageStyle,
+      ButtonContainer,
+      ButtonText,
+      ImageDetailsContainer,
+      IconContainer,
+      SoldOutImageContainer
+    } = styles;
+    if (EventStatus === "Sold Out") {
+      return (
+        <View style={[SoldOutImageContainer, { backgroundColor: borderColor }]}>
+          <View style={ImageDetailsContainer}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "flex-end",
+                justifyContent: "flex-end"
+              }}
+            >
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate("Buy", { TicketLink })
+                }
+              >
+                <View
+                  style={[ButtonContainer, { backgroundColor: borderColor }]}
+                >
+                  <Text style={ButtonText}>Buy Tickets</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      );
+    } else {
+      return (
+        <ImageBackground
+          source={{
+            uri: Image.Large
+          }}
+          style={ImageStyle}
+        >
+          <View style={ImageDetailsContainer}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "flex-end",
+                justifyContent: "flex-end"
+              }}
+            >
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate("Buy", { TicketLink })
+                }
+              >
+                <View
+                  style={[ButtonContainer, { backgroundColor: borderColor }]}
+                >
+                  <Text style={ButtonText}>Buy Tickets</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ImageBackground>
+      );
+    }
+  }
   render() {
     const {
       ImageStyle,
@@ -83,7 +153,8 @@ class EventDetails extends Component {
     const {
       Image,
       AgeLimit,
-      TicketLink
+      TicketLink,
+      EventStatus
     } = this.props.navigation.state.params.item;
     const { borderColor } = this.props.navigation.state.params;
     const { index } = this.props.navigation.state.params;
@@ -92,38 +163,7 @@ class EventDetails extends Component {
         <ScrollView showsVerticalScrollIndicator={false}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <View style={{ backgroundColor: "#ffffff", flex: 1 }}>
-            <ImageBackground
-              source={{
-                uri: Image.Large
-              }}
-              style={ImageStyle}
-            >
-              <View style={ImageDetailsContainer}>
-                <View
-                  style={{
-                    flex: 1,
-                    alignItems: "flex-end",
-                    justifyContent: "flex-end"
-                  }}
-                >
-                  <TouchableOpacity
-                    onPress={() =>
-                      this.props.navigation.navigate("Buy", { TicketLink })
-                    }
-                  >
-                    <View
-                      style={[
-                        ButtonContainer,
-                        { backgroundColor: borderColor }
-                      ]}
-                    >
-                      <Text style={ButtonText}>Buy Tickets</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </ImageBackground>
-
+            {this._renderImageBackground(Image, EventStatus)}
             {this._renderDetails()}
           </View>
         </ScrollView>
