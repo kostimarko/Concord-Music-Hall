@@ -71,7 +71,7 @@ class EventDetails extends Component {
       </View>
     );
   }
-  _renderImageBackground(Image, EventStatus) {
+  _renderImageBackground(Image, EventStatus, TicketLink) {
     const { borderColor } = this.props.navigation.state.params;
     const {
       ImageStyle,
@@ -88,21 +88,15 @@ class EventDetails extends Component {
             <View
               style={{
                 flex: 1,
-                alignItems: "flex-end",
-                justifyContent: "flex-end"
+                alignItems: "center",
+                justifyContent: "center"
               }}
             >
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate("Buy", { TicketLink })
-                }
+              <Text
+                style={{ color: "#ffffff", fontSize: 21, fontWeight: "700" }}
               >
-                <View
-                  style={[ButtonContainer, { backgroundColor: borderColor }]}
-                >
-                  <Text style={ButtonText}>Buy Tickets</Text>
-                </View>
-              </TouchableOpacity>
+                {EventStatus}
+              </Text>
             </View>
           </View>
         </View>
@@ -163,7 +157,7 @@ class EventDetails extends Component {
         <ScrollView showsVerticalScrollIndicator={false}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <View style={{ backgroundColor: "#ffffff", flex: 1 }}>
-            {this._renderImageBackground(Image, EventStatus)}
+            {this._renderImageBackground(Image, EventStatus, TicketLink)}
             {this._renderDetails()}
           </View>
         </ScrollView>
