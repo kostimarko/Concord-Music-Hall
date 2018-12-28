@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import moment from "moment";
-
+import ProgressiveImage from "../../../../components/ProgressiveImage";
 import { styles } from "./styles";
 
 const EventCard = props => {
@@ -14,7 +14,8 @@ const EventCard = props => {
     StartDate,
     AgeLimit,
     EventStatus,
-    EventId
+    EventId,
+    Loaded
   } = props;
   const {
     Image,
@@ -49,7 +50,7 @@ const EventCard = props => {
               </Text>
             </View>
             <View>
-              <Text style={[HeadlinerTextStyle, { color: "#ffffff" }]}>
+              <Text style={[HeadlinerTextStyle, { color: "#ffffff" }]} numberOfLines={2}>
                 {HeadLiner}
               </Text>
             </View>
@@ -77,7 +78,7 @@ const EventCard = props => {
       <TouchableOpacity onPress={NextSceen}>
         <View style={{ marginBottom: 45, flexDirection: "row" }}>
           <View>
-            <ImageBackground
+            <ProgressiveImage
               source={{ uri: ImageSource }}
               style={Image}
               imageStyle={Image}
@@ -95,7 +96,7 @@ const EventCard = props => {
               </Text>
             </View>
             <View>
-              <Text style={[HeadlinerTextStyle, { color: "#000000" }]}>
+              <Text style={[HeadlinerTextStyle, { color: "#000000" }]} numberOfLines={2}>
                 {HeadLiner}
               </Text>
             </View>

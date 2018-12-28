@@ -22,7 +22,7 @@ import { actions as Network } from "../../../network";
 import { EventCard, DateSeparator } from "../components";
 import { styles } from "./styles";
 
-const { getCurrentEvents, getAllEvents } = Network;
+const { GetEvents } = Network;
 const AllEventsAction = NavigationActions.navigate({
   routeName: "AllEvents"
 });
@@ -59,7 +59,7 @@ class Home extends PureComponent {
     this.state = {
       startDate: moment().format("YYYYMMDD"),
       endDate: moment()
-        .add(14, "days")
+        .add(7, "days")
         .format("YYYYMMDD"),
       CustomColor: [
         "rgb(255, 181, 5)",
@@ -69,36 +69,26 @@ class Home extends PureComponent {
         "rgb(95, 244, 155)"
       ]
     };
-    this._animated = new Animated.Value(0);
   }
   componentDidMount() {
     const start = moment().format("YYYY-MM-DD");
     const end = moment()
       .add(7, "days")
       .format("YYYY-MM-DD");
-    this.props.getCurrentEvents(start, end, res => {
-      Animated.timing(this._animated, {
-        toValue: 1,
-        duration: 800,
-        easing: Easing.in(Easing.cubic)
-      }).start();
-    });
+    this.props.GetEvents(start,end);
     this.props.navigation.setParams({ handleFilter: this.openCalendar });
   }
+
+  // Open Calendar
+  openCalendar = () => {
+    this.calendar && this.calendar.open();
+  };
+  // Set Border Color From State
   _getColor = () => {
     let color = this.state.CustomColor[
       Math.floor(Math.random() * this.state.CustomColor.length)
     ];
     return color;
-  };
-  _GetAllEvents = () => {
-    const { Events } = this.props;
-    const { StartDate } = Events[Events.length - 1];
-    this.props.getAllEvents(StartDate, res => {
-      if (res) {
-        this.props.navigation.dispatch(AllEventsAction);
-      }
-    });
   };
   confirmDate = ({ startDate, endDate, startMoment, endMoment }) => {
     this.setState({
@@ -107,53 +97,27 @@ class Home extends PureComponent {
     });
     const start = moment(startMoment).format("YYYY-MM-DD");
     const end = moment(endMoment).format("YYYY-MM-DD");
-    this.props.getCurrentEvents(start, end, res => {
-      Animated.timing(this._animated, {
-        toValue: 1,
-        duration: 800,
-        easing: Easing.in(Easing.cubic)
-      }).start();
-    });
-  };
-  openCalendar = () => {
-    this.calendar && this.calendar.open();
+    this.props.GetEvents(start, end);
   };
   _renderItem = ({ item, index }) => {
     let borderColor = this._getColor();
-    const rowStyles = [
-      {
-        opacity: this._animated.interpolate({
-          inputRange: [0, 1],
-          outputRange: [0, 1]
-        })
-      },
-      {
-        transform: [
-          {
-            translateX: this._animated.interpolate({
-              inputRange: [0, 1],
-              outputRange: [width, 0]
-            })
-          }
-        ]
-      }
-    ];
     return (
-      <Animated.View style={rowStyles} index={index}>
+      <View index={index}>
         <EventCard
           BorderColor={borderColor}
-          StartDate={item.StartDate}
-          ImageSource={item.Image.Medium}
-          Price={item.TicketPrice}
-          HeadLiner={item.HeadlinerInfo.name}
-          AgeLimit={item.AgeLimit}
+          StartDate={item.startDate}
+          ImageSource={item.image.jumbo.path}
+          Price={item.ticketPrice}
+          HeadLiner={item.headlinersName}
+          AgeLimit={item.ageLimit}
           NextSceen={() =>
             this.props.navigation.navigate("Details", { item, borderColor })
           }
-          EventStatus={item.EventStatus}
-          EventId={item.EventId}
+          EventStatus={item.eventStatus}
+          EventId={item.id}
+          Loaded={this.props.Loaded}
         />
-      </Animated.View>
+      </View>
     );
   };
   _renderHeader = () => {
@@ -167,11 +131,7 @@ class Home extends PureComponent {
     );
   };
   render() {
-    const { welcome, FlatListContainer } = styles;
-    // It's an optional property, I use this to show the structure of customI18n object.
-    let customI18n = {
-      date: "MM / DD" // date format
-    };
+    const { FlatListContainer } = styles;
     let color = {
       mainColor: "#E43F6F",
       subColor: "#ffffff"
@@ -180,26 +140,23 @@ class Home extends PureComponent {
     const YearLater = moment()
       .add(1, "years")
       .format("YYYYMMDD");
-
-    if (this.props.loaded) {
+    if (this.props.Loaded) {
       return (
         <View>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
-          <Animated.View style={[FlatListContainer]}>
-            <FlatList
+          <View style={[FlatListContainer]}>
+          <FlatList
               data={this.props.Events}
               renderItem={this._renderItem}
               showsVerticalScrollIndicator={false}
-              keyExtractor={(item, index) => item.EventId.toString()}
+              keyExtractor={(item, index) => item.id.toString()}
               ListHeaderComponent={this._renderHeader}
             />
-          </Animated.View>
-          <Calendar
+            <Calendar
             i18n="en"
             ref={calendar => {
               this.calendar = calendar;
             }}
-            customI18n={customI18n}
             color={color}
             format="YYYYMMDD"
             minDate={Today}
@@ -208,6 +165,7 @@ class Home extends PureComponent {
             endDate={this.state.endDate}
             onConfirm={this.confirmDate}
           />
+          </View>
         </View>
       );
     } else {
@@ -231,11 +189,11 @@ class Home extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { loaded, Events } = state.eventsReducer;
-  return { loaded, Events };
+  const { Loaded, Events } = state.eventsReducer;
+  return { Loaded, Events };
 };
 
 export default connect(
   mapStateToProps,
-  { getCurrentEvents, getAllEvents }
+  { GetEvents }
 )(Home);

@@ -1,25 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  StyleSheet,
   Text,
   View,
   ImageBackground,
   StatusBar,
-  FlatList,
   ScrollView,
   TouchableOpacity
 } from "react-native";
-import moment from "moment";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { styles } from "./styles";
 import { Headliner } from "../components";
+import ProgressiveImage from "../../../components/ProgressiveImage";
 
 class EventDetails extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { HeadlinerInfo } = navigation.state.params.item;
+    const { headlinersName } = navigation.state.params.item;
     return {
-      headerTitle: `${HeadlinerInfo.name}`,
+      headerTitle: `${headlinersName}`,
       headerTitleStyle: {
         color: "#191919",
         fontSize: 24,
@@ -33,55 +30,37 @@ class EventDetails extends Component {
       headerRight: null
     };
   };
-  componentDidMount() {
-    console.log("componentMounted");
-    console.log(this.props.navigation.state.params);
-  }
   _renderDetails() {
-    const {
-      AgeLimit,
-      TicketPrice,
-      StartDate,
-      HeadlinerInfo,
-      VenueName,
-      VenueAddress,
-      VenueState,
-      VenueCity,
-      HeadlinerDesc,
-      EventStatus
-    } = this.props.navigation.state.params.item;
+    const {headlinersName,startDate, headliners, venue,ticketPrice,ageLimit} = this.props.navigation.state.params.item;
     const { borderColor } = this.props.navigation.state.params;
-    const { AgeContainer, badgeText } = styles;
     return (
       <View style={{ padding: 15 }}>
         <Headliner
-          HeadlinerName={HeadlinerInfo.name}
-          Day={StartDate}
-          Time={StartDate}
-          HeadlinerDesc={HeadlinerInfo.eventDescription}
-          VenueName={VenueName}
-          VenueAddress={VenueAddress}
-          VenueState={VenueState}
-          VenueCity={VenueCity}
-          HeadlinerDesc={HeadlinerDesc}
-          Price={TicketPrice}
-          AgeLimit={AgeLimit}
+          HeadlinerName={headlinersName}
+          Day={startDate}
+          Time={startDate}
+          HeadlinerDesc={headliners["0"].eventDescription}
+          VenueName={venue.name}
+          VenueAddress={venue.address1}
+          VenueState={venue.stateProvince}
+          VenueCity={venue.city}
+          Price={ticketPrice}
+          AgeLimit={ageLimit}
           Color={borderColor}
         />
       </View>
     );
   }
-  _renderImageBackground(Image, EventStatus, TicketLink) {
+  _renderImageBackground(image, eventStatus, ticketPurchaseUrl) {
     const { borderColor } = this.props.navigation.state.params;
     const {
       ImageStyle,
       ButtonContainer,
       ButtonText,
       ImageDetailsContainer,
-      IconContainer,
       SoldOutImageContainer
     } = styles;
-    if (EventStatus === "Sold Out") {
+    if (eventStatus === "Sold Out") {
       return (
         <View style={[SoldOutImageContainer, { backgroundColor: borderColor }]}>
           <View style={ImageDetailsContainer}>
@@ -95,7 +74,7 @@ class EventDetails extends Component {
               <Text
                 style={{ color: "#ffffff", fontSize: 21, fontWeight: "700" }}
               >
-                {EventStatus}
+                {eventStatus}
               </Text>
             </View>
           </View>
@@ -105,7 +84,7 @@ class EventDetails extends Component {
       return (
         <ImageBackground
           source={{
-            uri: Image.Large
+            uri: image.jumbo.path
           }}
           style={ImageStyle}
         >
@@ -119,7 +98,7 @@ class EventDetails extends Component {
             >
               <TouchableOpacity
                 onPress={() =>
-                  this.props.navigation.navigate("Buy", { TicketLink })
+                  this.props.navigation.navigate("Buy", { ticketPurchaseUrl })
                 }
               >
                 <View
@@ -134,30 +113,17 @@ class EventDetails extends Component {
       );
     }
   }
-  render() {
-    const {
-      ImageStyle,
-      ButtonContainer,
-      ButtonText,
-      ImageDetailsContainer,
-      IconContainer,
-      HeaderRow
-    } = styles;
 
-    const {
-      Image,
-      AgeLimit,
-      TicketLink,
-      EventStatus
-    } = this.props.navigation.state.params.item;
-    const { borderColor } = this.props.navigation.state.params;
-    const { index } = this.props.navigation.state.params;
-    if (this.props.loaded) {
+  render() {
+    const { image, ticketPurchaseUrl,eventStatus,headliners } = this.props.navigation.state.params.item;
+    const {urlSoundcloud} = headliners["0"];
+    console.log(this.props.navigation.state.params.item)
+    if (this.props.Loaded) {
       return (
         <ScrollView showsVerticalScrollIndicator={false}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <View style={{ backgroundColor: "#ffffff", flex: 1 }}>
-            {this._renderImageBackground(Image, EventStatus, TicketLink)}
+            {this._renderImageBackground(image,eventStatus,ticketPurchaseUrl)}
             {this._renderDetails()}
           </View>
         </ScrollView>
@@ -173,8 +139,8 @@ class EventDetails extends Component {
 }
 
 const mapStateToProps = state => {
-  const { loaded, Events } = state.eventsReducer;
-  return { loaded, Events };
+  const { Loaded, Events } = state.eventsReducer;
+  return { Loaded, Events };
 };
 
 export default connect(mapStateToProps)(EventDetails);
