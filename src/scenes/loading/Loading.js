@@ -28,26 +28,18 @@ class Loading extends PureComponent {
         this.props.navigation.dispatch(LoadedAction);
     });
   }
-
-
   render() {
-      console.log(this.props)
   return(
       <View>
-          <ActivityIndicator />
-        <StatusBar barStyle="default" />
+        <ActivityIndicator />
+        <StatusBar barStyle="light-content" hidden={true} />
       </View>
   )
 
   }
 }
 
-const mapStateToProps = state => {
-    const { Loaded, Events } = state.eventsReducer;
-    return { Loaded, Events };
-  };
-
 export default connect(
-    mapStateToProps,
+    null,
     {bootApp}
   ) (Loading);

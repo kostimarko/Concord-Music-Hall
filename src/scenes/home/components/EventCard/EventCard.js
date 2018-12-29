@@ -6,7 +6,7 @@ import { styles } from "./styles";
 
 const EventCard = props => {
   const {
-    ImageSource,
+    JumboImage,
     Price,
     HeadLiner,
     NextSceen,
@@ -15,7 +15,8 @@ const EventCard = props => {
     AgeLimit,
     EventStatus,
     EventId,
-    Loaded
+    Loaded,
+    Thumbnail
   } = props;
   const {
     Image,
@@ -79,9 +80,10 @@ const EventCard = props => {
         <View style={{ marginBottom: 45, flexDirection: "row" }}>
           <View>
             <ProgressiveImage
-              source={{ uri: ImageSource }}
+              JumboImage={JumboImage}
               style={Image}
               imageStyle={Image}
+              Thumbnail={Thumbnail}
             />
           </View>
           <View

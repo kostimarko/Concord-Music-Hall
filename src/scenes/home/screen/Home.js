@@ -98,7 +98,8 @@ class Home extends PureComponent {
         <EventCard
           BorderColor={borderColor}
           StartDate={item.startDate}
-          ImageSource={item.image.jumbo.path}
+          JumboImage={item.image.jumbo.path}
+          Thumbnail={item.image.squareSmall.path}
           Price={item.ticketPrice}
           HeadLiner={item.headlinersName}
           AgeLimit={item.ageLimit}
