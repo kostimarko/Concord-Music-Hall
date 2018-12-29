@@ -23,9 +23,6 @@ import { EventCard, DateSeparator } from "../components";
 import { styles } from "./styles";
 
 const { GetEvents } = Network;
-const AllEventsAction = NavigationActions.navigate({
-  routeName: "AllEvents"
-});
 const { width } = Dimensions.get("window");
 class Home extends PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -71,11 +68,6 @@ class Home extends PureComponent {
     };
   }
   componentDidMount() {
-    const start = moment().format("YYYY-MM-DD");
-    const end = moment()
-      .add(7, "days")
-      .format("YYYY-MM-DD");
-    this.props.GetEvents(start,end);
     this.props.navigation.setParams({ handleFilter: this.openCalendar });
   }
 

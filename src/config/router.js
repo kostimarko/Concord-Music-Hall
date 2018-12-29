@@ -6,7 +6,7 @@ import {
 } from 'react-navigation';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Home, Profile, EventDetails, BuyTickets } from '../scenes';
+import { Home, Profile, EventDetails, BuyTickets,Loading } from '../scenes';
 
 import { fromLeft } from './transitions';
 
@@ -58,9 +58,10 @@ const Tabs = createBottomTabNavigator(
 
 export const RootStack = createSwitchNavigator(
   {
-    Home: Tabs
+    Home: Tabs,
+    Loading:Loading
   },
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Loading'
   }
 );
