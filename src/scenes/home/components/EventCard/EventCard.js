@@ -76,7 +76,7 @@ const EventCard = props => {
     );
   } else {
     return (
-      <TouchableOpacity onPress={NextSceen}>
+      <TouchableOpacity onPress={NextSceen} activeOpacity={0.5}>
         <View style={{ marginBottom: 45, flexDirection: "row" }}>
           <View>
             <ProgressiveImage

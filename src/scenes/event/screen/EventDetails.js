@@ -100,6 +100,7 @@ class EventDetails extends Component {
                 onPress={() =>
                   this.props.navigation.navigate("Buy", { ticketPurchaseUrl })
                 }
+                activeOpacity={0.8}
               >
                 <View
                   style={[ButtonContainer, { backgroundColor: borderColor }]}
@@ -116,9 +117,7 @@ class EventDetails extends Component {
 
   render() {
     const { image, ticketPurchaseUrl,eventStatus,headliners } = this.props.navigation.state.params.item;
-    const {urlSoundcloud} = headliners["0"];
-    console.log(this.props.navigation.state.params.item)
-    if (this.props.Loaded) {
+ 
       return (
         <ScrollView showsVerticalScrollIndicator={false}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -128,13 +127,7 @@ class EventDetails extends Component {
           </View>
         </ScrollView>
       );
-    } else {
-      return (
-        <View>
-          <Text>HI</Text>
-        </View>
-      );
-    }
+    
   }
 }
 
