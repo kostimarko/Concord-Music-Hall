@@ -1,24 +1,58 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import SlidingUpPanel from 'rn-sliding-up-panel';
+import LottieView from 'lottie-react-native';      
 import { NavigationActions } from 'react-navigation';
 import Button from '../../../../components/Button';
 import {SignUpForm} from '../';
+import NotFound from '../../../../assets/lottie/not_found.json';
+import {actions as Network} from '../../../../network/';
+
+const {CreateUserFromAnon}= Network;
+
+const {width,height}= Dimensions.get('window');
 
 class AnonUser extends Component {
     constructor(props){
         super(props)
         this.state={
-            visibleForm:null
+            visible:false
         }
     }
     render(){
-        console.log(this.props)
         return (
             <View style={styles.container}>
-                <View style={{backgroundColor:'red', height:200,width:200, borderRadius:50, alignSelf:'center', marginTop:25}}>
+             <View style={{width:width, height:width}}>
+             <LottieView
+              ref={(animation) => {
+                if (animation) {
+                  animation.play();
+                }
+              }}
+              source={NotFound}
+              loop={true}
+            />
+            </View>
+              <View style={{flex:1}}>
+                <Text>What are you even looking for?</Text>
+                <Text>Sign Up to get get contest info, be first on the list to get tickets, maybe you'll get into your show before everyone else. All we can tell you is not signing doesn't really do anything for you. </Text>
+              </View>
+
+            <View style={{flex:1}}>
+                <Button style={styles.ButtonStyle} ButtonText={'Sign Up'} OnPress={()=>{
+                    console.log('hi')
+                    this.setState({visible:true})
+                }} />
+            </View>
+            <SlidingUpPanel
+                visible={this.state.visible}
+                onRequestClose={() => this.setState({visible: false})}>
+                <View style={styles.container}>
+                    <Text>Here is the content inside panel</Text>
+                    <Button style={styles.ButtonStyle} ButtonText='Hide' OnPress={() => this.setState({visible: false})} />
                 </View>
-                <View>{this.state.visibleForm ? <SignUpForm /> : <Button ButtonText="Sign Up" OnPress={() => console.log('hi')} style={styles.ButtonStyle} />}</View>
+            </SlidingUpPanel>
             </View>
         )
     }
@@ -28,7 +62,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    justifyContent:'space-between'
   },
   ButtonStyle:{
       height:50,

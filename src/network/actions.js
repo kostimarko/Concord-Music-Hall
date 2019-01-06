@@ -11,6 +11,9 @@ export function GetEvents(StartDate,EndDate){
   }
 }
 
+export function CreateUserFromAnon(){
+  api.CreateUserFromAnon();
+}
 export function bootApp(StartDate,EndDate, callback){
 return async (dispatch)=>{
   try {

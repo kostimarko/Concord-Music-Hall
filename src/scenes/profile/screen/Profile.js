@@ -5,7 +5,6 @@ import {AnonUser} from '../components';
 
 class Profile extends Component {
   render() {
-    console.log(this.props)
     const {isAnonymous} = this.props.User;
    
     if(isAnonymous){
