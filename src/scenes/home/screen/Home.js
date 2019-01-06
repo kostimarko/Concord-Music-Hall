@@ -135,8 +135,8 @@ class Home extends PureComponent {
       .format("YYYYMMDD");
     if (this.props.Loaded) {
       return (
-        <View>
-          <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <View style={{backgroundColor:'#ffffff', flex:1}}>
+          <StatusBar backgroundColor="white" barStyle="dark-content" hidden={false} />
           <View style={[FlatListContainer]}>
           <FlatList
               data={this.props.Events}

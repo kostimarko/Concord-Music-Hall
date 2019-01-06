@@ -1,7 +1,9 @@
 import React from "react";
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import moment from "moment";
+import LottieView from 'lottie-react-native';
 import ProgressiveImage from "../../../../components/ProgressiveImage";
+import SoldOut from '../../../../assets/lottie/sold_out.json';
 import { styles } from "./styles";
 
 const EventCard = props => {
@@ -33,16 +35,22 @@ const EventCard = props => {
       <TouchableOpacity onPress={NextSceen}>
         <View style={{ marginBottom: 45, flexDirection: "row" }}>
           <View
-            style={[SoldOutImageContainer, { backgroundColor: BorderColor }]}
+            style={[SoldOutImageContainer]}
           >
-            <Text style={{ color: "white", fontSize: 24, fontWeight: "700" }}>
-              {EventStatus}
-            </Text>
+            <LottieView
+              ref={(animation) => {
+                if (animation) {
+                  animation.play();
+                }
+              }}
+              source={SoldOut}
+              loop={true}
+            />
           </View>
           <View
             style={[
               EventContainer,
-              { borderColor: BorderColor, backgroundColor: BorderColor }
+              { borderColor: '#ffb505', backgroundColor: '#ffb505' }
             ]}
           >
             <View>

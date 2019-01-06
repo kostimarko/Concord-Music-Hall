@@ -6,7 +6,7 @@ import {
 } from 'react-navigation';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Home, Profile, EventDetails, BuyTickets,Loading } from '../scenes';
+import { Home, Profile, EventDetails, BuyTickets,Loading, SignUpModal } from '../scenes';
 
 import { fromLeft } from './transitions';
 
@@ -56,12 +56,17 @@ const Tabs = createBottomTabNavigator(
   }
 );
 
-export const RootStack = createSwitchNavigator(
+export const RootStack = createStackNavigator(
   {
     Home: Tabs,
-    Loading:Loading
+    Loading:Loading,
+
   },
   {
-    initialRouteName: 'Loading'
+    initialRouteName: 'Loading',
+    headerMode: 'none',
+    cardStyle:{
+      backgroundColor:'#ffffff'
+    }
   }
 );
