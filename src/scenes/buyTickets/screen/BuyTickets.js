@@ -45,11 +45,11 @@ class BuyTickets extends PureComponent {
 
   render() {
     const { HeaderRow, IconContainer } = styles;
-    const { TicketLink } = this.props.navigation.state.params;
+    const { ticketPurchaseUrl } = this.props.navigation.state.params;
     return (
       <View style={{ flex: 1 }}>
         <WebView
-          source={{ uri: TicketLink }}
+          source={{ uri: ticketPurchaseUrl }}
           startInLoadingState
           renderLoading={this._renderLoading}
         />

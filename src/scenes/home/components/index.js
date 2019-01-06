@@ -1,5 +1,3 @@
-import EventCard from './EventCard/EventCard';
-import DateSeparator from './DateSeparator/DateSeparator';
-import EventCardLoader from './EventCardLoader/EventCardLoader';
+import EventCard from "./EventCard/EventCard";
 
-export { EventCard, DateSeparator, EventCardLoader };
+export { EventCard };
