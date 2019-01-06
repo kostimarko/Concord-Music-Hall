@@ -49,6 +49,10 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     flex: 1
   },
+  LottieContainer:{
+  width: width,
+  height:width
+  },
   IconContainer: {
     width: 40,
     height: 40,
