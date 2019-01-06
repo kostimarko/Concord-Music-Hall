@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import LottieView from 'lottie-react-native';
 import moment from "moment";
 import {
-  Text,
   View,
-  ActivityIndicator,
   StatusBar,
   Dimensions,
   Animated
@@ -72,7 +70,7 @@ class Loading extends PureComponent {
     })
   return(
     <View>
-      <StatusBar hidden={true}/>
+      <StatusBar backgroundColor="black" barStyle="light-content" hidden={false} />
       <Animated.View style={[{width:width, height:height, justifyContent:'center', backgroundColor:'black'}]}>
       <LottieView
               ref={(animation) => {
