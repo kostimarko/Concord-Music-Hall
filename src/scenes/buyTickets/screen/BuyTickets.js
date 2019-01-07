@@ -41,7 +41,7 @@ class BuyTickets extends PureComponent {
 
   _renderLoading = () => {
     return (
-      <View style={{justifyContent:'center'}}>
+      <View style={{justifyContent:'center', flex:1, flexDirection:'column'}}>
         <LottieView
               ref={(animation) => {
                 if (animation) {

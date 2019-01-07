@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { actions as Network } from "../../network";
-import ConcordLetters from '../../assets/lottie/ConcordLetters.json';
+import WhiteConcordLetters from '../../assets/lottie/WhiteConcordLetters.json';
 
 const {bootApp} = Network;
 const LoadedAction = NavigationActions.navigate({
@@ -27,6 +27,7 @@ class Loading extends PureComponent {
     };
   }
   componentDidMount() {
+    this.AnimateBackground()
     const start = moment().format("YYYY-MM-DD");
     const end = moment()
       .add(7, "days")
@@ -71,14 +72,14 @@ class Loading extends PureComponent {
   return(
     <View>
       <StatusBar backgroundColor="black" barStyle="light-content" hidden={false} />
-      <Animated.View style={[{width:width, height:height, justifyContent:'center', backgroundColor:'black'}]}>
+      <Animated.View style={[{width:width, height:height, justifyContent:'center', backgroundColor:color}]}>
       <LottieView
               ref={(animation) => {
                 if (animation) {
                   animation.play();
                 }
               }}
-              source={ConcordLetters}
+              source={WhiteConcordLetters}
               loop={true}
               style={{width:width/2, height:width/2, alignSelf:'center'}}
             />
