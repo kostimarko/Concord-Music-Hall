@@ -3,6 +3,6 @@ import Profile from './profile/screen/Profile';
 import EventDetails from './event/screen/EventDetails';
 import BuyTickets from './buyTickets/screen/BuyTickets';
 import Loading from './loading/Loading';
-import SignUpModal from './signUpModal/SignUpModal';
+import SignUp from './signUp/screen/SignUp';
 
-export { Home, Profile, EventDetails, BuyTickets, Loading , SignUpModal};
+export { Home, Profile, EventDetails, BuyTickets, Loading , SignUp};
