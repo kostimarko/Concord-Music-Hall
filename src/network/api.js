@@ -39,3 +39,24 @@ export const CreateUserFromAnon = async (Email,Password) => {
     console.log(error);
   }
 };
+
+export const GetContests = async () => {
+  try {
+    const data = await database.ref('Contests').once('value');
+    const contests = data.val();
+    return contests;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const GetSoldOut = async () => {
+  try {
+    const data = await database.ref('SoldOut').once('value');
+    const SoldOut = data.val();
+    return SoldOut;
+  } catch (error) {
+    console.log(error);
+  }
+};
+

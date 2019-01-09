@@ -1,6 +1,6 @@
 import * as api from './api';
 
-import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA ,NAME_CHANGE, EMAIL_CHANGE,PASSWORD_CHANGE } from './actionTypes';
+import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA ,NAME_CHANGE, EMAIL_CHANGE,PASSWORD_CHANGE,GOT_CONTESTS,SOLD_OUT } from './actionTypes';
 
 export function GetEvents(StartDate,EndDate) {
   return async (dispatch) => {
@@ -26,9 +26,14 @@ export function bootApp(StartDate,EndDate, callback) {
     try {
       const events = await api.GetEvents(StartDate,EndDate);
       const user = await api.CheckUser();
+      const contests = await api.GetContests();
+      const soldOut = await api.GetSoldOut();
+      console.log(soldOut);
       dispatch({ type:APP_LOADED, Loaded:false });
       dispatch({ type:GOT_WEEK_EVENTS, Events:events });
       dispatch({ type:GOT_USER_DATA, User:user._user });
+      dispatch({ type:GOT_CONTESTS, contests });
+      dispatch({ type:SOLD_OUT, SoldOut:soldOut });
       dispatch({ type:APP_LOADED, Loaded:true });
       callback();
     } catch (error) {

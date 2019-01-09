@@ -1,5 +1,5 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import {
   StyleSheet,
   Text,
@@ -11,59 +11,57 @@ import {
   Animated,
   Easing,
   Dimensions
-} from "react-native";
-import { NavigationActions } from "react-navigation";
-import moment from "moment";
-import Calendar from "react-native-calendar-select";
-import Svg, { Circle, Rect, Line } from "react-native-svg";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import ContentLoader from "rn-content-loader";
-import { actions as Network } from "../../../network";
-import { EventCard, DateSeparator } from "../components";
-import { styles } from "./styles";
+} from 'react-native';
+import { NavigationActions } from 'react-navigation';
+import moment from 'moment';
+import Calendar from 'react-native-calendar-select';
+import Svg, { Circle, Rect, Line } from 'react-native-svg';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import ContentLoader from 'rn-content-loader';
+import { actions as Network } from '../../../network';
+import { EventCard, DateSeparator } from '../components';
+import { styles } from './styles';
 
 const { GetEvents } = Network;
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 class Home extends PureComponent {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: "Concord Music Hall",
-      headerTitleStyle: {
-        color: "#191919",
-        fontSize: 24,
-        fontWeight: "300",
-        marginLeft: 10
-      },
-      headerStyle: {
-        elevation: 0
-      },
-      headerLeft: null,
-      headerRight: (
-        <TouchableOpacity onPress={navigation.getParam("handleFilter")}>
-          <View style={styles.IconContainer}>
-            <MaterialCommunityIcons
-              name="filter-variant"
-              size={25}
-              color="#191919"
-            />
-          </View>
-        </TouchableOpacity>
-      )
-    };
-  };
+  static navigationOptions = ({ navigation }) => ({
+    headerTitle: 'Concord Music Hall',
+    headerTitleStyle: {
+      color: '#191919',
+      fontSize: 24,
+      fontWeight: '300',
+      marginLeft: 10
+    },
+    headerStyle: {
+      elevation: 0
+    },
+    headerLeft: null,
+    headerRight: (
+      <TouchableOpacity onPress={navigation.getParam('handleFilter')}>
+        <View style={styles.IconContainer}>
+          <MaterialCommunityIcons
+            name="filter-variant"
+            size={25}
+            color="#191919"
+          />
+        </View>
+      </TouchableOpacity>
+    )
+  });
   constructor(props) {
     super(props);
     this.state = {
-      startDate: moment().format("YYYYMMDD"),
+      startDate: moment().format('YYYYMMDD'),
       endDate: moment()
-        .add(7, "days")
-        .format("YYYYMMDD"),
+        .add(7, 'days')
+        .format('YYYYMMDD'),
       CustomColor: [
-        "rgb(255, 181, 5)",
-        "rgb(124, 234, 230)",
-        "rgb(224, 89, 89)",
-        "rgb(164, 61, 237)",
-        "rgb(95, 244, 155)"
+        'rgb(255, 181, 5)',
+        'rgb(124, 234, 230)',
+        'rgb(224, 89, 89)',
+        'rgb(164, 61, 237)',
+        'rgb(95, 244, 155)'
       ]
     };
   }
@@ -77,26 +75,30 @@ class Home extends PureComponent {
   };
   // Set Border Color From State
   _getColor = () => {
-    let color = this.state.CustomColor[
+    const color = this.state.CustomColor[
       Math.floor(Math.random() * this.state.CustomColor.length)
     ];
     return color;
   };
-  confirmDate = ({ startDate, endDate, startMoment, endMoment }) => {
+  confirmDate = ({
+    startDate, endDate, startMoment, endMoment
+  }) => {
     this.setState({
       startDate: startMoment,
       endDate: endMoment
     });
-    const start = moment(startMoment).format("YYYY-MM-DD");
-    const end = moment(endMoment).format("YYYY-MM-DD");
+    const start = moment(startMoment).format('YYYY-MM-DD');
+    const end = moment(endMoment).format('YYYY-MM-DD');
     this.props.GetEvents(start, end);
   };
   _renderItem = ({ item, index }) => {
-    let borderColor = this._getColor();
+    const borderColor = this._getColor();
+    console.log(item.id);
     return (
       <View index={index}>
         <EventCard
           Contests={this.props.Contests}
+          SoldOut={this.props.SoldOut}
           BorderColor={borderColor}
           StartDate={item.startDate}
           JumboImage={item.image.jumbo.path}
@@ -105,7 +107,7 @@ class Home extends PureComponent {
           HeadLiner={item.headlinersName}
           AgeLimit={item.ageLimit}
           NextSceen={() =>
-            this.props.navigation.navigate("Details", { item, borderColor, Contests:this.props.Contests })
+            this.props.navigation.navigate('Details', { item, borderColor, Contests:this.props.Contests })
           }
           EventStatus={item.eventStatus}
           EventId={item.id}
@@ -114,32 +116,31 @@ class Home extends PureComponent {
       </View>
     );
   };
-  _renderHeader = () => {
-    return (
-      <View style={{ marginBottom: 15 }}>
-        <Text style={styles.DateTextStyle}>
-          {moment(this.state.startDate).format("MMM Do")} &#8211;{" "}
-          {moment(this.state.endDate).format("MMM Do")}
-        </Text>
-      </View>
-    );
-  };
+  _renderHeader = () => (
+    <View style={{ marginBottom: 15 }}>
+      <Text style={styles.DateTextStyle}>
+        {moment(this.state.startDate).format('MMM Do')} &#8211;{' '}
+        {moment(this.state.endDate).format('MMM Do')}
+      </Text>
+    </View>
+  );
   render() {
+    console.log(this.props.SoldOut);
     const { FlatListContainer } = styles;
-    let color = {
-      mainColor: "#E43F6F",
-      subColor: "#ffffff"
+    const color = {
+      mainColor: '#E43F6F',
+      subColor: '#ffffff'
     };
-    const Today = moment().format("YYYYMMDD");
+    const Today = moment().format('YYYYMMDD');
     const YearLater = moment()
-      .add(1, "years")
-      .format("YYYYMMDD");
+      .add(1, 'years')
+      .format('YYYYMMDD');
     if (this.props.Loaded) {
       return (
-        <View style={{backgroundColor:'#ffffff', flex:1}}>
+        <View style={{ backgroundColor:'#ffffff', flex:1 }}>
           <StatusBar backgroundColor="white" barStyle="dark-content" hidden={false} />
           <View style={[FlatListContainer]}>
-          <FlatList
+            <FlatList
               data={this.props.Events}
               renderItem={this._renderItem}
               showsVerticalScrollIndicator={false}
@@ -147,18 +148,18 @@ class Home extends PureComponent {
               ListHeaderComponent={this._renderHeader}
             />
             <Calendar
-            i18n="en"
-            ref={calendar => {
+              i18n="en"
+              ref={(calendar) => {
               this.calendar = calendar;
             }}
-            color={color}
-            format="YYYYMMDD"
-            minDate={Today}
-            maxDate={YearLater}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            onConfirm={this.confirmDate}
-          />
+              color={color}
+              format="YYYYMMDD"
+              minDate={Today}
+              maxDate={YearLater}
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              onConfirm={this.confirmDate}
+            />
           </View>
         </View>
       );
@@ -182,10 +183,12 @@ class Home extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { Loaded, Events } = state.eventsReducer;
-  const {Contests} = state.contestReducer;
-  return { Loaded, Events, Contests };
+  const { Contests, SoldOut } = state.contestReducer;
+  return {
+    Loaded, Events, Contests, SoldOut
+  };
 };
 
 export default connect(
