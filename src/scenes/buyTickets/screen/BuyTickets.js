@@ -10,12 +10,16 @@ import {
   ScrollView,
   TouchableOpacity,
   WebView,
-  ActivityIndicator
+  Dimensions
 } from 'react-native';
 import moment from 'moment';
+import LottieView from 'lottie-react-native';
 import Svg, { Rect } from 'react-native-svg';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { styles } from './styles';
+import ConcordLetters from '../../../assets/lottie/ConcordLetters.json';
+
+const {width,height} = Dimensions.get('window');
 
 class BuyTickets extends PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -37,8 +41,17 @@ class BuyTickets extends PureComponent {
 
   _renderLoading = () => {
     return (
-      <View>
-        <ActivityIndicator size="large" color="#0000ff" />
+      <View style={{justifyContent:'center', flex:1, flexDirection:'column'}}>
+        <LottieView
+              ref={(animation) => {
+                if (animation) {
+                  animation.play();
+                }
+              }}
+              source={ConcordLetters}
+              loop={true}
+              style={{width:width/2, height:width/2, alignSelf:'center'}}
+            />
       </View>
     );
   };
