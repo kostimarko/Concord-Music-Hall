@@ -1,4 +1,4 @@
-import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA } from './actionTypes';
+import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA,GOT_CONTESTS } from './actionTypes';
 
 const initEventState = {
   Loaded: false,
@@ -15,6 +15,18 @@ export const eventsReducer = (state = initEventState, action) => {
       return { ...state };
   }
 };
+
+const initContestState = {
+  Contests: {}
+}
+export const contestReducer = (state = initContestState,action)=>{
+  switch(action.type){
+    case GOT_CONTESTS:
+      return { ...state, Contests: action.Contests }
+    default:
+      return { ...state }
+  }
+}
 
 const initUserState ={
   User:{}

@@ -14,6 +14,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
+  ContestImageContainer:{
+    width: width / 2 - 10,
+    height: width / 2 - 10,
+  },
   DateTextStyle: {
     fontSize: 15,
     fontWeight: "700"

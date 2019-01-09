@@ -96,6 +96,7 @@ class Home extends PureComponent {
     return (
       <View index={index}>
         <EventCard
+          Contests={this.props.Contests}
           BorderColor={borderColor}
           StartDate={item.startDate}
           JumboImage={item.image.jumbo.path}
@@ -104,7 +105,7 @@ class Home extends PureComponent {
           HeadLiner={item.headlinersName}
           AgeLimit={item.ageLimit}
           NextSceen={() =>
-            this.props.navigation.navigate("Details", { item, borderColor })
+            this.props.navigation.navigate("Details", { item, borderColor, Contests:this.props.Contests })
           }
           EventStatus={item.eventStatus}
           EventId={item.id}
@@ -183,7 +184,8 @@ class Home extends PureComponent {
 
 const mapStateToProps = state => {
   const { Loaded, Events } = state.eventsReducer;
-  return { Loaded, Events };
+  const {Contests} = state.contestReducer;
+  return { Loaded, Events, Contests };
 };
 
 export default connect(

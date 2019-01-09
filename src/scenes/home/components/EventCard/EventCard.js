@@ -4,6 +4,7 @@ import moment from "moment";
 import LottieView from 'lottie-react-native';
 import ProgressiveImage from "../../../../components/ProgressiveImage";
 import SoldOut from '../../../../assets/lottie/sold_out.json';
+import Tickets from '../../../../assets/lottie/Tickets.json';
 import { styles } from "./styles";
 
 const EventCard = props => {
@@ -18,7 +19,8 @@ const EventCard = props => {
     EventStatus,
     EventId,
     Loaded,
-    Thumbnail
+    Thumbnail,
+    Contests
   } = props;
   const {
     Image,
@@ -28,8 +30,62 @@ const EventCard = props => {
     TimeTextStyle,
     PriceTextStyle,
     AgeLimitTextStyle,
-    SoldOutImageContainer
+    SoldOutImageContainer,
+    ContestImageContainer
   } = styles;
+  if(Contests[`${EventId}`]){
+    return(
+      <TouchableOpacity onPress={NextSceen}>
+    <View style={{ marginBottom: 45, flexDirection: "row" }}>
+      <View
+        style={[ContestImageContainer]}
+      >
+        <LottieView
+          ref={(animation) => {
+            if (animation) {
+              animation.play();
+            }
+          }}
+          source={Tickets}
+          loop={false}
+        />
+      </View>
+      <View
+        style={[
+          EventContainer,
+          { borderColor: '#473bf0', backgroundColor: '#473bf0' }
+        ]}
+      >
+        <View>
+          <Text style={[DateTextStyle, { color: "#ffffff" }]}>
+            {moment(StartDate).format("dddd MMM Do")}
+          </Text>
+        </View>
+        <View>
+          <Text style={[HeadlinerTextStyle, { color: "#ffffff" }]} numberOfLines={2}>
+            {HeadLiner}
+          </Text>
+        </View>
+        <View>
+          <Text style={[TimeTextStyle, { color: "#ffffff" }]}>
+            {moment(StartDate).format("h:mm a")}
+          </Text>
+        </View>
+        <View>
+          <Text style={[PriceTextStyle, { color: "#ffffff" }]}>
+            {Price}
+          </Text>
+        </View>
+        <View>
+          <Text style={[AgeLimitTextStyle, { color: "#ffffff" }]}>
+            {AgeLimit}
+          </Text>
+        </View>
+      </View>
+    </View>
+  </TouchableOpacity>
+    )
+  }
   if (EventStatus === "Sold Out") {
     return (
       <TouchableOpacity onPress={NextSceen}>
@@ -82,7 +138,8 @@ const EventCard = props => {
         </View>
       </TouchableOpacity>
     );
-  } else {
+  }
+  else {
     return (
       <TouchableOpacity onPress={NextSceen} activeOpacity={0.5}>
         <View style={{ marginBottom: 45, flexDirection: "row" }}>

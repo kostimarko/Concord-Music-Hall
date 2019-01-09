@@ -13,6 +13,16 @@ export const GetEvents = async(StartDate,EndDate)=>{
   }
 }
 
+export const GetContests = async() =>{
+  try {
+    const data  = await database.ref('Contests').once('value')
+    const contests = data.val()
+    return contests;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const CheckUser = async()=>{
   try {
     const {_user}= auth;
