@@ -3,48 +3,39 @@ import axios from 'axios';
 
 const auth = firebase.auth();
 const database = firebase.database();
-export const GetEvents = async(StartDate,EndDate)=>{
+export const GetEvents = async (StartDate,EndDate) => {
   try {
-    const data = await axios.get(`http://www.ticketfly.com/api/events/list.json?venueId=9501&fromDate=${StartDate}&thruDate=${EndDate}`)
-    const {events} = data.data;
-    return events
+    const data = await axios.get(`http://www.ticketfly.com/api/events/list.json?venueId=9501&fromDate=${StartDate}&thruDate=${EndDate}`);
+    const { events } = data.data;
+    return events;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-export const GetContests = async() =>{
+export const CheckUser = async () => {
   try {
-    const data  = await database.ref('Contests').once('value')
-    const contests = data.val()
-    return contests;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-export const CheckUser = async()=>{
-  try {
-    const {_user}= auth;
-    if(!_user){
+    const { _user } = auth;
+    if (!_user) {
       const user = await auth.signInAnonymously();
-      const {uid} = user.user._user;
+      const { uid } = user.user._user;
       const userData = user.user._user;
-      database.ref(`Users/${uid}`).set({uid})
+      database.ref(`Users/${uid}`).set({ uid });
       return userData;
-    } if(_user){
+    } if (_user) {
       return _user;
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-export const CreateUserFromAnon = async ()=>{
+export const CreateUserFromAnon = async (Email,Password) => {
   try {
-    const {currentUser} = firebase.auth();
-    console.log(currentUser)
+    const credential = await auth.createUserWithEmailAndPassword(Email,Password);
+    // const User = await auth.linkWithCredential(credential);
+    console.log(credential);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};

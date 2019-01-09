@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
-import SlidingUpPanel from 'rn-sliding-up-panel';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import LottieView from 'lottie-react-native';      
-import { NavigationActions } from 'react-navigation';
 import Button from '../../../../components/Button';
-import {SignUpForm} from '../';
 import NotFound from '../../../../assets/lottie/not_found.json';
-import {actions as Network} from '../../../../network/';
 
-const {CreateUserFromAnon}= Network;
-
-const {width,height}= Dimensions.get('window');
+const {width}= Dimensions.get('window');
 
 class AnonUser extends Component {
     constructor(props){
@@ -23,7 +17,7 @@ class AnonUser extends Component {
     render(){
         return (
             <View style={styles.container}>
-             <View style={{width:width, height:width}}>
+             <View style={{ flex:1, padding:15}}>
              <LottieView
               ref={(animation) => {
                 if (animation) {
@@ -32,27 +26,20 @@ class AnonUser extends Component {
               }}
               source={NotFound}
               loop={true}
+              style={{width:width/2, height:width/2,}}
             />
             </View>
-              <View style={{flex:1}}>
-                <Text>What are you even looking for?</Text>
-                <Text>Sign Up to get get contest info, be first on the list to get tickets, maybe you'll get into your show before everyone else. All we can tell you is not signing doesn't really do anything for you. </Text>
+              <View style={{flex:1, padding:15, alignItems:'flex-start', justifyContent:'center'}}>
+                <Text style={{fontSize:21, fontWeight:'700', marginBottom:10}}>What are you even looking for?</Text>
+                <Text style={{fontSize:14, fontWeight:'300'}}>Sign up to get get contest info, be first on the list to get tickets, maybe you'll get into your show before everyone else. All we can tell you is not signing doesn't really do anything for you. </Text>
               </View>
 
-            <View style={{flex:1}}>
+            <View style={{flex:1, padding:15, alignItems:'flex-start', justifyContent:'center'}}>
                 <Button style={styles.ButtonStyle} ButtonText={'Sign Up'} OnPress={()=>{
                     console.log('hi')
-                    this.setState({visible:true})
+                    this.props.navigation.navigate('SignUp')
                 }} />
             </View>
-            <SlidingUpPanel
-                visible={this.state.visible}
-                onRequestClose={() => this.setState({visible: false})}>
-                <View style={styles.container}>
-                    <Text>Here is the content inside panel</Text>
-                    <Button style={styles.ButtonStyle} ButtonText='Hide' OnPress={() => this.setState({visible: false})} />
-                </View>
-            </SlidingUpPanel>
             </View>
         )
     }
@@ -62,6 +49,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+    alignItems:'center',
+    justifyContent:'space-between',
+    flexDirection:'column'
   },
   ButtonStyle:{
       height:50,
@@ -69,7 +59,7 @@ const styles = StyleSheet.create({
       backgroundColor:'black',
       alignItems:'center',
       justifyContent:'center',
-      alignSelf:'center'
+      alignSelf:'center',
   }
 });
 

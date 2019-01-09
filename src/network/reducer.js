@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA,GOT_CONTESTS } from './actionTypes';
+=======
+import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA ,NAME_CHANGE, EMAIL_CHANGE,PASSWORD_CHANGE } from './actionTypes';
+>>>>>>> feature/auth
 
 const initEventState = {
   Loaded: false,
@@ -16,6 +20,7 @@ export const eventsReducer = (state = initEventState, action) => {
   }
 };
 
+<<<<<<< HEAD
 const initContestState = {
   Contests: {}
 }
@@ -31,12 +36,26 @@ export const contestReducer = (state = initContestState,action)=>{
 const initUserState ={
   User:{}
 }
+=======
+const initUserState = {
+  User:{},
+  FullName: '',
+  Email: '',
+  Password: ''
+};
+>>>>>>> feature/auth
 
-export const userReducer = (state = initUserState,action)=>{
-  switch(action.type){
+export const userReducer = (state = initUserState,action) => {
+  switch (action.type) {
     case GOT_USER_DATA:
-    return {...state, User:action.User};
+      return { ...state, User: action.User };
+    case NAME_CHANGE:
+      return { ...state, FullName: action.data };
+    case EMAIL_CHANGE:
+      return { ...state, Email: action.data };
+    case PASSWORD_CHANGE:
+      return { ...state, Password: action.data };
     default:
-    return {...state}
+      return { ...state };
   }
-}
+};

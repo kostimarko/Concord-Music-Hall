@@ -3838,12 +3838,6 @@ react-lifecycles-compat@^3, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
-react-native-animatable@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.3.0.tgz#b5c3940fc758cfd9b2fe54613a457c4b6962b46e"
-  dependencies:
-    prop-types "^15.5.10"
-
 react-native-calendar-select@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/react-native-calendar-select/-/react-native-calendar-select-0.1.2.tgz#814302a2add128209e91d1485d9afdb83b726712"
@@ -3908,6 +3902,10 @@ react-native-tab-view@^1.0.0:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-1.2.0.tgz#0cc26a1c8e49b6c0d58a30363dbbe43954907c31"
   dependencies:
     prop-types "^15.6.1"
+
+react-native-textinput-effects@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/react-native-textinput-effects/-/react-native-textinput-effects-0.4.2.tgz#05336a8ed9e4992397fc5de714692d774eb91b07"
 
 react-native-vector-icons@^5.0.0:
   version "5.0.0"
@@ -4224,13 +4222,6 @@ rn-content-loader@^0.0.1:
   resolved "https://registry.yarnpkg.com/rn-content-loader/-/rn-content-loader-0.0.1.tgz#fc2a66cffa50668bad1a2a6e5b71a0b8fc305139"
   dependencies:
     d3-interpolate "^1.3.2"
-
-rn-sliding-up-panel@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/rn-sliding-up-panel/-/rn-sliding-up-panel-1.3.1.tgz#c6271787890b03f9923e5087455b71b3778ebf91"
-  dependencies:
-    clamp "^1.0.1"
-    prop-types "^15.6.0"
 
 rsvp@^3.3.3:
   version "3.6.2"

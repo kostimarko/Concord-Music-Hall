@@ -4,6 +4,22 @@ import { StyleSheet, Text, View } from 'react-native';
 import {AnonUser} from '../components';
 
 class Profile extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: `Profile`,
+      headerTitleStyle: {
+        color: "#191919",
+        fontSize: 24,
+        fontWeight: "300",
+        marginLeft: 10
+      },
+      headerStyle: {
+        elevation: 0
+      },
+
+      headerRight: null
+    };
+  };
   render() {
     const {isAnonymous} = this.props.User;
    
