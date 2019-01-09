@@ -30,7 +30,7 @@ const ProfileStack = createStackNavigator({
 
 const Tabs = createBottomTabNavigator(
   {
-    Events:Home,
+    Events:{ screen:Home },
     Featured,
   },
   {
@@ -70,7 +70,6 @@ export const RootStack = createStackNavigator(
   },
   {
     initialRouteName: 'Loading',
-    headerMode: 'none',
     cardStyle:{
       backgroundColor:'#ffffff'
     },
