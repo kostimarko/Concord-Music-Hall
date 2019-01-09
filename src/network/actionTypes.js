@@ -6,3 +6,4 @@ export const SOLD_OUT = 'sold_out';
 export const NAME_CHANGE = 'name_change';
 export const EMAIL_CHANGE = 'email_change';
 export const PASSWORD_CHANGE = 'password_change';
+export const GOT_FEATURED = 'got_featured';

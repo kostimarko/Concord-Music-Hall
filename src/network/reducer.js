@@ -1,8 +1,9 @@
-import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA ,NAME_CHANGE, EMAIL_CHANGE,PASSWORD_CHANGE, GOT_CONTESTS,SOLD_OUT } from './actionTypes';
+import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA ,NAME_CHANGE, EMAIL_CHANGE,PASSWORD_CHANGE, GOT_CONTESTS,SOLD_OUT,GOT_FEATURED } from './actionTypes';
 
 const initEventState = {
   Loaded: false,
   Events: {},
+  Featured:{}
 };
 
 export const eventsReducer = (state = initEventState, action) => {
@@ -11,6 +12,8 @@ export const eventsReducer = (state = initEventState, action) => {
       return { ...state, Loaded: action.Loaded };
     case GOT_WEEK_EVENTS:
       return { ...state, Events: action.Events };
+    case GOT_FEATURED:
+      return { ...state,Featured: action.Featured };
     default:
       return { ...state };
   }

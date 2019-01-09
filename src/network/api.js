@@ -13,6 +13,16 @@ export const GetEvents = async (StartDate,EndDate) => {
   }
 };
 
+export const GetFeatured = async () => {
+  try {
+    const data = await axios.get('http://www.ticketfly.com/api/events/featured.json?venueId=9501&maxResults=5');
+    const { events } = data.data;
+    return events;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const CheckUser = async () => {
   try {
     const { _user } = auth;

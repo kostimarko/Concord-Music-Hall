@@ -125,7 +125,7 @@ class Home extends PureComponent {
     </View>
   );
   render() {
-    console.log(this.props.SoldOut);
+    console.log(this.props.Featured);
     const { FlatListContainer } = styles;
     const color = {
       mainColor: '#E43F6F',
@@ -184,10 +184,10 @@ class Home extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  const { Loaded, Events } = state.eventsReducer;
+  const { Loaded, Events, Featured } = state.eventsReducer;
   const { Contests, SoldOut } = state.contestReducer;
   return {
-    Loaded, Events, Contests, SoldOut
+    Loaded, Events, Contests, SoldOut,Featured
   };
 };
 
