@@ -6,7 +6,7 @@ import {
 } from 'react-navigation';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Home, Profile, EventDetails, BuyTickets,Loading, SignUp } from '../scenes';
+import { Home, Profile, EventDetails, BuyTickets,Loading, SignUp,Featured } from '../scenes';
 
 import { fromLeft } from './transitions';
 
@@ -24,17 +24,16 @@ const HomeStack = createStackNavigator(
   }
 );
 
-const ProfileStack = createStackNavigator(
-  {
-    ProfileScreen:Profile,
-    SignUp:SignUp
-  }
-)
+const ProfileStack = createStackNavigator({
+  ProfileScreen:Profile,
+  SignUp
+});
 
 const Tabs = createBottomTabNavigator(
   {
     Home: HomeStack,
-    Profile: ProfileStack
+    Featured,
+    Profile: ProfileStack,
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -45,8 +44,10 @@ const Tabs = createBottomTabNavigator(
           iconName = 'music-circle';
         } else if (routeName === 'Profile') {
           iconName = 'account';
-        } else if (routeName === 'SignUp'){
+        } else if (routeName === 'SignUp') {
           iconName = 'account';
+        } else if (routeName === 'Featured') {
+          iconName = 'star';
         }
         return (
           <MaterialCommunityIcons name={iconName} size={25} color={tintColor} />
@@ -68,7 +69,7 @@ const Tabs = createBottomTabNavigator(
 export const RootStack = createStackNavigator(
   {
     Home: Tabs,
-    Loading:Loading,
+    Loading,
 
   },
   {
