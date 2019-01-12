@@ -1,37 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
-import {AnonUser} from '../components';
+import { AnonUser } from '../components';
 
 class Profile extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: `Profile`,
-      headerTitleStyle: {
-        color: "#191919",
-        fontSize: 24,
-        fontWeight: "300",
-        marginLeft: 10
-      },
-      headerStyle: {
-        elevation: 0
-      },
+  static navigationOptions = ({ navigation }) => ({
+    headerTitle: 'Profile',
+    headerTitleStyle: {
+      color: '#191919',
+      fontSize: 24,
+      fontWeight: '300',
+      marginLeft: 10
+    },
+    headerStyle: {
+      elevation: 0
+    },
 
-      headerRight: null
-    };
-  };
+    headerRight: null
+  });
   render() {
-    const {isAnonymous} = this.props.User;
-   
-    if(isAnonymous){
-      return(
-        <AnonUser navigation={this.props.navigation}/>
-      )
+    const { isAnonymous } = this.props.User;
+
+    if (isAnonymous) {
+      return (
+        <AnonUser navigation={this.props.navigation} />
+      );
     }
-    if(!isAnonymous){
-      return(
+    if (!isAnonymous) {
+      return (
         <View style={styles.container}><Text style={styles.welcome}> I AM NOT ANON</Text></View>
-      )
+      );
     }
   }
 }
@@ -55,7 +53,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const {  User } = state.userReducer;
   return {  User };
 };

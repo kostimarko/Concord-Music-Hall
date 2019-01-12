@@ -26,7 +26,7 @@ const { GetEvents } = Network;
 const { width } = Dimensions.get('window');
 class Featured extends PureComponent {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Concord Music Hall',
+    headerTitle: 'Featured Events',
     headerTitleStyle: {
       color: '#191919',
       fontSize: 24,
@@ -37,17 +37,6 @@ class Featured extends PureComponent {
       elevation: 0
     },
     headerLeft: null,
-    headerRight: (
-      <TouchableOpacity onPress={navigation.getParam('handleFilter')}>
-        <View style={styles.IconContainer}>
-          <MaterialCommunityIcons
-            name="filter-variant"
-            size={25}
-            color="#191919"
-          />
-        </View>
-      </TouchableOpacity>
-    )
   });
   constructor(props) {
     super(props);
