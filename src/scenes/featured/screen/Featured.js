@@ -114,10 +114,6 @@ class Featured extends PureComponent {
     </View>
   );
   render() {
-<<<<<<< HEAD
-=======
-    console.log(this.props.Featured);
->>>>>>> feature/featured-events
     const { FlatListContainer } = styles;
     const color = {
       mainColor: '#E43F6F',
@@ -133,11 +129,7 @@ class Featured extends PureComponent {
           <StatusBar backgroundColor="white" barStyle="dark-content" hidden={false} />
           <View style={[FlatListContainer]}>
             <FlatList
-<<<<<<< HEAD
               data={this.props.Featured}
-=======
-              data={this.props.Events}
->>>>>>> feature/featured-events
               renderItem={this._renderItem}
               showsVerticalScrollIndicator={false}
               keyExtractor={(item, index) => item.id.toString()}
