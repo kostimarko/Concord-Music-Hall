@@ -68,7 +68,6 @@ class Home extends PureComponent {
   componentDidMount() {
     this.props.navigation.setParams({ handleFilter: this.openCalendar });
   }
-
   // Open Calendar
   openCalendar = () => {
     this.calendar && this.calendar.open();
@@ -93,7 +92,6 @@ class Home extends PureComponent {
   };
   _renderItem = ({ item, index }) => {
     const borderColor = this._getColor();
-    console.log(item.id);
     return (
       <View index={index}>
         <EventCard
@@ -125,7 +123,6 @@ class Home extends PureComponent {
     </View>
   );
   render() {
-    console.log(this.props.Featured);
     const { FlatListContainer } = styles;
     const color = {
       mainColor: '#E43F6F',

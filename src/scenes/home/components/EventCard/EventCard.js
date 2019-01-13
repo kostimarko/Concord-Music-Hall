@@ -42,13 +42,10 @@ const EventCard = (props) => {
             style={[ContestImageContainer]}
           >
             <LottieView
-              ref={(animation) => {
-            if (animation) {
-              animation.play();
-            }
-          }}
+              ref={animation => animation.play()}
               source={Tickets}
               loop={false}
+              autoPlay={true}
             />
           </View>
           <View
@@ -95,13 +92,10 @@ const EventCard = (props) => {
             style={[SoldOutImageContainer]}
           >
             <LottieView
-              ref={(animation) => {
-                if (animation) {
-                  animation.play();
-                }
-              }}
+              ref={animation => animation.play()}
               source={SoldOutAnim}
-              loop={true}
+              loop={false}
+              autoPlay={true}
             />
           </View>
           <View

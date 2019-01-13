@@ -101,7 +101,8 @@ const EventCard = (props) => {
                 }
               }}
               source={SoldOutAnim}
-              loop={true}
+              loop={false}
+              autoPlay={true}
             />
           </View>
           <View

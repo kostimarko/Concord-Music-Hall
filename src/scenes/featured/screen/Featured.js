@@ -82,7 +82,6 @@ class Featured extends PureComponent {
   };
   _renderItem = ({ item, index }) => {
     const borderColor = this._getColor();
-    console.log(item.id);
     return (
       <View index={index}>
         <EventCard
