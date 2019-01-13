@@ -1,53 +1,54 @@
-import { Platform, StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Platform, Dimensions } from 'react-native';
 
-const { width, height } = Dimensions.get("window");
-
+const { width, height } = Dimensions.get('window');
 export const styles = StyleSheet.create({
-  Image: {
-    width: width / 2 - 10,
-    height: width / 2 - 10
+  Container:{
+    marginBottom:15,
+    height: height / 2,
   },
-  SoldOutImageContainer: {
-    width: width / 2 - 10,
-    height: width / 2 - 10,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center"
+  ImageStyle: {
+    resizeMode: 'cover',
+    flex:1,
+    flexDirection: 'row',
+    alignItems:'flex-end',
+    justifyContent:'center',
+    paddingRight:15,
+    paddingLeft:15,
+    paddingBottom:15,
   },
-  ContestImageContainer:{
-    width: width / 2 - 10,
-    height: width / 2 - 10,
+  CardContainerStyle:{
+    backgroundColor:'#ffffff',
+    height:150,
+    borderRadius:5,
+    flex:1,
+    paddingLeft:15,
+    paddingTop:15,
+    paddingBottom:15,
+    paddingRight:15,
+    flexDirection:'column',
+    justifyContent:'space-between'
   },
-  DateTextStyle: {
-    fontSize: 15,
-    fontWeight: "700"
+  TextContainer:{
+    flexDirection:'row',
+    justifyContent:'space-between'
   },
-  TimeTextStyle: {
-    fontSize: 15,
-    marginTop: 15,
-    fontWeight: "700"
+  DateText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#4a4a4a'
   },
-  HeadlinerTextStyle: {
-    fontSize: 24,
-    fontWeight: "300"
+  AgeLimitText:{
+    fontSize:15,
+    fontWeight:'700'
   },
-  PriceTextStyle: {
-    fontSize: 15,
-    fontWeight: "300"
+  ArtistText:{
+    fontSize:36,
+    fontWeight:'100',
+    color:'#4a4a4a'
   },
-  AgeLimitTextStyle: {
-    fontSize: 15,
-    marginTop: 15,
-    fontWeight: "700"
-  },
-  EventContainer: {
-    width: width / 2 - 10,
-    height: width / 2 - 10,
-    borderWidth: 10,
-    marginTop: 30,
-    paddingLeft: 10,
-    paddingTop: 15,
-    paddingRight: 10,
-    paddingBottom: 15
+  PriceText:{
+    fontSize:18,
+    fontWeight:'300',
+    color:'#4a4a4a'
   }
 });

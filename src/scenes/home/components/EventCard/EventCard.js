@@ -137,7 +137,7 @@ const EventCard = (props) => {
   else {
     return (
       <TouchableOpacity onPress={NextSceen} activeOpacity={0.5}>
-        <View style={{ marginBottom: 45, flexDirection: 'row' }}>
+        <View style={{ marginBottom: 25, flexDirection: 'row' }}>
           <View>
             <ProgressiveImage
               JumboImage={JumboImage}

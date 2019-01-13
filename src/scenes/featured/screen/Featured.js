@@ -54,14 +54,7 @@ class Featured extends PureComponent {
       ]
     };
   }
-  componentDidMount() {
-    this.props.navigation.setParams({ handleFilter: this.openCalendar });
-  }
 
-  // Open Calendar
-  openCalendar = () => {
-    this.calendar && this.calendar.open();
-  };
   // Set Border Color From State
   _getColor = () => {
     const color = this.state.CustomColor[
@@ -69,19 +62,9 @@ class Featured extends PureComponent {
     ];
     return color;
   };
-  confirmDate = ({
-    startDate, endDate, startMoment, endMoment
-  }) => {
-    this.setState({
-      startDate: startMoment,
-      endDate: endMoment
-    });
-    const start = moment(startMoment).format('YYYY-MM-DD');
-    const end = moment(endMoment).format('YYYY-MM-DD');
-    this.props.GetEvents(start, end);
-  };
   _renderItem = ({ item, index }) => {
     const borderColor = this._getColor();
+    console.log(item.ageLimit);
     return (
       <View index={index}>
         <EventCard
@@ -104,14 +87,7 @@ class Featured extends PureComponent {
       </View>
     );
   };
-  _renderHeader = () => (
-    <View style={{ marginBottom: 15 }}>
-      <Text style={styles.DateTextStyle}>
-        {moment(this.state.startDate).format('MMM Do')} &#8211;{' '}
-        {moment(this.state.endDate).format('MMM Do')}
-      </Text>
-    </View>
-  );
+
   render() {
     const { FlatListContainer } = styles;
     const color = {
@@ -132,7 +108,6 @@ class Featured extends PureComponent {
               renderItem={this._renderItem}
               showsVerticalScrollIndicator={false}
               keyExtractor={(item, index) => item.id.toString()}
-              ListHeaderComponent={this._renderHeader}
             />
             <Calendar
               i18n="en"
