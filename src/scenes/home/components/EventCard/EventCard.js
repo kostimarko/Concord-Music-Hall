@@ -84,7 +84,7 @@ const EventCard = (props) => {
       </TouchableOpacity>
     );
   }
-  if (SoldOut[`${EventId}`]) {
+  if (EventStatus === 'Sold Out') {
     return (
       <TouchableOpacity onPress={NextSceen}>
         <View style={{ marginBottom: 45, flexDirection: 'row' }}>

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Text,
   View,
@@ -7,11 +7,11 @@ import {
   StatusBar,
   ScrollView,
   TouchableOpacity
-} from "react-native";
+} from 'react-native';
 import LottieView from 'lottie-react-native';
-import { styles } from "./styles";
-import { Headliner } from "../components";
-import ProgressiveImage from "../../../components/ProgressiveImage";
+import { styles } from './styles';
+import { Headliner } from '../components';
+import ProgressiveImage from '../../../components/ProgressiveImage';
 import Tickets from '../../../assets/lottie/Tickets.json';
 
 class EventDetails extends Component {
@@ -20,9 +20,9 @@ class EventDetails extends Component {
     return {
       headerTitle: `${headlinersName}`,
       headerTitleStyle: {
-        color: "#191919",
+        color: '#191919',
         fontSize: 24,
-        fontWeight: "300",
+        fontWeight: '300',
         marginLeft: 10
       },
       headerStyle: {
@@ -33,7 +33,9 @@ class EventDetails extends Component {
     };
   };
   _renderDetails() {
-    const {headlinersName,startDate, headliners, venue,ticketPrice,ageLimit} = this.props.navigation.state.params.item;
+    const {
+      headlinersName,startDate, headliners, venue,ticketPrice,ageLimit
+    } = this.props.navigation.state.params.item;
     const { borderColor, Contests } = this.props.navigation.state.params;
     return (
       <View style={{ padding: 15 }}>
@@ -41,7 +43,7 @@ class EventDetails extends Component {
           HeadlinerName={headlinersName}
           Day={startDate}
           Time={startDate}
-          HeadlinerDesc={headliners["0"].eventDescription}
+          HeadlinerDesc={headliners['0'].eventDescription}
           VenueName={venue.name}
           VenueAddress={venue.address1}
           VenueState={venue.stateProvince}
@@ -63,19 +65,19 @@ class EventDetails extends Component {
       SoldOutImageContainer,
       LottieContainer
     } = styles;
-    if (eventStatus === "Sold Out") {
+    if (eventStatus === 'Sold Out') {
       return (
         <View style={[SoldOutImageContainer, { backgroundColor: borderColor }]}>
           <View style={ImageDetailsContainer}>
             <View
               style={{
                 flex: 1,
-                alignItems: "center",
-                justifyContent: "center"
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
               <Text
-                style={{ color: "#ffffff", fontSize: 21, fontWeight: "700" }}
+                style={{ color: '#ffffff', fontSize: 21, fontWeight: '700' }}
               >
                 {eventStatus}
               </Text>
@@ -84,29 +86,29 @@ class EventDetails extends Component {
         </View>
       );
     }
-    if(Contests[`${id}`]){
-      return(
+    if (Contests[`${id}`]) {
+      return (
         <View style={LottieContainer}>
           <LottieView
-          ref={(animation) => {
+            ref={(animation) => {
             if (animation) {
               animation.play();
             }
           }}
-          source={Tickets}
-          loop={false}
-        />
-        <View style={ImageDetailsContainer}>
+            source={Tickets}
+            loop={false}
+          />
+          <View style={ImageDetailsContainer}>
             <View
               style={{
                 flex: 1,
-                alignItems: "flex-end",
-                justifyContent: "flex-end"
+                alignItems: 'flex-end',
+                justifyContent: 'flex-end'
               }}
             >
               <TouchableOpacity
                 onPress={() =>
-                  this.props.navigation.navigate("Buy", { ticketPurchaseUrl })
+                  this.props.navigation.navigate('Buy', { ticketPurchaseUrl })
                 }
                 activeOpacity={0.8}
               >
@@ -119,27 +121,28 @@ class EventDetails extends Component {
             </View>
           </View>
         </View>
-      )
+      );
     }
     else {
       return (
-        <ImageBackground
-          source={{
-            uri: image.jumbo.path
-          }}
-          style={ImageStyle}
-        >
+        <View>
+          <ProgressiveImage
+            JumboImage={image.jumbo.path}
+            style={ImageStyle}
+            imageStyle={ImageStyle}
+            Thumbnail={image.squareSmall.path}
+          />
           <View style={ImageDetailsContainer}>
             <View
               style={{
                 flex: 1,
-                alignItems: "flex-end",
-                justifyContent: "flex-end"
+                alignItems: 'flex-end',
+                justifyContent: 'flex-end'
               }}
             >
               <TouchableOpacity
                 onPress={() =>
-                  this.props.navigation.navigate("Buy", { ticketPurchaseUrl })
+                  this.props.navigation.navigate('Buy', { ticketPurchaseUrl })
                 }
                 activeOpacity={0.8}
               >
@@ -151,28 +154,29 @@ class EventDetails extends Component {
               </TouchableOpacity>
             </View>
           </View>
-        </ImageBackground>
+        </View>
       );
     }
   }
 
   render() {
-    const { image, ticketPurchaseUrl,eventStatus,headliners, id } = this.props.navigation.state.params.item;
-    const { Contests} = this.props.navigation.state.params;
-      return (
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <StatusBar backgroundColor="white" barStyle="dark-content" />
-          <View style={{ backgroundColor: "#ffffff", flex: 1 }}>
-            {this._renderImageBackground(image,eventStatus,ticketPurchaseUrl, Contests,id)}
-            {this._renderDetails()}
-          </View>
-        </ScrollView>
-      );
-    
+    const {
+      image, ticketPurchaseUrl,eventStatus,headliners, id
+    } = this.props.navigation.state.params.item;
+    const { Contests } = this.props.navigation.state.params;
+    return (
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <View style={{ backgroundColor: '#ffffff', flex: 1 }}>
+          {this._renderImageBackground(image,eventStatus,ticketPurchaseUrl, Contests,id)}
+          {this._renderDetails()}
+        </View>
+      </ScrollView>
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { Loaded, Events } = state.eventsReducer;
   return { Loaded, Events };
 };
