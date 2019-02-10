@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     fontWeight:'700'
   },
   ArtistText:{
-    fontSize:36,
+    fontSize:24,
     fontWeight:'100',
     color:'#4a4a4a'
   },

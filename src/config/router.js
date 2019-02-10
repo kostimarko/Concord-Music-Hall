@@ -15,7 +15,8 @@ const FeaturedStack = createStackNavigator({
 });
 
 const ProfileStack = createStackNavigator({
-  ProfileStack:{ screen:Profile }
+  ProfileStack:{ screen:Profile },
+  SignUp: { screen:SignUp }
 });
 
 const Tabs =   createBottomTabNavigator({

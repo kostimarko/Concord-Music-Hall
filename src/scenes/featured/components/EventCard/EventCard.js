@@ -37,24 +37,24 @@ const EventCard = (props) => {
   return (
     <TouchableOpacity onPress={NextSceen} activeOpacity={0.5}>
       <View style={Container}>
-      <ImageBackground source={{ uri: JumboImage }} style={ImageStyle}>
+        <ImageBackground source={{ uri: JumboImage }} style={ImageStyle}>
           <View style={CardContainerStyle}>
-          <View style={TextContainer}>
-            <Text style={DateText}>{moment(StartDate).format('MMM Do')}</Text>
-            <Text style={[{ color:BorderColor },AgeLimitText]}>{AgeLimit}</Text>
+            <View style={TextContainer}>
+              <Text style={DateText}>{moment(StartDate).format('MMM Do')}</Text>
+              <Text style={[{ color:BorderColor },AgeLimitText]}>{AgeLimit}</Text>
+            </View>
+            <View style={[{ marginBottom:15 },TextContainer]}>
+              <Text style={ArtistText}>{HeadLiner}</Text>
+            </View>
+            <View style={TextContainer}>
+              <Text style={DateText}>{moment(StartDate).format('h:mm a')}</Text>
+            </View>
+            <View style={TextContainer}>
+              <Text style={PriceText}>{Price}</Text>
+            </View>
           </View>
-          <View style={[{ marginBottom:15 },TextContainer]}>
-            <Text style={ArtistText}>{HeadLiner}</Text>
-          </View>
-          <View style={TextContainer}>
-            <Text style={DateText}>{moment(StartDate).format('h:mm a')}</Text>
-          </View>
-          <View style={TextContainer}>
-            <Text style={PriceText}>{Price}</Text>
-          </View>
-        </View>
         </ImageBackground>
-    </View>
+      </View>
     </TouchableOpacity>
   );
 };
