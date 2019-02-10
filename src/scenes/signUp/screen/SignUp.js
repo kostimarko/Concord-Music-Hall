@@ -129,7 +129,7 @@ class SignUp extends Component {
               style={styles.ButtonStyle}
               ButtonText="Create Account"
               OnPress={() => {
-                    console.log('hi');
+                  this.props.CreateUserFromAnon(Email,Password);
                 }}
             />
 

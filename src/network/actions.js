@@ -14,8 +14,8 @@ export function GetEvents(StartDate,EndDate) {
 export function CreateUserFromAnon(Email,Password) {
   return async (dispatch) => {
     try {
-      const User = await api.CreateUserFromAnon(Email,Password);
-      console.log(User);
+      // const User = await api.CreateUserFromAnon(Email,Password);
+      console.log(Email,Password);
     } catch (error) {
       console.log(error);
     }
