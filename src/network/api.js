@@ -25,14 +25,16 @@ export const GetFeatured = async () => {
 
 export const CheckUser = async () => {
   try {
-    const { _user } = auth;
-    if (!_user) {
+    const { currentUser } = auth;
+    if (!currentUser) {
       const user = await auth.signInAnonymously();
+
       const { uid } = user.user._user;
-      const userData = user.user._user;
+      const { _user } = user.user;
       database.ref(`Users/${uid}`).set({ uid });
-      return userData;
-    } if (_user) {
+      return _user;
+    } else if (currentUser) {
+      const { _user } = currentUser;
       return _user;
     }
   } catch (error) {
@@ -42,9 +44,10 @@ export const CheckUser = async () => {
 
 export const CreateUserFromAnon = async (Email,Password) => {
   try {
-    const credential = await auth.createUserWithEmailAndPassword(Email,Password);
-    // const User = await auth.linkWithCredential(credential);
-    console.log(credential);
+    const credential = await firebase.auth.EmailAuthProvider.credential(Email,Password);
+    const { currentUser } = auth;
+    const User = await currentUser.linkWithCredential(credential);
+    return User;
   } catch (error) {
     console.log(error);
   }
