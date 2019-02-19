@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View } from 'react-native';
-import { AnonUser } from '../components';
+import { StyleSheet, ScrollView, View } from 'react-native';
+import ProfileaAnimation from '../../../assets/lottie/Profile.json';
+import GenreAnimation from '../../../assets/lottie/Genre.json';
+import NotificationAnimation from '../../../assets/lottie/Notification.json';
+import { AnonUser, ProfileCard } from '../components';
 
 class Profile extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -28,7 +31,23 @@ class Profile extends Component {
     }
     if (!isAnonymous) {
       return (
-        <View style={styles.container}><Text style={styles.welcome}> I AM NOT ANON</Text></View>
+        <ScrollView contentContainerStyle={styles.container}>
+          <ProfileCard
+            Animation={ProfileaAnimation}
+            TextDetails="Edit Your Profile Info"
+            OnPress={() => console.log('yo')}
+          />
+          <ProfileCard
+            Animation={GenreAnimation}
+            TextDetails="Edit your music Selections"
+            OnPress={() => this.props.navigation.navigate('GenreSelection')}
+          />
+          <ProfileCard
+            Animation={NotificationAnimation}
+            TextDetails="Edit your Notification Selections"
+            OnPress={() => console.log('yo')}
+          />
+        </ScrollView>
       );
     }
   }
@@ -39,7 +58,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#FFFFFF'
   },
   welcome: {
     fontSize: 20,

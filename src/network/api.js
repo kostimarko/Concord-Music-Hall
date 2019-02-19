@@ -73,3 +73,38 @@ export const GetSoldOut = async () => {
   }
 };
 
+export const GetGenres = async () => {
+  try {
+    const data = await database.ref('Genres').once('value');
+    const Genres = data.val();
+    return Genres;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const GetUsersGenres = async () => {
+  const { currentUser } = firebase.auth();
+
+  try {
+    const data = await database
+      .ref(`Users/${currentUser.uid}/selected-genres`)
+      .once('value');
+    const UserGenres = data.val();
+    return UserGenres;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const SelectedGenres = async (name, checked) => {
+  const { currentUser } = firebase.auth();
+  try {
+    const data = await database
+      .ref(`Users/${currentUser.uid}/selected-genres/${name}`)
+      .set(checked);
+  } catch (e) {
+    console.log(e);
+  }
+};
+

@@ -1,6 +1,6 @@
 import * as api from './api';
 
-import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA ,NAME_CHANGE, EMAIL_CHANGE,PASSWORD_CHANGE,GOT_CONTESTS,SOLD_OUT,GOT_FEATURED } from './actionTypes';
+import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA ,NAME_CHANGE, EMAIL_CHANGE,PASSWORD_CHANGE,GOT_CONTESTS,SOLD_OUT,GOT_FEATURED, GOT_GENRES,GENRE_TOGGLE_CHECKBOX,GENRE_SELECTION } from './actionTypes';
 
 export function GetEvents(StartDate,EndDate) {
   return async (dispatch) => {
@@ -30,12 +30,21 @@ export function bootApp(StartDate,EndDate, callback) {
       const contests = await api.GetContests();
       const soldOut = await api.GetSoldOut();
       const featured = await api.GetFeatured();
+      const genres = await api.GetGenres();
       dispatch({ type:APP_LOADED, Loaded:false });
       dispatch({ type:GOT_WEEK_EVENTS, Events:events });
       dispatch({ type:GOT_USER_DATA, User:user });
       dispatch({ type:GOT_CONTESTS, contests });
       dispatch({ type:SOLD_OUT, SoldOut:soldOut });
       dispatch({ type:GOT_FEATURED, Featured:featured });
+      dispatch({ type:GOT_GENRES, Genres:genres });
+
+      const UserGenres = await api.GetUsersGenres();
+      if (UserGenres) {
+        dispatch({ type: GOT_GENRES, Genres: UserGenres });
+      } else if (!UserGenres) {
+      }
+
       dispatch({ type:APP_LOADED, Loaded:true });
       callback();
     } catch (error) {
@@ -58,3 +67,13 @@ export const onPasswordChange = text => ({
   type:PASSWORD_CHANGE,
   data:text
 });
+
+export const GenreToggleCheckbox = (name, checked) => (dispatch) => {
+  const checkbox = !checked;
+  dispatch({ type: GENRE_TOGGLE_CHECKBOX, name, checkbox });
+};
+
+export const SelectedGenres = (name, checked) => (dispatch) => {
+  api.SelectedGenres(name, checked);
+  dispatch({ type: GENRE_SELECTION, name, checked });
+};

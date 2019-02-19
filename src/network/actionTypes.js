@@ -7,3 +7,6 @@ export const NAME_CHANGE = 'name_change';
 export const EMAIL_CHANGE = 'email_change';
 export const PASSWORD_CHANGE = 'password_change';
 export const GOT_FEATURED = 'got_featured';
+export const GOT_GENRES = 'got_genres';
+export const GENRE_TOGGLE_CHECKBOX = 'genre_toggle_checkbox';
+export const GENRE_SELECTION = 'genre_selection';

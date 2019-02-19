@@ -1,3 +1,4 @@
 import AnonUser from './AnonUser/AnonUser';
+import ProfileCard from './ProfileCard/ProfileCard';
 
-export { AnonUser };
+export { AnonUser, ProfileCard };

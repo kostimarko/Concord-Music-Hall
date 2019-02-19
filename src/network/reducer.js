@@ -1,4 +1,17 @@
-import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA ,NAME_CHANGE, EMAIL_CHANGE,PASSWORD_CHANGE, GOT_CONTESTS,SOLD_OUT,GOT_FEATURED } from './actionTypes';
+import update from 'immutability-helper';
+import {
+  APP_LOADED,
+  GOT_WEEK_EVENTS,
+  GOT_USER_DATA,
+  NAME_CHANGE,
+  EMAIL_CHANGE,
+  PASSWORD_CHANGE,
+  GOT_CONTESTS,
+  SOLD_OUT,
+  GOT_FEATURED,
+  GOT_GENRES,
+  GENRE_TOGGLE_CHECKBOX
+} from './actionTypes';
 
 const initEventState = {
   Loaded: false,
@@ -23,7 +36,8 @@ const initUserState = {
   User:{},
   FullName: '',
   Email: '',
-  Password: ''
+  Password: '',
+  Genres:{}
 };
 
 export const userReducer = (state = initUserState,action) => {
@@ -36,6 +50,14 @@ export const userReducer = (state = initUserState,action) => {
       return { ...state, Email: action.data };
     case PASSWORD_CHANGE:
       return { ...state, Password: action.data };
+    case GOT_GENRES:
+      return { ...state, Genres:action.Genres };
+    case GENRE_TOGGLE_CHECKBOX:
+      return update(state,{
+        Genres:{
+          [action.name]:{ $set:action.checkbox }
+        }
+      });
     default:
       return { ...state };
   }
