@@ -11,11 +11,12 @@ export function GetEvents(StartDate,EndDate) {
   };
 }
 
-export function CreateUserFromAnon(Email,Password) {
+export function CreateUserFromAnon(Email,Password, callback) {
   return async (dispatch) => {
     try {
-      // const User = await api.CreateUserFromAnon(Email,Password);
-      console.log(Email,Password);
+      const User = await api.CreateUserFromAnon(Email,Password);
+      dispatch({ type:GOT_USER_DATA, User:User.user._user });
+      callback();
     } catch (error) {
       console.log(error);
     }
@@ -31,7 +32,7 @@ export function bootApp(StartDate,EndDate, callback) {
       const featured = await api.GetFeatured();
       dispatch({ type:APP_LOADED, Loaded:false });
       dispatch({ type:GOT_WEEK_EVENTS, Events:events });
-      dispatch({ type:GOT_USER_DATA, User:user._user });
+      dispatch({ type:GOT_USER_DATA, User:user });
       dispatch({ type:GOT_CONTESTS, contests });
       dispatch({ type:SOLD_OUT, SoldOut:soldOut });
       dispatch({ type:GOT_FEATURED, Featured:featured });
