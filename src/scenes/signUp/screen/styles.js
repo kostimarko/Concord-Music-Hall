@@ -21,7 +21,6 @@ export default StyleSheet.create({
   logo: {
     width: width - 50,
     resizeMode: 'contain',
-
   },
   ButtonStyle:{
     height:50,

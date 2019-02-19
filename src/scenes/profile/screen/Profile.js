@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, View } from 'react-native';
+import { StyleSheet, ScrollView, View, Image } from 'react-native';
 import ProfileaAnimation from '../../../assets/lottie/Profile.json';
 import GenreAnimation from '../../../assets/lottie/Genre.json';
 import NotificationAnimation from '../../../assets/lottie/Notification.json';
 import { AnonUser, ProfileCard } from '../components';
+import { styles } from './styles';
+import Concord from './ConcordMusicHall.png';
+
 
 class Profile extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -31,7 +34,8 @@ class Profile extends Component {
     }
     if (!isAnonymous) {
       return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView contentContainerStyle={styles.ScrollContainer}>
+          <Image source={Concord} style={styles.logo} />
           <ProfileCard
             Animation={ProfileaAnimation}
             TextDetails="Edit Your Profile Info"
@@ -52,25 +56,6 @@ class Profile extends Component {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
-  }
-});
 
 const mapStateToProps = (state) => {
   const {  User } = state.userReducer;

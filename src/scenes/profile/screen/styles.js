@@ -61,5 +61,15 @@ export const styles = StyleSheet.create({
     marginLeft: 15,
     justifyContent: 'flex-start',
     color: '#473bf0'
-  }
+  },
+  logo: {
+    width: width - 50,
+    resizeMode: 'contain',
+  },
+  ScrollContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF'
+  },
 });
