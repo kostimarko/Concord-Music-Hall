@@ -22,7 +22,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    borderRadius: 50
   },
   ButtonText: {
     fontSize: 18,

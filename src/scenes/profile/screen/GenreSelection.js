@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, ScrollView, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import AnimatedCheckbox from '../../../components/AnimatedCheckbox';
@@ -69,14 +69,14 @@ class GenreSelection extends Component {
         >
           {this._genreList()}
         </ScrollView>
-        <TouchableWithoutFeedback
+        <TouchableOpacity
           style={ButtonContainer}
           onPress={this._sendData}
         >
           <View style={Button}>
             <Text style={ButtonText}>Save</Text>
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </View>
     );
   }

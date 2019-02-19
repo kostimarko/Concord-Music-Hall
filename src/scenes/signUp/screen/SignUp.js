@@ -68,7 +68,6 @@ class SignUp extends Component {
           ButtonText="Create Account"
           OnPress={() => {
             this.props.CreateUserFromAnon(Email,Password,() => {
-              console.log('i should nav');
               this.props.navigation.navigate('Profile');
             });
           }}
