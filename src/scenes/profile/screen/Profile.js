@@ -46,11 +46,6 @@ class Profile extends Component {
             TextDetails="Edit your music Selections"
             OnPress={() => this.props.navigation.navigate('GenreSelection')}
           />
-          <ProfileCard
-            Animation={NotificationAnimation}
-            TextDetails="Edit your Notification Selections"
-            OnPress={() => console.log('yo')}
-          />
         </ScrollView>
       );
     }

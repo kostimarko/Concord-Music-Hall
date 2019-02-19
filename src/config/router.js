@@ -17,7 +17,7 @@ const FeaturedStack = createStackNavigator({
 const ProfileStack = createStackNavigator({
   Profile:{ screen:Profile },
   SignUp: { screen:SignUp },
-  GenreSelection:{ screen:GenreSelection }
+  GenreSelection:{ screen:GenreSelection },
 },  {
   navigationOptions: {
     gesturesEnabled: true
