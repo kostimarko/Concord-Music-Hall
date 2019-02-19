@@ -69,6 +69,7 @@ class SignUp extends Component {
           OnPress={() => {
             this.props.CreateUserFromAnon(Email,Password,() => {
               console.log('i should nav');
+              this.props.navigation.navigate('Profile');
             });
           }}
           textStyle={{ color:'black',fontSize:16,fontWeight:'700' }}

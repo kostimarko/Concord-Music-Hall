@@ -15,14 +15,14 @@ const FeaturedStack = createStackNavigator({
 });
 
 const ProfileStack = createStackNavigator({
-  ProfileStack:{ screen:Profile },
+  Profile:{ screen:Profile },
   SignUp: { screen:SignUp }
 });
 
 const Tabs =   createBottomTabNavigator({
   Events:EventsStack,
   Featured:FeaturedStack,
-  Profile:ProfileStack
+  ProfileScreen:ProfileStack
 },{
   navigationOptions:({ navigation }) => ({
     tabBarIcon:({ tintColor }) => {
@@ -32,7 +32,7 @@ const Tabs =   createBottomTabNavigator({
         iconName = 'music-circle';
       } else if (routeName === 'Featured') {
         iconName = 'star';
-      } else if ( routeName === 'Profile') {
+      } else if ( routeName === 'ProfileScreen') {
         iconName = 'account';
       }
       return (

@@ -15,7 +15,7 @@ export function CreateUserFromAnon(Email,Password, callback) {
   return async (dispatch) => {
     try {
       const User = await api.CreateUserFromAnon(Email,Password);
-      dispatch({ GOT_USER_DATA, User:User.user._user });
+      dispatch({ type:GOT_USER_DATA, User:User.user._user });
       callback();
     } catch (error) {
       console.log(error);
