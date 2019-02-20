@@ -42,11 +42,14 @@ export const CheckUser = async () => {
   }
 };
 
-export const CreateUserFromAnon = async (Email,Password) => {
+export const CreateUserFromAnon = async (Email,Password, FullName) => {
   try {
     const credential = await firebase.auth.EmailAuthProvider.credential(Email,Password);
     const { currentUser } = auth;
+    const { uid } = currentUser;
     const User = await currentUser.linkWithCredential(credential);
+    User.user.updateProfile({ displayName:FullName });
+    database.ref(`Users/${uid}`).set({ Email,FullName });
     return User;
   } catch (error) {
     console.log(error);
@@ -108,3 +111,13 @@ export const SelectedGenres = async (name, checked) => {
   }
 };
 
+export const UpdateUser = async (name,email) => {
+  const { currentUser } = firebase.auth();
+  const { uid } = currentUser;
+  try {
+    currentUser.user.updateProfile({ displayName:name });
+    database.ref(`User/${uid}`).set({ name,email });
+  } catch (error) {
+    console.log(error);
+  }
+};

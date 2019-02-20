@@ -39,7 +39,7 @@ class Profile extends Component {
           <ProfileCard
             Animation={ProfileaAnimation}
             TextDetails="Edit Your Profile Info"
-            OnPress={() => console.log('yo')}
+            OnPress={() => this.props.navigation.navigate('EditProfile')}
           />
           <ProfileCard
             Animation={GenreAnimation}

@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, TextInput,StatusBar, KeyboardAvoidingView,Image, Animated,TouchableOpacity, Keyboard,Platform } from 'react-native';
-import styles from './styles';
+import { View, TextInput,StatusBar, KeyboardAvoidingView,Image, StyleSheet,Dimensions, Keyboard,Platform } from 'react-native';
 import Button from '../../../components/Button';
-import logo from './logo.png';
+import logo from '../../signUp/screen/logo.png';
 import { actions as Network } from '../../../network';
 
+const { width,height } = Dimensions.get('window');
+
 const {
-  onEmailChange,onNameChange,onPasswordChange,CreateUserFromAnon
+  onEmailChange,onNameChange,onPasswordChange,UpdateUser
 } = Network;
 
-class SignUp extends Component {
+class EditProfile extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Sign Up',
     headerTitleStyle: {
@@ -47,29 +48,24 @@ class SignUp extends Component {
         />
         <Image source={logo} style={styles.logo} />
         <TextInput
-          placeholder="Full Name"
+          placeholder="Full name"
+          value={FullName}
           style={styles.input}
           onChangeText={text => this.onNameChange(text)}
         />
         <TextInput
           placeholder="Email"
+          value={Email}
           style={styles.input}
           onChangeText={text => this.onEmailChange(text)}
-        />
-        <TextInput
-          placeholder="Password"
-          style={styles.input}
-          onChangeText={text => this.onPasswordChange(text)}
-          secureTextEntry
         />
 
         <Button
           style={styles.ButtonStyle}
-          ButtonText="Create Account"
+          ButtonText="Save"
           OnPress={() => {
-            this.props.CreateUserFromAnon(Email,Password,FullName,() => {
-              this.props.navigation.navigate('Profile');
-            });
+            console.log('Saved');
+            console.log('props');
           }}
           textStyle={{ color:'black',fontSize:16,fontWeight:'700' }}
         />
@@ -78,6 +74,46 @@ class SignUp extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#000000',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  input: {
+    height: 50,
+    backgroundColor: '#fff',
+    marginHorizontal: 10,
+    marginVertical: 5,
+    // paddingVertical: 5,
+    // paddingHorizontal: 15,
+    width: width - 30
+  },
+  logo: {
+    width: width - 50,
+    resizeMode: 'contain',
+  },
+  ButtonStyle:{
+    height:50,
+    borderRadius:25,
+    backgroundColor:'white',
+    alignItems:'center',
+    justifyContent:'center',
+    alignSelf:'center',
+    marginTop:15
+  },
+  register:{
+    marginBottom:20,
+    width:window.width - 100,
+    alignItems:'center',
+    justifyContent:'center',
+    height:50,
+    backgroundColor: '#ffae',
+  }
+});
+
 const mapStateToProps = (state) => {
   const {
     User, FullName, Email,Password
@@ -88,5 +124,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps,{
-  onNameChange,onEmailChange,onPasswordChange, CreateUserFromAnon
-})(SignUp);
+  onNameChange,onEmailChange,onPasswordChange, UpdateUser
+})(EditProfile);

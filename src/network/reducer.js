@@ -10,7 +10,8 @@ import {
   SOLD_OUT,
   GOT_FEATURED,
   GOT_GENRES,
-  GENRE_TOGGLE_CHECKBOX
+  GENRE_TOGGLE_CHECKBOX,
+  UPDATE_USER
 } from './actionTypes';
 
 const initEventState = {
@@ -43,7 +44,19 @@ const initUserState = {
 export const userReducer = (state = initUserState,action) => {
   switch (action.type) {
     case GOT_USER_DATA:
-      return { ...state, User: action.User };
+      return {
+        ...state,
+        User: action.User,
+        FullName:action.User.displayName,
+        Email: action.User.email,
+        Password: ''
+      };
+    case UPDATE_USER:
+      return {
+        ...state,
+        FullName:action.name,
+        Email:action.email
+      };
     case NAME_CHANGE:
       return { ...state, FullName: action.data };
     case EMAIL_CHANGE:

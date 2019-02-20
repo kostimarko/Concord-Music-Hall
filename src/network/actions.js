@@ -1,6 +1,20 @@
 import * as api from './api';
 
-import { APP_LOADED, GOT_WEEK_EVENTS,GOT_USER_DATA ,NAME_CHANGE, EMAIL_CHANGE,PASSWORD_CHANGE,GOT_CONTESTS,SOLD_OUT,GOT_FEATURED, GOT_GENRES,GENRE_TOGGLE_CHECKBOX,GENRE_SELECTION } from './actionTypes';
+import {
+  APP_LOADED,
+  GOT_WEEK_EVENTS,
+  GOT_USER_DATA,
+  NAME_CHANGE,
+  EMAIL_CHANGE,
+  PASSWORD_CHANGE,
+  GOT_CONTESTS,
+  SOLD_OUT,
+  GOT_FEATURED,
+  GOT_GENRES,
+  GENRE_TOGGLE_CHECKBOX,
+  GENRE_SELECTION,
+  UPDATE_USER,
+} from './actionTypes';
 
 export function GetEvents(StartDate,EndDate) {
   return async (dispatch) => {
@@ -11,10 +25,10 @@ export function GetEvents(StartDate,EndDate) {
   };
 }
 
-export function CreateUserFromAnon(Email,Password, callback) {
+export function CreateUserFromAnon(Email,Password, FullName, callback) {
   return async (dispatch) => {
     try {
-      const User = await api.CreateUserFromAnon(Email,Password);
+      const User = await api.CreateUserFromAnon(Email,Password, FullName);
       dispatch({ type:GOT_USER_DATA, User:User.user._user });
       callback();
     } catch (error) {
@@ -77,3 +91,10 @@ export const SelectedGenres = (name, checked) => (dispatch) => {
   api.SelectedGenres(name, checked);
   dispatch({ type: GENRE_SELECTION, name, checked });
 };
+
+
+export const UpdateUser = (name,email) => (dispatch) => {
+  api.UpdateUser(name,email);
+  dispatch({ type:UPDATE_USER, name,email });
+};
+

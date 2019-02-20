@@ -2,7 +2,7 @@ import React from 'react';
 import {  createStackNavigator,createSwitchNavigator,  createBottomTabNavigator } from 'react-navigation';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Home, Profile, EventDetails, BuyTickets,Loading, SignUp,Featured, GenreSelection } from '../scenes';
+import { Home, Profile, EventDetails, BuyTickets,Loading, SignUp,Featured, GenreSelection, EditProfile } from '../scenes';
 
 import { fromLeft } from './transitions';
 
@@ -18,6 +18,7 @@ const ProfileStack = createStackNavigator({
   Profile:{ screen:Profile },
   SignUp: { screen:SignUp },
   GenreSelection:{ screen:GenreSelection },
+  EditProfile:{ screen:EditProfile }
 },  {
   navigationOptions: {
     gesturesEnabled: true
