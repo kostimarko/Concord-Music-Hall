@@ -9,6 +9,23 @@ import Tickets from '../../../../assets/lottie/Tickets.json';
 import { styles } from './styles';
 
 class EventCard extends Component {
+  componentDidMount() {
+    this._sub = this.props.navigation.addListener(
+      'didFocus',
+      this._animation
+    );
+  }
+
+  _animation =() => {
+    if (this.animation) {
+      this.animation.play();
+    }
+  }
+
+  componentWillUnmount() {
+    this._sub.remove();
+  }
+
   render() {
     const {
       JumboImage,
@@ -93,6 +110,9 @@ class EventCard extends Component {
               style={[SoldOutImageContainer]}
             >
               <LottieView
+                ref={(animation) => {
+                this.animation = animation;
+              }}
                 source={SoldOutAnim}
                 loop={true}
                 autoPlay={true}
