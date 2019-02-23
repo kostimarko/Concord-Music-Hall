@@ -61,6 +61,9 @@ class EventCard extends Component {
               style={[ContestImageContainer]}
             >
               <LottieView
+                ref={(animation) => {
+                this.animation = animation;
+              }}
                 source={Tickets}
                 loop={false}
                 autoPlay={true}
