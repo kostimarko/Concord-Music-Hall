@@ -64,7 +64,6 @@ class Featured extends PureComponent {
   };
   _renderItem = ({ item, index }) => {
     const borderColor = this._getColor();
-    console.log(item.ageLimit);
     return (
       <View index={index}>
         <EventCard
@@ -78,7 +77,9 @@ class Featured extends PureComponent {
           HeadLiner={item.headlinersName}
           AgeLimit={item.ageLimit}
           NextSceen={() =>
-            this.props.navigation.navigate('Details', { item, borderColor, Contests:this.props.Contests })
+            this.props.navigation.navigate('Details', {
+ item, borderColor, Contests:this.props.Contests,SoldOut:this.props.SoldOut
+})
           }
           EventStatus={item.eventStatus}
           EventId={item.id}
