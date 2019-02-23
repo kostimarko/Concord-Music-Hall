@@ -13,6 +13,7 @@ import { styles } from './styles';
 import { Headliner, ContestButton } from '../components';
 import ProgressiveImage from '../../../components/ProgressiveImage';
 import Tickets from '../../../assets/lottie/Tickets.json';
+import SoldOutAnimation from '../../../assets/lottie/sold_out.json';
 
 class EventDetails extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -70,21 +71,17 @@ class EventDetails extends Component {
     } = styles;
     if (SoldOut[`${id}`]) {
       return (
-        <View style={[SoldOutImageContainer, { backgroundColor: borderColor }]}>
-          <View style={ImageDetailsContainer}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <Text
-                style={{ color: '#ffffff', fontSize: 21, fontWeight: '700' }}
-              >
-                SOLD OUT
-              </Text>
-            </View>
+        <View>
+          <View style={[LottieContainer]}>
+            <LottieView
+              ref={(animation) => {
+          if (animation) {
+            animation.play();
+          }
+        }}
+              source={SoldOutAnimation}
+              loop={true}
+            />
           </View>
         </View>
       );
