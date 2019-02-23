@@ -2,7 +2,7 @@ import React from 'react';
 import {  createStackNavigator,createSwitchNavigator,  createBottomTabNavigator } from 'react-navigation';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Home, Profile, EventDetails, BuyTickets,Loading, SignUp,Featured, GenreSelection, EditProfile } from '../scenes';
+import { Home, Profile, EventDetails, BuyTickets,Loading, SignUp,Featured, GenreSelection, EditProfile, Contest } from '../scenes';
 
 import { fromLeft } from './transitions';
 
@@ -68,7 +68,8 @@ const HomeStack = createStackNavigator(
       }
     },
     Details:{ screen:EventDetails },
-    Buy:{ screen:BuyTickets }
+    Buy:{ screen:BuyTickets },
+    Contest: { screen:Contest }
   },
   {
     navigationOptions: {

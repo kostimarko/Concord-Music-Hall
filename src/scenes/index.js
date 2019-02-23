@@ -7,5 +7,6 @@ import SignUp from './signUp/screen/SignUp';
 import Featured from './featured/screen/Featured';
 import GenreSelection from './profile/screen/GenreSelection';
 import EditProfile from './profile/screen/EditProfile';
+import Contest from './contest/Contest';
 
-export { Home, Profile, EventDetails, BuyTickets, Loading , SignUp, Featured, GenreSelection, EditProfile };
+export { Home, Profile, EventDetails, BuyTickets, Loading , SignUp, Featured, GenreSelection, EditProfile,Contest };

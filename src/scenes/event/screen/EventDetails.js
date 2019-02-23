@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { styles } from './styles';
-import { Headliner } from '../components';
+import { Headliner, ContestButton } from '../components';
 import ProgressiveImage from '../../../components/ProgressiveImage';
 import Tickets from '../../../assets/lottie/Tickets.json';
 
@@ -34,7 +34,7 @@ class EventDetails extends Component {
   };
   _renderDetails() {
     const {
-      headlinersName,startDate, headliners, venue,ticketPrice,ageLimit
+      headlinersName,startDate, headliners, venue,ticketPrice,ageLimit,id
     } = this.props.navigation.state.params.item;
     const { borderColor, Contests } = this.props.navigation.state.params;
     return (
@@ -51,11 +51,14 @@ class EventDetails extends Component {
           Price={ticketPrice}
           AgeLimit={ageLimit}
           Color={borderColor}
+          Id={id}
+          Contests={Contests}
+          Navigation={this.props.navigation}
         />
       </View>
     );
   }
-  _renderImageBackground(image, eventStatus, ticketPurchaseUrl,Contests, id) {
+  _renderImageBackground(image, eventStatus, ticketPurchaseUrl,Contests, id,SoldOut) {
     const { borderColor } = this.props.navigation.state.params;
     const {
       ImageStyle,
@@ -65,7 +68,7 @@ class EventDetails extends Component {
       SoldOutImageContainer,
       LottieContainer
     } = styles;
-    if (eventStatus === 'Sold Out') {
+    if (SoldOut[`${id}`]) {
       return (
         <View style={[SoldOutImageContainer, { backgroundColor: borderColor }]}>
           <View style={ImageDetailsContainer}>
@@ -79,7 +82,7 @@ class EventDetails extends Component {
               <Text
                 style={{ color: '#ffffff', fontSize: 21, fontWeight: '700' }}
               >
-                {eventStatus}
+                SOLD OUT
               </Text>
             </View>
           </View>
@@ -88,37 +91,17 @@ class EventDetails extends Component {
     }
     if (Contests[`${id}`]) {
       return (
-        <View style={LottieContainer}>
-          <LottieView
-            ref={(animation) => {
+        <View>
+          <View style={LottieContainer}>
+            <LottieView
+              ref={(animation) => {
             if (animation) {
               animation.play();
             }
           }}
-            source={Tickets}
-            loop={false}
-          />
-          <View style={ImageDetailsContainer}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'flex-end',
-                justifyContent: 'flex-end'
-              }}
-            >
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate('Buy', { ticketPurchaseUrl })
-                }
-                activeOpacity={0.8}
-              >
-                <View
-                  style={[ButtonContainer, { backgroundColor: borderColor }]}
-                >
-                  <Text style={ButtonText}>Buy Tickets</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
+              source={Tickets}
+              loop={false}
+            />
           </View>
         </View>
       );
@@ -163,12 +146,12 @@ class EventDetails extends Component {
     const {
       image, ticketPurchaseUrl,eventStatus,headliners, id
     } = this.props.navigation.state.params.item;
-    const { Contests } = this.props.navigation.state.params;
+    const { Contests,SoldOut } = this.props.navigation.state.params;
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <View style={{ backgroundColor: '#ffffff', flex: 1 }}>
-          {this._renderImageBackground(image,eventStatus,ticketPurchaseUrl, Contests,id)}
+          {this._renderImageBackground(image,eventStatus,ticketPurchaseUrl, Contests,id, SoldOut)}
           {this._renderDetails()}
         </View>
       </ScrollView>

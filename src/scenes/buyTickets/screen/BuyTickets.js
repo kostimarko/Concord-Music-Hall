@@ -19,42 +19,38 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { styles } from './styles';
 import ConcordLetters from '../../../assets/lottie/ConcordLetters.json';
 
-const {width,height} = Dimensions.get('window');
+const { width,height } = Dimensions.get('window');
 
 class BuyTickets extends PureComponent {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: 'Buy Tickets',
-      headerTitleStyle: {
-        color: '#191919',
-        fontSize: 24,
-        fontWeight: '300',
-        marginLeft: 10
-      },
-      headerStyle: {
-        elevation: 0
-      },
+  static navigationOptions = ({ navigation }) => ({
+    headerTitle: 'Buy Tickets',
+    headerTitleStyle: {
+      color: '#191919',
+      fontSize: 24,
+      fontWeight: '300',
+      marginLeft: 10
+    },
+    headerStyle: {
+      elevation: 0
+    },
 
-      headerRight: null
-    };
-  };
+    headerRight: null
+  });
 
-  _renderLoading = () => {
-    return (
-      <View style={{justifyContent:'center', flex:1, flexDirection:'column'}}>
+  _renderLoading = () => (
+    <View style={{ justifyContent:'center', flex:1, flexDirection:'column' }}>
         <LottieView
-              ref={(animation) => {
+          ref={(animation) => {
                 if (animation) {
                   animation.play();
                 }
               }}
-              source={ConcordLetters}
-              loop={true}
-              style={{width:width/2, height:width/2, alignSelf:'center'}}
-            />
+          source={ConcordLetters}
+          loop={true}
+          style={{ width:width - 20, height:width - 20, alignSelf:'center' }}
+        />
       </View>
-    );
-  };
+  );
 
   render() {
     const { HeaderRow, IconContainer } = styles;
