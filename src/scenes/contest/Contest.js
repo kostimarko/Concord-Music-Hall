@@ -6,6 +6,10 @@ import { View, Text, TouchableWithoutFeedback, StatusBar } from 'react-native';
 import moment from 'moment';
 import ContestAnim from '../../assets/lottie/User_Enters_Contest.json';
 import { styles } from './styles';
+import { actions as Network } from '../../network';
+import AnonUser from '../../components/AnonUser';
+
+const { UserEntersContest } = Network;
 
 class Contest extends PureComponent {
   static navigationOptions = ({ navigation }) => ({
@@ -23,6 +27,10 @@ class Contest extends PureComponent {
     headerTintColor: 'white',
     headerRight: null
   });
+
+  componentDidMount() {
+    console.log(this.props.User);
+  }
   render() {
     const {
       container,
@@ -35,45 +43,58 @@ class Contest extends PureComponent {
       LottieContainer
     } = styles;
     const { Id,HeadlinerName,Time } = this.props.navigation.state.params;
-    return (
-      <View style={container}>
-        <StatusBar backgroundColor="#473BF0" barStyle="light-content" />
-        <View style={titleTextContainer}>
-          <Text style={titleText}>
-              Just press the button to enter our contest and win free tickets to{' '}
-            <Text style={boldText}>{HeadlinerName}</Text> on{' '}
-            <Text style={boldText}>{moment(Time).format('MMM Do YYYY')}</Text>{' '}
-              at{' '}
-            <Text style={boldText}>{moment(Time).format('hA')}</Text>
-          </Text>
-        </View>
-        <View style={lottieContainer}>
-          <LottieView
-            ref={(animation) => {
-                if (animation) {
-                  animation.play();
-                }
+    const { isAnonymous } = this.props.User;
+    if (!isAnonymous) {
+      return (
+        <View style={container}>
+          <StatusBar backgroundColor="#473BF0" barStyle="light-content" />
+          <View style={titleTextContainer}>
+            <Text style={titleText}>
+                Just press the button to enter our contest and win free tickets to{' '}
+              <Text style={boldText}>{HeadlinerName}</Text> on{' '}
+              <Text style={boldText}>{moment(Time).format('MMM Do YYYY')}</Text>{' '}
+                at{' '}
+              <Text style={boldText}>{moment(Time).format('hA')}</Text>
+            </Text>
+          </View>
+          <View style={lottieContainer}>
+            <LottieView
+              ref={(animation) => {
+                  if (animation) {
+                    animation.play();
+                  }
+                }}
+              source={ContestAnim}
+            />
+          </View>
+          <View style={{ flex: 1, alignItems: 'center' }}>
+            <TouchableWithoutFeedback
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                console.log('entering');
+                this.props.UserEntersContest(Id,() => {
+                  this.props.navigation.goBack();
+                });
               }}
-            source={ContestAnim}
-          />
+            >
+              <View style={Button}>
+                <Text style={ButtonText}>Enter Contest</Text>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
         </View>
-        <View style={{ flex: 1, alignItems: 'center' }}>
-          <TouchableWithoutFeedback
-            style={{ alignItems: 'center' }}
-            onPress={() => console.log('testing')}
-          >
-            <View style={Button}>
-              <Text style={ButtonText}>Enter Contest</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
-      </View>
-    );
+      );
+    }
+    else {
+      return (
+        <AnonUser navigation={this.props.navigation} />
+      );
+    }
   }
 }
 const mapStateToProps = (state) => {
-  const { isAnonymous } = state.authReducer;
-  return {  isAnonymous };
+  const { User } = state.userReducer;
+  return {  User };
 };
 
-export default connect(null)(Contest);
+export default connect(mapStateToProps,{ UserEntersContest })(Contest);

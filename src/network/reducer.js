@@ -49,7 +49,7 @@ export const userReducer = (state = initUserState,action) => {
         User: action.User,
         FullName:action.User.displayName,
         Email: action.User.email,
-        Password: ''
+        Password: '',
       };
     case UPDATE_USER:
       return {

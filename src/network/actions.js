@@ -14,6 +14,7 @@ import {
   GENRE_TOGGLE_CHECKBOX,
   GENRE_SELECTION,
   UPDATE_USER,
+  USER_ENTERS_CONTEST
 } from './actionTypes';
 
 export function GetEvents(StartDate,EndDate) {
@@ -41,6 +42,7 @@ export function bootApp(StartDate,EndDate, callback) {
     try {
       const events = await api.GetEvents(StartDate,EndDate);
       const user = await api.CheckUser();
+      console.log(user);
       const contests = await api.GetContests();
       const soldOut = await api.GetSoldOut();
       const featured = await api.GetFeatured();
@@ -96,5 +98,12 @@ export const SelectedGenres = (name, checked) => (dispatch) => {
 export const UpdateUser = (name,email) => (dispatch) => {
   api.UpdateUser(name,email);
   dispatch({ type:UPDATE_USER, name,email });
+};
+
+export const UserEntersContest = (id,callback) => (dispatch) => {
+  console.log(id);
+  api.UserEntersContest(id);
+  dispatch({ type:USER_ENTERS_CONTEST });
+  callback();
 };
 

@@ -121,3 +121,15 @@ export const UpdateUser = async (name,email) => {
     console.log(error);
   }
 };
+
+export const UserEntersContest = async (id) => {
+  const { currentUser } = firebase.auth();
+
+  try {
+    console.log(id);
+    const data = await database.ref(`Users/${currentUser.uid}/ContestsEntered`).push().set(id);
+  } catch (error) {
+    console.log(error);
+  }
+};
+

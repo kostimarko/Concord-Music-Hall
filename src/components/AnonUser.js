@@ -2,18 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import LottieView from 'lottie-react-native';
-import Button from '../../../../components/Button';
-import NotFound from '../../../../assets/lottie/not_found.json';
+import Button from './Button';
+import NotFound from '../assets/lottie/not_found.json';
 
 const { width } = Dimensions.get('window');
 
 class AnonUser extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      visible:false
-    };
-  }
   render() {
     return (
       <View style={styles.container}>

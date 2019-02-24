@@ -4,7 +4,8 @@ import { StyleSheet, ScrollView, View, Image } from 'react-native';
 import ProfileaAnimation from '../../../assets/lottie/Profile.json';
 import GenreAnimation from '../../../assets/lottie/Genre_Icon.json';
 import NotificationAnimation from '../../../assets/lottie/Notification.json';
-import { AnonUser, ProfileCard } from '../components';
+import { ProfileCard } from '../components';
+import AnonUser from '../../../components/AnonUser';
 import { styles } from './styles';
 import Concord from './ConcordMusicHall.png';
 

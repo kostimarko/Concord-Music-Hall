@@ -11,3 +11,4 @@ export const GOT_GENRES = 'got_genres';
 export const GENRE_TOGGLE_CHECKBOX = 'genre_toggle_checkbox';
 export const GENRE_SELECTION = 'genre_selection';
 export const UPDATE_USER = 'update_user';
+export const USER_ENTERS_CONTEST = 'user_enters_contest';
