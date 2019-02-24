@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, ScrollView, View, Image } from 'react-native';
 import ProfileaAnimation from '../../../assets/lottie/Profile.json';
-import GenreAnimation from '../../../assets/lottie/Genre.json';
+import GenreAnimation from '../../../assets/lottie/Genre_Icon.json';
 import NotificationAnimation from '../../../assets/lottie/Notification.json';
 import { AnonUser, ProfileCard } from '../components';
 import { styles } from './styles';
