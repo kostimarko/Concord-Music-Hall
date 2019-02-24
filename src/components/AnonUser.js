@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { withNavigationFocus } from 'react-navigation';
 import LottieView from 'lottie-react-native';
 import Button from './Button';
 import NotFound from '../assets/lottie/not_found.json';
@@ -8,15 +9,29 @@ import NotFound from '../assets/lottie/not_found.json';
 const { width } = Dimensions.get('window');
 
 class AnonUser extends Component {
+  componentDidMount() {
+    this._sub = this.props.navigation.addListener(
+      'didFocus',
+      this._animation
+    );
+  }
+
+  _animation =() => {
+    if (this.animation) {
+      this.animation.play();
+    }
+  }
+
+  componentWillUnmount() {
+    this._sub.remove();
+  }
   render() {
     return (
       <View style={styles.container}>
         <View style={{ flex:1, padding:15 }}>
           <LottieView
             ref={(animation) => {
-                if (animation) {
-                  animation.play();
-                }
+              this.animation = animation;
               }}
             source={NotFound}
             loop={true}
