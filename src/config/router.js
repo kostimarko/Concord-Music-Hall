@@ -13,23 +13,10 @@ const EventsStack = createStackNavigator({
 const FeaturedStack = createStackNavigator({
   FeaturedEvents:{ screen:Featured }
 });
-
-const ProfileStack = createStackNavigator({
-  Profile:{ screen:Profile },
-  SignUp: { screen:SignUp },
-  GenreSelection:{ screen:GenreSelection },
-  EditProfile:{ screen:EditProfile }
-},  {
-  navigationOptions: {
-    gesturesEnabled: true
-  },
-  transitionConfig: () => fromLeft(),
-});
-
 const Tabs =   createBottomTabNavigator({
   Events:EventsStack,
   Featured:FeaturedStack,
-  ProfileScreen:ProfileStack
+  ProfileScreen:{ screen:Profile }
 },{
   navigationOptions:({ navigation }) => ({
     tabBarIcon:({ tintColor }) => {
@@ -69,7 +56,10 @@ const HomeStack = createStackNavigator(
     },
     Details:{ screen:EventDetails },
     Buy:{ screen:BuyTickets },
-    Contest: { screen:Contest }
+    Contest: { screen:Contest },
+    SignUp: { screen:SignUp },
+    GenreSelection:{ screen:GenreSelection },
+    EditProfile:{ screen:EditProfile }
   },
   {
     navigationOptions: {
