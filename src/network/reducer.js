@@ -40,7 +40,7 @@ const initUserState = {
   Email: '',
   Password: '',
   Genres:{},
-  Contests:{}
+  EnteredContests:{}
 };
 
 export const userReducer = (state = initUserState,action) => {
@@ -62,7 +62,7 @@ export const userReducer = (state = initUserState,action) => {
     case GOT_USER_CONTESTS:
       return {
         ...state,
-        Contests:action.Contests
+        EnteredContests:action.Contests
       };
     case NAME_CHANGE:
       return { ...state, FullName: action.data };

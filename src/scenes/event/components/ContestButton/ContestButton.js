@@ -13,6 +13,27 @@ const ContestButton = (props) => {
     Header,
     Paragraph
   } = styles;
+  const { UserEnteredContest, Id } = props;
+  if (UserEnteredContest[`${Id}`]) {
+    return (
+      <View style={ContestButtonContainer}>
+        <View style={LottieContainer}>
+          <LottieView
+            ref={(animation) => {
+          if (animation) {
+            animation.play();
+          }
+        }}
+            loop={true}
+            source={ContestAnim}
+          />
+        </View>
+        <View style={TextContainer}>
+          <Text style={Header}>You already entered this contest</Text>
+        </View>
+      </View>
+    );
+  }
   return (
     <TouchableOpacity onPress={props.ContestPress}>
       <View style={ContestButtonContainer}>

@@ -55,11 +55,12 @@ class EventDetails extends Component {
           Id={id}
           Contests={Contests}
           Navigation={this.props.navigation}
+          UserEnteredContest={this.props.EnteredContests}
         />
       </View>
     );
   }
-  _renderImageBackground(image, eventStatus, ticketPurchaseUrl,Contests, id,SoldOut) {
+  _renderImageBackground(image, eventStatus, ticketPurchaseUrl,Contests, id,SoldOut,EnteredContests) {
     const { borderColor } = this.props.navigation.state.params;
     const {
       ImageStyle,
@@ -69,6 +70,40 @@ class EventDetails extends Component {
       SoldOutImageContainer,
       LottieContainer
     } = styles;
+    if (EnteredContests[`${id}`] & Contests[`${id}`]) {
+      return (
+        <View>
+          <ProgressiveImage
+            JumboImage={image.jumbo.path}
+            style={ImageStyle}
+            imageStyle={ImageStyle}
+            Thumbnail={image.squareSmall.path}
+          />
+          <View style={ImageDetailsContainer}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'flex-end',
+                justifyContent: 'flex-end'
+              }}
+            >
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate('Buy', { ticketPurchaseUrl })
+                }
+                activeOpacity={0.8}
+              >
+                <View
+                  style={[ButtonContainer, { backgroundColor: borderColor }]}
+                >
+                  <Text style={ButtonText}>Buy Tickets</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      );
+    }
     if (SoldOut[`${id}`]) {
       return (
         <View>
@@ -144,11 +179,12 @@ class EventDetails extends Component {
       image, ticketPurchaseUrl,eventStatus,headliners, id
     } = this.props.navigation.state.params.item;
     const { Contests,SoldOut } = this.props.navigation.state.params;
+    const { EnteredContests } = this.props;
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <View style={{ backgroundColor: '#ffffff', flex: 1 }}>
-          {this._renderImageBackground(image,eventStatus,ticketPurchaseUrl, Contests,id, SoldOut)}
+          {this._renderImageBackground(image,eventStatus,ticketPurchaseUrl, Contests,id, SoldOut, EnteredContests)}
           {this._renderDetails()}
         </View>
       </ScrollView>
@@ -158,7 +194,8 @@ class EventDetails extends Component {
 
 const mapStateToProps = (state) => {
   const { Loaded, Events } = state.eventsReducer;
-  return { Loaded, Events };
+  const { EnteredContests } = state.userReducer;
+  return { Loaded, Events,EnteredContests };
 };
 
 export default connect(mapStateToProps)(EventDetails);

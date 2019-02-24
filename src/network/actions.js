@@ -47,8 +47,13 @@ export function bootApp(StartDate,EndDate, callback) {
       const soldOut = await api.GetSoldOut();
       const featured = await api.GetFeatured();
       const genres = await api.GetGenres();
-      const enteredContests = await api.UserContests();
-      console.log(enteredContests);
+      api.UserContests((data) => {
+        if (data) {
+          dispatch({ type:GOT_USER_CONTESTS, Contests:data });
+        } else {
+
+        }
+      });
       dispatch({ type:APP_LOADED, Loaded:false });
       dispatch({ type:GOT_WEEK_EVENTS, Events:events });
       dispatch({ type:GOT_USER_DATA, User:user });
@@ -56,7 +61,6 @@ export function bootApp(StartDate,EndDate, callback) {
       dispatch({ type:SOLD_OUT, SoldOut:soldOut });
       dispatch({ type:GOT_FEATURED, Featured:featured });
       dispatch({ type:GOT_GENRES, Genres:genres });
-      dispatch({ type:GOT_USER_CONTESTS, Contests:enteredContests });
 
       const UserGenres = await api.GetUsersGenres();
       if (UserGenres) {

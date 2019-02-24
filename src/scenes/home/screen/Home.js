@@ -106,12 +106,13 @@ class Home extends PureComponent {
           AgeLimit={item.ageLimit}
           NextSceen={() =>
             this.props.navigation.navigate('Details', {
- item, borderColor, Contests:this.props.Contests, SoldOut:this.props.SoldOut 
+ item, borderColor, Contests:this.props.Contests, SoldOut:this.props.SoldOut
 })
           }
           EventStatus={item.eventStatus}
           EventId={item.id}
           Loaded={this.props.Loaded}
+          UserEnteredContest={this.props.EnteredContests}
         />
       </View>
     );
@@ -184,9 +185,10 @@ class Home extends PureComponent {
 
 const mapStateToProps = (state) => {
   const { Loaded, Events, Featured } = state.eventsReducer;
+  const { EnteredContests } = state.userReducer;
   const { Contests, SoldOut } = state.contestReducer;
   return {
-    Loaded, Events, Contests, SoldOut,Featured
+    Loaded, Events, Contests, SoldOut,Featured,EnteredContests
   };
 };
 

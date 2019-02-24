@@ -40,7 +40,8 @@ class EventCard extends Component {
       Loaded,
       Thumbnail,
       Contests,
-      SoldOut
+      SoldOut,
+      UserEnteredContest
     } = this.props;
     const {
       Image,
@@ -53,6 +54,54 @@ class EventCard extends Component {
       SoldOutImageContainer,
       ContestImageContainer
     } = styles;
+    if (UserEnteredContest[`${EventId}`] & Contests[`${EventId}`]) {
+      return (
+        <TouchableOpacity onPress={NextSceen} activeOpacity={0.5}>
+          <View style={{ marginBottom: 25, flexDirection: 'row' }}>
+            <View>
+              <ProgressiveImage
+                JumboImage={JumboImage}
+                style={Image}
+                imageStyle={Image}
+                Thumbnail={Thumbnail}
+              />
+            </View>
+            <View
+              style={[
+                EventContainer,
+                { borderColor: BorderColor, backgroundColor: 'white' }
+              ]}
+            >
+              <View>
+                <Text style={[DateTextStyle, { color: '#000000' }]}>
+                  {moment(StartDate).format('dddd MMM Do')}
+                </Text>
+              </View>
+              <View>
+                <Text style={[HeadlinerTextStyle, { color: '#000000' }]} numberOfLines={2}>
+                  {HeadLiner}
+                </Text>
+              </View>
+              <View>
+                <Text style={[TimeTextStyle, { color: '#000000' }]}>
+                  {moment(StartDate).format('h:mm a')}
+                </Text>
+              </View>
+              <View>
+                <Text style={[PriceTextStyle, { color: '#000000' }]}>
+                  {Price}
+                </Text>
+              </View>
+              <View>
+                <Text style={[AgeLimitTextStyle, { color: '#000000' }]}>
+                  {AgeLimit}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
+      );
+    }
     if (Contests[`${EventId}`]) {
       return (
         <TouchableOpacity onPress={NextSceen}>

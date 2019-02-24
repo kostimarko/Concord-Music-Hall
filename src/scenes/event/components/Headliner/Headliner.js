@@ -31,12 +31,13 @@ const Headliner = (props) => {
     Color,
     Contests,
     Id,
-    Navigation
+    Navigation,
+    UserEnteredContest
   } = props;
   if (Contests[`${Id}`]) {
     return (
       <View>
-        <Text style={HeaderText}>CONTEST</Text>
+        <Text style={HeaderText}>Headliner</Text>
         <Text style={[HeadlinerText, { color: Color }]}>{HeadlinerName}</Text>
         <View style={IconRow}>
           <View style={IconContainer}>
@@ -73,7 +74,7 @@ const Headliner = (props) => {
               {VenueCity}, {VenueState}
             </Text>
 
-            <ContestButton ContestPress={() => Navigation.navigate('Contest',{ Id,HeadlinerName,Time })} />
+            <ContestButton Id={Id} UserEnteredContest={UserEnteredContest} ContestPress={() => Navigation.navigate('Contest',{ Id,HeadlinerName,Time })} />
 
             <Text style={descText}>{HeadlinerDesc}</Text>
           </View>
@@ -83,7 +84,7 @@ const Headliner = (props) => {
   } else {
     return (
       <View>
-        <Text style={HeaderText}>HEADLINER</Text>
+        <Text style={HeaderText}>Headliner</Text>
         <Text style={[HeadlinerText, { color: Color }]}>{HeadlinerName}</Text>
         <View style={IconRow}>
           <View style={IconContainer}>

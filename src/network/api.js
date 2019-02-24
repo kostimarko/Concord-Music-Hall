@@ -111,18 +111,13 @@ export const SelectedGenres = async (name, checked) => {
   }
 };
 
-export const UserContests = async () => {
+export function UserContests(callback) {
   const { currentUser } = firebase.auth();
-
-  try {
-    const data = await database.ref(`Users/${currentUser.uid}/ContestsEntered`).on('value',snapshot => snapshot.val());
-    console.log(data);
-    const enteredContests = 'hi';
-    return enteredContests;
-  } catch (error) {
-    console.log(error);
-  }
-};
+  database.ref(`Users/${currentUser.uid}/ContestsEntered`).on('value', (snapshot) => {
+    const data = snapshot.val();
+    callback(data);
+  });
+}
 
 export const UpdateUser = async (name,email) => {
   const { currentUser } = firebase.auth();
@@ -140,7 +135,7 @@ export const UserEntersContest = async (id) => {
 
   try {
     console.log(id);
-    const data = await database.ref(`Users/${currentUser.uid}/ContestsEntered`).push().set(id);
+    const data = await database.ref(`Users/${currentUser.uid}/ContestsEntered`).child(id).set(id);
   } catch (error) {
     console.log(error);
   }
