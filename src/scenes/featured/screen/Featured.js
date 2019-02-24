@@ -84,6 +84,7 @@ class Featured extends PureComponent {
           EventStatus={item.eventStatus}
           EventId={item.id}
           Loaded={this.props.Loaded}
+          UserEnteredContest={this.props.EnteredContests}
         />
       </View>
     );
@@ -91,14 +92,6 @@ class Featured extends PureComponent {
 
   render() {
     const { FlatListContainer } = styles;
-    const color = {
-      mainColor: '#E43F6F',
-      subColor: '#ffffff'
-    };
-    const Today = moment().format('YYYYMMDD');
-    const YearLater = moment()
-      .add(1, 'years')
-      .format('YYYYMMDD');
     if (this.props.Loaded) {
       return (
         <View style={{ backgroundColor:'#ffffff', flex:1 }}>
@@ -109,19 +102,6 @@ class Featured extends PureComponent {
               renderItem={this._renderItem}
               showsVerticalScrollIndicator={false}
               keyExtractor={(item, index) => item.id.toString()}
-            />
-            <Calendar
-              i18n="en"
-              ref={(calendar) => {
-              this.calendar = calendar;
-            }}
-              color={color}
-              format="YYYYMMDD"
-              minDate={Today}
-              maxDate={YearLater}
-              startDate={this.state.startDate}
-              endDate={this.state.endDate}
-              onConfirm={this.confirmDate}
             />
           </View>
         </View>
@@ -149,8 +129,9 @@ class Featured extends PureComponent {
 const mapStateToProps = (state) => {
   const { Loaded, Events, Featured } = state.eventsReducer;
   const { Contests, SoldOut } = state.contestReducer;
+  const { EnteredContests } = state.userReducer;
   return {
-    Loaded, Events, Contests, SoldOut,Featured
+    Loaded, Events, Contests, SoldOut,Featured,EnteredContests
   };
 };
 
