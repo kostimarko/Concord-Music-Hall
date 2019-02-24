@@ -5,6 +5,7 @@ import { NavigationActions } from 'react-navigation';
 import { View, Text, TouchableWithoutFeedback, StatusBar } from 'react-native';
 import moment from 'moment';
 import ContestAnim from '../../assets/lottie/User_Enters_Contest.json';
+import SuccessAnim from '../../assets/lottie/success.json';
 import { styles } from './styles';
 import { actions as Network } from '../../network';
 import AnonUser from '../../components/AnonUser';
@@ -28,8 +29,31 @@ class Contest extends PureComponent {
     headerRight: null
   });
 
-  componentDidMount() {
-    console.log(this.props.User);
+  _renderLottie = (Id,EnteredContests) => {
+    if (EnteredContests[`${Id}`]) {
+      return (
+        <LottieView
+          ref={(animation) => {
+                      if (animation) {
+                        animation.play();
+                      }
+                    }}
+          source={SuccessAnim}
+          loop={false}
+        />
+      );
+    } else {
+      return (
+        <LottieView
+          ref={(animation) => {
+                      if (animation) {
+                        animation.play();
+                      }
+                    }}
+          source={ContestAnim}
+        />
+      );
+    }
   }
   render() {
     const {
@@ -44,6 +68,7 @@ class Contest extends PureComponent {
     } = styles;
     const { Id,HeadlinerName,Time } = this.props.navigation.state.params;
     const { isAnonymous } = this.props.User;
+    const { EnteredContests } = this.props;
     if (!isAnonymous) {
       return (
         <View style={container}>
@@ -58,14 +83,7 @@ class Contest extends PureComponent {
             </Text>
           </View>
           <View style={lottieContainer}>
-            <LottieView
-              ref={(animation) => {
-                  if (animation) {
-                    animation.play();
-                  }
-                }}
-              source={ContestAnim}
-            />
+            {this._renderLottie(Id,EnteredContests)}
           </View>
           <View style={{ flex: 1, alignItems: 'center' }}>
             <TouchableWithoutFeedback
@@ -73,7 +91,9 @@ class Contest extends PureComponent {
               onPress={() => {
                 console.log('entering');
                 this.props.UserEntersContest(Id,() => {
-                  this.props.navigation.goBack();
+                  setTimeout(() => {
+                    this.props.navigation.goBack();
+                  },1000);
                 });
               }}
             >
@@ -96,8 +116,8 @@ class Contest extends PureComponent {
   }
 }
 const mapStateToProps = (state) => {
-  const { User } = state.userReducer;
-  return {  User };
+  const { User,EnteredContests } = state.userReducer;
+  return {  User,EnteredContests };
 };
 
 export default connect(mapStateToProps,{ UserEntersContest })(Contest);
