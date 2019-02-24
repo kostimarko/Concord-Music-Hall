@@ -11,7 +11,8 @@ import {
   GOT_FEATURED,
   GOT_GENRES,
   GENRE_TOGGLE_CHECKBOX,
-  UPDATE_USER
+  UPDATE_USER,
+  GOT_USER_CONTESTS
 } from './actionTypes';
 
 const initEventState = {
@@ -38,7 +39,8 @@ const initUserState = {
   FullName: '',
   Email: '',
   Password: '',
-  Genres:{}
+  Genres:{},
+  Contests:{}
 };
 
 export const userReducer = (state = initUserState,action) => {
@@ -56,6 +58,11 @@ export const userReducer = (state = initUserState,action) => {
         ...state,
         FullName:action.name,
         Email:action.email
+      };
+    case GOT_USER_CONTESTS:
+      return {
+        ...state,
+        Contests:action.Contests
       };
     case NAME_CHANGE:
       return { ...state, FullName: action.data };

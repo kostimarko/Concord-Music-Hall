@@ -111,6 +111,19 @@ export const SelectedGenres = async (name, checked) => {
   }
 };
 
+export const UserContests = async () => {
+  const { currentUser } = firebase.auth();
+
+  try {
+    const data = await database.ref(`Users/${currentUser.uid}/ContestsEntered`).on('value',snapshot => snapshot.val());
+    console.log(data);
+    const enteredContests = 'hi';
+    return enteredContests;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const UpdateUser = async (name,email) => {
   const { currentUser } = firebase.auth();
   const { uid } = currentUser;

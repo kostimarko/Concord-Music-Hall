@@ -30,7 +30,7 @@ class Profile extends Component {
 
     if (isAnonymous) {
       return (
-        <AnonUser navigation={this.props.navigation} />
+        <AnonUser navigation={this.props.navigation} containerStyle={{ backgroundColor:'#ffffff' }} textColor={{ color:'#A9A9A9' }} />
       );
     }
     if (!isAnonymous) {

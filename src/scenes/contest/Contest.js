@@ -87,7 +87,10 @@ class Contest extends PureComponent {
     }
     else {
       return (
-        <AnonUser navigation={this.props.navigation} />
+        <View style={{ flex:1 }}>
+          <StatusBar backgroundColor="#473BF0" barStyle="light-content" />
+          <AnonUser navigation={this.props.navigation} containerStyle={{ backgroundColor:'#473BF0' }} textColor={{ color:'#ffffff' }} />
+        </View>
       );
     }
   }

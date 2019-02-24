@@ -27,7 +27,7 @@ class AnonUser extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container,this.props.containerStyle]}>
         <View style={{ flex:1, padding:15 }}>
           <LottieView
             ref={(animation) => {
@@ -42,8 +42,8 @@ class AnonUser extends Component {
 flex:1, padding:15, alignItems:'flex-start', justifyContent:'center'
 }}
         >
-          <Text style={{ fontSize:21, fontWeight:'700', marginBottom:10 }}>What are you even looking for?</Text>
-          <Text style={{ fontSize:14, fontWeight:'300' }}>Sign up to get get contest info, be first on the list to get tickets, maybe you'll get into your show before everyone else. All we can tell you is not signing doesn't really do anything for you. </Text>
+          <Text style={[{ fontSize:21, fontWeight:'700', marginBottom:10 },this.props.textColor]}>What are you even looking for?</Text>
+          <Text style={[{ fontSize:14, fontWeight:'300' }, this.props.textColor]}>Sign up to get get contest info, be first on the list to get tickets, maybe you'll get into your show before everyone else. All we can tell you is not signing doesn't really do anything for you. </Text>
         </View>
 
         <View style={{
@@ -67,7 +67,6 @@ flex:1, padding:15, alignItems:'flex-start', justifyContent:'center'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
     alignItems:'center',
     justifyContent:'space-between',
     flexDirection:'column'
