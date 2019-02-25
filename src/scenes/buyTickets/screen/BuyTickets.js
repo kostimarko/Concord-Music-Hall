@@ -31,7 +31,13 @@ class BuyTickets extends PureComponent {
       marginLeft: 10
     },
     headerStyle: {
-      elevation: 0
+      elevation: 0,
+      borderBottomWidth: 0,
+      shadowColor: 'transparent',
+      shadowRadius: 0,
+      shadowOffset: {
+        height: 0,
+      }
     },
 
     headerRight: null
@@ -39,7 +45,7 @@ class BuyTickets extends PureComponent {
 
   _renderLoading = () => (
     <View style={{ justifyContent:'center', flex:1, flexDirection:'column' }}>
-        <LottieView
+      <LottieView
           ref={(animation) => {
                 if (animation) {
                   animation.play();
@@ -49,7 +55,7 @@ class BuyTickets extends PureComponent {
           loop={true}
           style={{ width:width - 20, height:width - 20, alignSelf:'center' }}
         />
-      </View>
+    </View>
   );
 
   render() {

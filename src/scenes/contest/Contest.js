@@ -23,7 +23,13 @@ class Contest extends PureComponent {
     },
     headerStyle: {
       elevation: 0,
-      backgroundColor:'#473BF0'
+      backgroundColor:'#473BF0',
+      borderBottomWidth: 0,
+      shadowColor: 'transparent',
+      shadowRadius: 0,
+      shadowOffset: {
+        height: 0,
+      }
     },
     headerTintColor: 'white',
     headerRight: null

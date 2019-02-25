@@ -21,7 +21,13 @@ class SignUp extends Component {
     },
     headerStyle: {
       elevation: 0,
-      backgroundColor:'#000000'
+      backgroundColor:'#000000',
+      borderBottomWidth: 0,
+      shadowColor: 'transparent',
+      shadowRadius: 0,
+      shadowOffset: {
+        height: 0,
+      }
     },
     headerTintColor:'#ffffff',
     headerRight: null

@@ -34,7 +34,13 @@ class Featured extends PureComponent {
       marginLeft: 10
     },
     headerStyle: {
-      elevation: 0
+      elevation: 0,
+      borderBottomWidth: 0,
+      shadowColor: 'transparent',
+      shadowRadius: 0,
+      shadowOffset: {
+        height: 0,
+      }
     },
     headerLeft: null,
   });
